@@ -32,10 +32,11 @@ Map<String, List<Future<ByteData>>> loadFontsFromFontsDir([String? package]) {
     currentDir,
     package == null ? 'fonts' : '../$package/fonts',
   );
+  final prefix = package == null ? '' : 'packages/$package/';
   for (final file in Directory(fontsDirectory).listSync()) {
     if (file is File) {
       final fontFamily =
-          path.basenameWithoutExtension(file.path).split('-').first;
+          prefix + path.basenameWithoutExtension(file.path).split('-').first;
       (fontFamilyToData[fontFamily] ??= [])
           .add(file.readAsBytes().then((bytes) => ByteData.view(bytes.buffer)));
     }
