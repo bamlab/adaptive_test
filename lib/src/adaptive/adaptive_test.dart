@@ -1,16 +1,16 @@
 import 'dart:io';
 
-import 'package:adaptive_test/src/configuration.dart';
-import 'package:flutter/foundation.dart';
 import 'package:adaptive_test/src/adaptive/window_configuration.dart';
-import 'package:adaptive_test/src/helpers/await_images.dart';
-import 'package:flutter_test/flutter_test.dart';
-
-import 'package:flutter/material.dart';
 import 'package:adaptive_test/src/adaptive/window_size.dart';
+import 'package:adaptive_test/src/configuration.dart';
+import 'package:adaptive_test/src/helpers/await_images.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_test/flutter_test.dart';
 import 'package:meta/meta.dart';
 import 'package:recase/recase.dart';
 
+import '../helpers/target_platform_extension.dart';
 import 'widgets/adaptive_wrapper.dart';
 
 /// Type of [callback] that will be executed inside the Flutter test environment.
@@ -73,7 +73,7 @@ extension Adaptive on WidgetTester {
     final enforcedTestPlatform =
         AdaptiveTestConfiguration.instance.enforcedTestPlatform;
     if (enforcedTestPlatform != null &&
-        Platform.operatingSystem != enforcedTestPlatform.name.toLowerCase()) {
+        enforcedTestPlatform.isRuntimePlatform) {
       throw ('Runtime platform ${Platform.operatingSystem} is not ${enforcedTestPlatform.name}');
     }
 
