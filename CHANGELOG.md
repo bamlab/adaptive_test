@@ -1,3 +1,6 @@
+## 0.2.1
+
+* fix: runtime platform check.
 ## 0.2.0
 
 * fix: font loader with package not working.
