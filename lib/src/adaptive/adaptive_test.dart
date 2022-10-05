@@ -73,7 +73,7 @@ extension Adaptive on WidgetTester {
     final enforcedTestPlatform =
         AdaptiveTestConfiguration.instance.enforcedTestPlatform;
     if (enforcedTestPlatform != null &&
-        enforcedTestPlatform.isRuntimePlatform) {
+        !enforcedTestPlatform.isRuntimePlatform) {
       throw ('Runtime platform ${Platform.operatingSystem} is not ${enforcedTestPlatform.name}');
     }
 
