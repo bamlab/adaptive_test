@@ -1,3 +1,7 @@
+## 0.2.0
+
+* fix: font loader with package not working.
+* feat: create is runtime platform extension.
 ## 0.1.0
 
 * Add .pubignore to reduce package size.
