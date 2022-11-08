@@ -69,6 +69,7 @@ extension Adaptive on WidgetTester {
     String? suffix,
     Key?
         byKey, // Sometimes we want to find the widget by its unique key in the case they are multiple of the same type.
+    bool waitForImages = false,
   }) async {
     final enforcedTestPlatform =
         AdaptiveTestConfiguration.instance.enforcedTestPlatform;
@@ -80,7 +81,9 @@ extension Adaptive on WidgetTester {
     final localSuffix = suffix != null ? "_${ReCase(suffix).snakeCase}" : '';
 
     final name = ReCase('$T');
-    await awaitImages();
+    if (waitForImages) {
+      await awaitImages();
+    }
     await expectLater(
       // Find by its type except if the widget's unique key was given.
       byKey != null ? find.byKey(byKey) : find.byType(AdaptiveWrapper),
