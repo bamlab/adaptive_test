@@ -69,7 +69,7 @@ extension Adaptive on WidgetTester {
     String? suffix,
     Key?
         byKey, // Sometimes we want to find the widget by its unique key in the case they are multiple of the same type.
-    bool waitForImages = false,
+    bool waitForImages = true,
   }) async {
     final enforcedTestPlatform =
         AdaptiveTestConfiguration.instance.enforcedTestPlatform;
