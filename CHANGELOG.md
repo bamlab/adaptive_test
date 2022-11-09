@@ -1,3 +1,7 @@
+## 0.2.3
+
+* fix: set the image precaching to true by default
+
 ## 0.2.2
 
 * feat: add an option to disable the image precaching
