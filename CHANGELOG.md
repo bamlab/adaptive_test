@@ -1,3 +1,7 @@
+## 0.2.2
+
+* feat: add an option to disable the image precaching
+
 ## 0.2.1
 
 * fix: runtime platform check.
