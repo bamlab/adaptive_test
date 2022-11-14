@@ -1,3 +1,13 @@
+## 0.3.0
+
+**Breaking changes**
+
+* Remove the space in golden file names. 
+  
+  This is a breaking change for users who have generated golden files with the previous version of the library. The golden file names will now be `preview/${windowConfig.name}:${name.snakeCase}$localSuffix.png` instead of `preview/${windowConfig.name}: ${name.snakeCase}$localSuffix.png`.
+
+  To resolve this, you can either rename the golden files manually or regenerate them.
+
 ## 0.2.3
 
 * fix: set the image precaching to true by default
