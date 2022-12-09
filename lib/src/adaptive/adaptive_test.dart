@@ -88,7 +88,7 @@ extension Adaptive on WidgetTester {
       // Find by its type except if the widget's unique key was given.
       byKey != null ? find.byKey(byKey) : find.byType(AdaptiveWrapper),
       matchesGoldenFile(
-        'preview/${windowConfig.name}:${name.snakeCase}$localSuffix.png',
+        'preview/${windowConfig.name}_${name.snakeCase}$localSuffix.png',
       ),
     );
   }
