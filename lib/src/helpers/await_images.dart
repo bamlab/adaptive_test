@@ -26,5 +26,6 @@ extension AwaitImages on WidgetTester {
         }
       }
     });
+    await pumpAndSettle();
   }
 }
