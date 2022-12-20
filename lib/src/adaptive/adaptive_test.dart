@@ -31,7 +31,7 @@ void testAdaptiveWidgets(
   Timeout? timeout,
   bool semanticsEnabled = true,
   ValueVariant<WindowConfigData>? variantOverride,
-  dynamic tags,
+  dynamic tags = const ['golden'],
 }) {
   final defaultVariant = AdaptiveTestConfiguration.instance.deviceVariant;
   final variant = variantOverride ?? defaultVariant;
@@ -71,10 +71,8 @@ extension Adaptive on WidgetTester {
         byKey, // Sometimes we want to find the widget by its unique key in the case they are multiple of the same type.
     bool waitForImages = true,
   }) async {
-    final enforcedTestPlatform =
-        AdaptiveTestConfiguration.instance.enforcedTestPlatform;
-    if (enforcedTestPlatform != null &&
-        !enforcedTestPlatform.isRuntimePlatform) {
+    final enforcedTestPlatform = AdaptiveTestConfiguration.instance.enforcedTestPlatform;
+    if (enforcedTestPlatform != null && !enforcedTestPlatform.isRuntimePlatform) {
       throw ('Runtime platform ${Platform.operatingSystem} is not ${enforcedTestPlatform.name}');
     }
 
