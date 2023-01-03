@@ -1,3 +1,7 @@
+## 0.3.1
+
+* fix: replace iterable with a list in the await image method.
+
 ## 0.3.0
 
 **Breaking changes**
