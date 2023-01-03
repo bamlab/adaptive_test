@@ -7,14 +7,14 @@ extension AwaitImages on WidgetTester {
   /// Pauses test until images are ready to be rendered.
   Future<void> awaitImages() async {
     await runAsync(() async {
-      for (final element in find.byType(Image).evaluate()) {
+      for (final element in find.byType(Image).evaluate().toList()) {
         final widget = element.widget as Image;
         final image = widget.image;
         await precacheImage(image, element);
         await pumpAndSettle();
       }
 
-      for (final element in find.byType(DecoratedBox).evaluate()) {
+      for (final element in find.byType(DecoratedBox).evaluate().toList()) {
         final widget = element.widget as DecoratedBox;
         final decoration = widget.decoration;
         if (decoration is BoxDecoration) {
