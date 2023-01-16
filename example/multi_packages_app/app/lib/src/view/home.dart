@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:multi_packages_theme_example/main.dart';
 
 class HomeLayout extends StatelessWidget {
   const HomeLayout({Key? key}) : super(key: key);
@@ -7,7 +8,7 @@ class HomeLayout extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Adaptative Golden'),
+        title: const AppText('Adaptative Golden'),
       ),
       body: Center(
         child: Padding(
@@ -22,12 +23,7 @@ class HomeLayout extends StatelessWidget {
               ),
               const SizedBox(width: 20),
               const Expanded(
-                child: TextField(
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'Say hi !',
-                  ),
-                ),
+                child: AppTextField(labelText: 'Say hi !'),
               )
             ],
           ),

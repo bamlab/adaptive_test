@@ -17,7 +17,12 @@ Future<void> testExecutable(FutureOr<void> Function() testMain) async {
   AdaptiveTestConfiguration.instance
     ..setEnforcedTestPlatform(TargetPlatform.macOS)
     ..setDeviceVariants(defaultDeviceConfigs);
-  await loadFonts();
+  await loadFontsFromPackage(
+    package: Package(
+      name: 'multi_packages_theme_example',
+      relativePath: '../theme',
+    ),
+  );
   setupFileComparatorWithThreshold();
   await testMain();
 }
