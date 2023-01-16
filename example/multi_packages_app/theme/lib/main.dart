@@ -1,7 +1,2 @@
-import 'package:flutter/material.dart';
-
-import 'src/app.dart';
-
-void main() {
-  runApp(const App());
-}
+export './src/widgets/text.dart';
+export './src/widgets/text_field.dart';
