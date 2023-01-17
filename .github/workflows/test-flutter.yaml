@@ -9,9 +9,11 @@ on:
 jobs:
   test:
     runs-on: macos-latest
+    strategy:
+      matrix: { dir: ['example/simple_app'] }
     defaults:
       run:
-        working-directory: example
+        working-directory: ${{ matrix.dir }}
 
     steps:
       - uses: actions/checkout@v2
