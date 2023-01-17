@@ -19,7 +19,7 @@ Future<void> testExecutable(FutureOr<void> Function() testMain) async {
     ..setDeviceVariants(defaultDeviceConfigs);
   await loadFontsFromPackage(
     package: Package(
-      name: 'multi_packages_theme_example',
+      name: 'multi_packages_example_theme',
       relativePath: '../theme',
     ),
   );

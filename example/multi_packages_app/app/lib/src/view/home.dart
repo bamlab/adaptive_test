@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:multi_packages_theme_example/main.dart';
+import 'package:multi_packages_example_theme/main.dart';
 
 class HomeLayout extends StatelessWidget {
   const HomeLayout({Key? key}) : super(key: key);

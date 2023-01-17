@@ -116,7 +116,7 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.8.0"
-  multi_packages_theme_example:
+  multi_packages_example_theme:
     dependency: "direct main"
     description:
       path: "../theme"

@@ -13,11 +13,11 @@ class AppTextField extends StatelessWidget {
         labelText: labelText,
       ),
       style: style?.copyWith(
-            package: 'multi_packages_theme_example',
+            package: 'multi_packages_example_theme',
             fontFamily: 'Roboto',
           ) ??
           const TextStyle(
-            package: 'multi_packages_theme_example',
+            package: 'multi_packages_example_theme',
             fontFamily: 'Roboto',
           ),
     );

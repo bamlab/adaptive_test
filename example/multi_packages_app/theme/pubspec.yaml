@@ -1,4 +1,4 @@
-name: multi_packages_theme_example
+name: multi_packages_example_theme
 description: A multi packages Flutter app to illustrate the package adaptive_test. This "multi_packages_theme" package holds the theme related code
 
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev

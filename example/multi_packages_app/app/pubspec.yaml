@@ -1,4 +1,4 @@
-name: multi_packages_app_example
+name: multi_packages_example_app
 description: A multi packages Flutter app to illustrate the package adaptive_test. This "multi_packages_app" package holds the app related code
 
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
@@ -12,7 +12,7 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.2
-  multi_packages_theme_example:
+  multi_packages_example_theme:
     path: '../theme'
 
 dev_dependencies:
