@@ -1,3 +1,8 @@
+## 0.3.2
+
+* feat: add the `loadFontsFromPackage` method to load fonts from a package which name does not match the corresponding folder name
+* example: add multi-packages example to showcase loading fonts from a separate package
+
 ## 0.3.1
 
 * fix: replace iterable with a list in the await image method.
