@@ -66,6 +66,17 @@ Future<void> testExecutable(FutureOr<void> Function() testMain) async {
 }
 ```
 
+Alternatively you can load fonts from a separate package by specifying its name and path:
+
+```dart
+await loadFontsFromPackage(
+  package: Package(
+    name: 'my_theme_package',
+    relativePath: '../theme',
+  ),
+);
+```
+
 ### Setup devices to run test on
 Define a set of device variant corresponding to your definition of done.
 ```dart
