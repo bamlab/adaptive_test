@@ -10,7 +10,7 @@ jobs:
   test:
     runs-on: macos-latest
     strategy:
-      matrix: { dir: ['example/simple_app'] }
+      matrix: { dir: ['example/simple_app', 'example/multi_packages_app/app', 'example/multi_packages_app/theme'] }
     defaults:
       run:
         working-directory: ${{ matrix.dir }}
