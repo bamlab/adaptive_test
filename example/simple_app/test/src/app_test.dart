@@ -15,7 +15,7 @@ void main() {
         ),
       );
 
-      await tester.expectGolden<App>(variant);
+      await tester.expectGolden<App>(variant, suffix: 'simple');
 
       final textField = find.byType(TextField);
 
@@ -24,7 +24,7 @@ void main() {
 
       await tester.expectGolden<App>(
         variant,
-        suffix: 'with_keyboard',
+        suffix: 'simple_with_keyboard',
       );
     },
   );
