@@ -8,29 +8,27 @@ import 'window_size.dart';
 extension WidgetTesterWithConfigurableWindow on WidgetTester {
   /// Configure the tester window to represent the given device variant.
   void configureWindow(WindowConfigData windowConfig) {
-    binding.window.physicalSizeTestValue = windowConfig.physicalSize;
-    binding.window.devicePixelRatioTestValue = windowConfig.pixelDensity;
-    binding.window.paddingTestValue = windowConfig.padding;
-    binding.window.viewPaddingTestValue = windowConfig.padding;
+    view.physicalSize = windowConfig.physicalSize;
+    view.devicePixelRatio = windowConfig.pixelDensity;
+    view.padding = windowConfig.padding;
+    view.viewPadding = windowConfig.padding;
 
-    addTearDown(binding.window.clearPaddingTestValue);
-    addTearDown(binding.window.clearViewPaddingTestValue);
-    addTearDown(binding.window.clearPhysicalSizeTestValue);
-    addTearDown(
-      binding.window.clearDevicePixelRatioTestValue,
-    );
-    addTearDown(binding.window.clearViewInsetsTestValue);
+    addTearDown(view.resetPadding);
+    addTearDown(view.resetViewPadding);
+    addTearDown(view.resetDevicePixelRatio);
+    addTearDown(view.resetPhysicalSize);
+    addTearDown(view.resetViewInsets);
   }
 
   /// Configure the tester window to represent an opened keyboard on the given device variant.
   void configureOpenedKeyboardWindow(WindowConfigData windowConfig) {
-    binding.window.viewInsetsTestValue = windowConfig.viewInsets;
-    binding.window.paddingTestValue = windowConfig.padding.copyWith(bottom: 0);
+    view.viewInsets = windowConfig.viewInsets;
+    view.padding = windowConfig.padding.copyWith(bottom: 0);
   }
 
   /// Configure the tester window to represent a closed keyboard on the given device variant.
   void configureClosedKeyboardWindow(WindowConfigData windowConfig) {
-    binding.window.clearViewInsetsTestValue();
-    binding.window.paddingTestValue = windowConfig.padding;
+    view.resetViewInsets();
+    view.padding = windowConfig.padding;
   }
 }
