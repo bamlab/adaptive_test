@@ -10,7 +10,15 @@ jobs:
   test:
     runs-on: macos-latest
     strategy:
-      matrix: { dir: ['example/simple_app', 'example/multi_packages_app/app', 'example/multi_packages_app/theme'] }
+      matrix:
+        {
+          dir:
+            [
+              "example/simple_app",
+              "example/multi_packages_app/app",
+              "example/multi_packages_app/theme",
+            ],
+        }
     defaults:
       run:
         working-directory: ${{ matrix.dir }}
@@ -35,8 +43,7 @@ jobs:
         run: flutter packages get
 
       - name: Format
-        run: flutter format --set-exit-if-changed lib test
-
+        run: dart format --set-exit-if-changed lib test
       - name: Analyze
         run: flutter analyze lib test
 
