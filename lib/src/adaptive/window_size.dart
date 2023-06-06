@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:equatable/equatable.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -78,11 +76,11 @@ class WindowConfigData extends Equatable {
     this.notchSize,
     this.punchHole,
     this.homeIndicator,
-  })  : viewInsets = WindowPaddingImpl(
+  })  : viewInsets = ViewPaddingImpl(
               bottom: keyboardSize?.height ?? 0,
             ) *
             pixelDensity,
-        padding = WindowPaddingImpl(
+        padding = ViewPaddingImpl(
               bottom: safeAreaPadding.bottom,
               top: safeAreaPadding.top,
             ) *
@@ -131,13 +129,13 @@ class WindowConfigData extends Equatable {
   /// This padding describe the size used by an opened keyboard.
   ///
   /// expressed in `px`.
-  final WindowPadding viewInsets;
+  final FakeViewPadding viewInsets;
 
   /// This padding describe the size taken by the hardware layer.
   /// Like the notch on the iPhone X.
   ///
   /// expressed in `px`.
-  final WindowPadding padding;
+  final FakeViewPadding padding;
 
   /// This represent the size of the device, expressed in `px`.
   final Size physicalSize;
@@ -159,16 +157,16 @@ class WindowConfigData extends Equatable {
       ];
 }
 
-/// Implementation of the abstract class [WindowPadding].
-class WindowPaddingImpl implements WindowPadding {
-  const WindowPaddingImpl({
+//// Implementation of the abstract class [FakeViewPadding].
+class ViewPaddingImpl implements FakeViewPadding {
+  const ViewPaddingImpl({
     this.bottom = 0,
     this.top = 0,
     this.left = 0,
     this.right = 0,
   });
 
-  static const WindowPaddingImpl zero = WindowPaddingImpl();
+  static const ViewPaddingImpl zero = ViewPaddingImpl();
 
   @override
   final double bottom;
@@ -187,7 +185,7 @@ class WindowPaddingImpl implements WindowPadding {
   /// Returns a [WindowPaddingImpl] whose dimensions are the dimensions of the
   /// left-hand-side operand (a [WindowPaddingImpl]) multiplied by the scalar
   /// right-hand-side operand (a [double]).
-  WindowPaddingImpl operator *(double operand) => WindowPaddingImpl(
+  ViewPaddingImpl operator *(double operand) => ViewPaddingImpl(
         bottom: bottom * operand,
         top: top * operand,
         left: left * operand,
@@ -195,14 +193,14 @@ class WindowPaddingImpl implements WindowPadding {
       );
 }
 
-extension WindowPaddingX on WindowPadding {
-  WindowPadding copyWith({
+extension FakeViewPaddingX on FakeViewPadding {
+  FakeViewPadding copyWith({
     double? bottom,
     double? top,
     double? left,
     double? right,
   }) {
-    return WindowPaddingImpl(
+    return ViewPaddingImpl(
       bottom: bottom ?? this.bottom,
       top: top ?? this.top,
       left: left ?? this.left,
