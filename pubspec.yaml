@@ -1,18 +1,18 @@
 name: adaptive_test
 description: >-
   A Flutter package to generate adaptive golden files during widget tests.
-version: 0.3.2
+version: 0.4.0
 homepage: https://github.com/bamlab/adaptive_test
 repository: https://github.com/bamlab/adaptive_test
 
 environment:
-  sdk: ">=2.17.6 <3.0.0"
+  sdk: '>=3.0.5 <4.0.0'
   flutter: ">=1.17.0"
 
 dependencies:
   cupertino_icons: ^1.0.5
   equatable: ^2.0.5
-  file: ^6.1.4
+  file: ^7.0.0
   flutter:
     sdk: flutter
   flutter_test:
@@ -21,7 +21,6 @@ dependencies:
   path: ^1.8.2
   platform: ^3.1.0
   recase: ^4.0.0
-  test_api: ^0.4.12
 
 dev_dependencies:
   flutter_lints: ^2.0.1

@@ -1,3 +1,8 @@
+## 0.4.0
+
+* fix: add support for flutter >=3.10.0
+* fix: add support for dart >=3.0.5
+
 ## 0.3.2
 
 * feat: add the `loadFontsFromPackage` method to load fonts from a package which name does not match the corresponding folder name
