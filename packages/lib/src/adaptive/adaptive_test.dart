@@ -16,7 +16,7 @@ typedef WidgetTesterAdaptiveCallback = Future<void> Function(
   WindowConfigData windowConfig,
 );
 
-const goldenTag = ['golden'];
+const _defaultGoldenTag = ['golden'];
 
 /// Function wrapper around [testWidgets] that will be executed for every
 /// [WindowConfigData] variant.
@@ -42,7 +42,7 @@ void testAdaptiveThemedWidgets(
     skip: skip ?? AdaptiveTestConfiguration.instance.skipGoldenAssertion(),
     timeout: timeout,
     semanticsEnabled: semanticsEnabled,
-    tags: tags ?? goldenTag,
+    tags: tags ?? _defaultGoldenTag,
   );
 }
 
@@ -65,7 +65,7 @@ void testAdaptiveWidgets(
     skip: skip ?? AdaptiveTestConfiguration.instance.skipGoldenAssertion(),
     timeout: timeout,
     semanticsEnabled: semanticsEnabled,
-    tags: tags ?? goldenTag,
+    tags: tags ?? _defaultGoldenTag,
   );
 }
 
@@ -74,10 +74,10 @@ void _testAdaptiveWidgetsBase(
   String description,
   WidgetTesterAdaptiveCallback callback,
   ValueVariant<WindowConfigData> variant, {
-  bool? skip,
-  Timeout? timeout,
-  bool semanticsEnabled = true,
-  dynamic tags,
+  required bool skip,
+  required Timeout? timeout,
+  required bool semanticsEnabled,
+  required dynamic tags,
 }) {
   testWidgets(
     description,
@@ -89,11 +89,11 @@ void _testAdaptiveWidgetsBase(
       debugDisableShadows = true;
       debugDefaultTargetPlatformOverride = null;
     },
-    skip: skip ?? AdaptiveTestConfiguration.instance.skipGoldenAssertion(),
+    skip: skip,
     timeout: timeout,
     semanticsEnabled: semanticsEnabled,
     variant: variant,
-    tags: tags ?? goldenTag,
+    tags: tags ?? _defaultGoldenTag,
   );
 }
 
