@@ -1,4 +1,4 @@
-name: adaptive_test
+name: adaptive_test_extended
 description: >-
   A Flutter package to generate adaptive golden files during widget tests.
 version: 0.4.0

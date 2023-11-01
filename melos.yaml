@@ -9,7 +9,7 @@ scripts:
     description: Generate goldens.
     packageFilters:
       dependsOn:
-        - adaptive_test
+        - adaptive_test_extended
 
   tests:
     exec: flutter test

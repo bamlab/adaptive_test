@@ -98,7 +98,7 @@ class _KeyboardDisplayerState extends State<KeyboardDisplayer> {
         'assets/keyboards/${windowConfig.name}.png',
         height: windowConfig.keyboardSize?.height,
         width: windowConfig.keyboardSize?.width,
-        package: 'adaptive_test',
+        package: 'adaptive_test_extended',
         fit: BoxFit.cover,
       ),
     );

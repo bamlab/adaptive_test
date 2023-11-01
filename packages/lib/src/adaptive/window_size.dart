@@ -84,6 +84,10 @@ class WindowConfigData extends Equatable {
         targetPlatform: targetPlatform,
         borderRadius: borderRadius,
         safeAreaPadding: safeAreaPadding,
+        keyboardSize: keyboardSize,
+        notchSize: notchSize,
+        punchHole: punchHole,
+        homeIndicator: homeIndicator,
       );
 
   WindowConfigData._(
@@ -214,7 +218,7 @@ class WindowConfigData extends Equatable {
 }
 
 /// Implementation of the abstract class [FakeViewPadding].
-class ViewPaddingImpl implements FakeViewPadding {
+class ViewPaddingImpl implements FakeViewPadding, EquatableMixin {
   const ViewPaddingImpl({
     this.bottom = 0,
     this.top = 0,
@@ -247,6 +251,12 @@ class ViewPaddingImpl implements FakeViewPadding {
         left: left * operand,
         right: right * operand,
       );
+
+  @override
+  List<Object?> get props => [bottom, top, left, right];
+
+  @override
+  bool? get stringify => true;
 }
 
 extension FakeViewPaddingX on FakeViewPadding {
