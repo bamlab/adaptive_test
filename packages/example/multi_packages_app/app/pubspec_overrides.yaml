@@ -1,0 +1,4 @@
+# melos_managed_dependency_overrides: multi_packages_example_theme
+dependency_overrides:
+  multi_packages_example_theme:
+    path: ../theme

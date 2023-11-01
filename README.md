@@ -47,8 +47,8 @@ See the [official doc](https://api.flutter.dev/flutter/flutter_test/flutter_test
 ## Usage
 
 ### To render custom fonts:
-- Add your fonts to your app assets folders.
-- Add your fonts to your flutter assets.
+- Add your fonts to your app packages.assets folders.
+- Add your fonts to your flutter packages.assets.
 ```yaml
 flutter:
   fonts:
