@@ -2,6 +2,7 @@ name: workspace
 
 packages:
   - packages/**
+  - packages/
 
 scripts:
   gen:goldens:
@@ -15,5 +16,5 @@ scripts:
     exec: flutter test
     description: Run tests.
     packageFilters:
-      dependsOn:
-        - flutter_test
+      dirExists:
+        - test

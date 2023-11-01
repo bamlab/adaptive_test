@@ -1,0 +1,4 @@
+# melos_managed_dependency_overrides: adaptive_test_extended
+dependency_overrides:
+  adaptive_test_extended:
+    path: ../..
