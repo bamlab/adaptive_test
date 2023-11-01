@@ -65,7 +65,28 @@ class WindowConfig extends InheritedWidget {
 
 /// A Data class that describe a device properties that will impact design.
 class WindowConfigData extends Equatable {
-  WindowConfigData(
+  factory WindowConfigData(
+    String name, {
+    required Size size,
+    required double pixelDensity,
+    required TargetPlatform targetPlatform,
+    required BorderRadius borderRadius,
+    required EdgeInsets safeAreaPadding,
+    Size? keyboardSize,
+    Size? notchSize,
+    PunchHoleData? punchHole,
+    HomeIndicatorData? homeIndicator,
+  }) =>
+      WindowConfigData._(
+        name,
+        size: size,
+        pixelDensity: pixelDensity,
+        targetPlatform: targetPlatform,
+        borderRadius: borderRadius,
+        safeAreaPadding: safeAreaPadding,
+      );
+
+  WindowConfigData._(
     this.name, {
     required this.size,
     required this.pixelDensity,
@@ -87,6 +108,38 @@ class WindowConfigData extends Equatable {
             ) *
             pixelDensity,
         physicalSize = size * pixelDensity;
+
+  WindowConfigData light() {
+    return WindowConfigData._(
+      name,
+      size: size,
+      pixelDensity: pixelDensity,
+      targetPlatform: targetPlatform,
+      borderRadius: borderRadius,
+      safeAreaPadding: EdgeInsets.fromViewPadding(padding, pixelDensity),
+      keyboardSize: keyboardSize,
+      notchSize: notchSize,
+      punchHole: punchHole,
+      homeIndicator: homeIndicator,
+      themeMode: ThemeMode.light,
+    );
+  }
+
+  WindowConfigData dark() {
+    return WindowConfigData._(
+      name,
+      size: size,
+      pixelDensity: pixelDensity,
+      targetPlatform: targetPlatform,
+      borderRadius: borderRadius,
+      safeAreaPadding: EdgeInsets.fromViewPadding(padding, pixelDensity),
+      keyboardSize: keyboardSize,
+      notchSize: notchSize,
+      punchHole: punchHole,
+      homeIndicator: homeIndicator,
+      themeMode: ThemeMode.dark,
+    );
+  }
 
   final String name;
 
@@ -142,7 +195,6 @@ class WindowConfigData extends Equatable {
   final Size physicalSize;
 
   final ThemeMode? themeMode;
-
   @override
   List<Object?> get props => [
         name,
@@ -159,28 +211,6 @@ class WindowConfigData extends Equatable {
         physicalSize,
         themeMode,
       ];
-
-  WindowConfigData copyWith({
-    String? name,
-    ThemeMode? themeMode,
-  }) {
-    return WindowConfigData(
-      name ?? this.name,
-      themeMode: themeMode,
-      size: size,
-      keyboardSize: keyboardSize,
-      borderRadius: borderRadius,
-      homeIndicator: homeIndicator,
-      notchSize: notchSize,
-      targetPlatform: targetPlatform,
-      punchHole: punchHole,
-      pixelDensity: pixelDensity,
-      safeAreaPadding: EdgeInsets.fromViewPadding(
-        padding,
-        pixelDensity,
-      ),
-    );
-  }
 }
 
 /// Implementation of the abstract class [FakeViewPadding].

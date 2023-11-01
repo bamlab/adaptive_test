@@ -21,6 +21,32 @@ const goldenTag = ['golden'];
 /// Function wrapper around [testWidgets] that will be executed for every
 /// [WindowConfigData] variant.
 @isTest
+void testAdaptiveThemedWidgets(
+  String description,
+  WidgetTesterAdaptiveCallback callback, {
+  bool? skip,
+  Timeout? timeout,
+  bool semanticsEnabled = true,
+  ValueVariant<WindowConfigData>? variantOverride,
+  dynamic tags,
+}) {
+  final variant = variantOverride ?? AdaptiveTestConfiguration.instance.themedDeviceVariant;
+
+  _testAdaptiveWidgetsBase(
+    description,
+    (widgetTester, windowConfig) => callback(
+      widgetTester,
+      windowConfig,
+    ),
+    variant,
+    skip: skip ?? AdaptiveTestConfiguration.instance.skipGoldenAssertion(),
+    timeout: timeout,
+    semanticsEnabled: semanticsEnabled,
+    tags: tags ?? goldenTag,
+  );
+}
+
+@isTest
 void testAdaptiveWidgets(
   String description,
   WidgetTesterAdaptiveCallback callback, {
@@ -32,6 +58,27 @@ void testAdaptiveWidgets(
 }) {
   final defaultVariant = AdaptiveTestConfiguration.instance.deviceVariant;
   final variant = variantOverride ?? defaultVariant;
+  _testAdaptiveWidgetsBase(
+    description,
+    callback,
+    variant,
+    skip: skip ?? AdaptiveTestConfiguration.instance.skipGoldenAssertion(),
+    timeout: timeout,
+    semanticsEnabled: semanticsEnabled,
+    tags: tags ?? goldenTag,
+  );
+}
+
+@isTest
+void _testAdaptiveWidgetsBase(
+  String description,
+  WidgetTesterAdaptiveCallback callback,
+  ValueVariant<WindowConfigData> variant, {
+  bool? skip,
+  Timeout? timeout,
+  bool semanticsEnabled = true,
+  dynamic tags,
+}) {
   testWidgets(
     description,
     (tester) async {

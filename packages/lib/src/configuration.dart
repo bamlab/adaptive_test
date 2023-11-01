@@ -27,9 +27,8 @@ class AdaptiveTestConfiguration {
 
   WindowConfigDataCallback<String> get customDescribeValue =>
       _customDescribeValue ??
-      (windowConfig) => windowConfig.themeMode == null || windowConfig.themeMode == ThemeMode.system
-          ? windowConfig.name
-          : '${windowConfig.name}:${windowConfig.themeMode!.name}';
+      (windowConfig) =>
+          windowConfig.themeMode == null ? windowConfig.name : '${windowConfig.name}:${windowConfig.themeMode!.name}';
 
   WindowConfigDataCallback<String>? _customDescribeValue;
 
@@ -51,6 +50,20 @@ class AdaptiveTestConfiguration {
   }
 
   WindowVariant? _deviceVariant;
+  WindowVariant? _themedDeviceVariant;
+
+  WindowVariant get themedDeviceVariant {
+    final scopedDeviceVariant = _themedDeviceVariant;
+    if (scopedDeviceVariant == null) {
+      throw Exception(
+        '''Device variant is not set.
+please set it first in the [testExecutable] method.
+See: https://api.flutter.dev/flutter/flutter_test/flutter_test-library.html
+''',
+      );
+    }
+    return scopedDeviceVariant;
+  }
 
   WindowVariant get deviceVariant {
     final scopedDeviceVariant = _deviceVariant;
@@ -70,13 +83,17 @@ See: https://api.flutter.dev/flutter/flutter_test/flutter_test-library.html
   /// Eg [iPhone8], [iPhone13], [iPadPro], [desktop], [pixel5].
   void setDeviceVariants(Set<WindowConfigData> deviceConfigs) {
     _deviceVariant = WindowVariant(deviceConfigs);
+    final themedVariants = <WindowConfigData>{};
+    for (final deviceConfig in deviceConfigs) {
+      themedVariants.add(deviceConfig.light());
+      themedVariants.add(deviceConfig.dark());
+    }
+    _themedDeviceVariant = WindowVariant(themedVariants);
   }
 
   /// Generates golden path for a given [WindowConfigData] and [Widget] type.
   String _defaultGoldenFilePathFactory(WindowConfigData windowConfig, Type widgetType, String? suffix) {
-    final themeModeName = windowConfig.themeMode == null || windowConfig.themeMode == ThemeMode.system
-        ? ''
-        : ':${windowConfig.themeMode!.name}';
+    final themeModeName = windowConfig.themeMode == null ? '' : ':${windowConfig.themeMode!.name}';
     final localSuffix = suffix != null ? ReCase(suffix).snakeCase : '';
     const rootDirName = 'golden';
     String parentDirName = widgetType.toString().snakeCase;
