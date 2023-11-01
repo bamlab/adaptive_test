@@ -7,7 +7,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:meta/meta.dart';
-import 'package:recase/recase.dart';
 import './window_configuration.dart';
 import '../helpers/target_platform_extension.dart';
 import 'widgets/adaptive_wrapper.dart';
@@ -19,6 +18,8 @@ typedef WidgetTesterAdaptiveCallback = Future<void> Function(
   WidgetTester widgetTester,
   WindowConfigData windowConfig,
 );
+
+const goldenTag = ['golden'];
 
 /// Function wrapper around [testWidgets] that will be executed for every
 /// [WindowConfigData] variant.
@@ -48,7 +49,7 @@ void testAdaptiveWidgets(
     timeout: timeout,
     semanticsEnabled: semanticsEnabled,
     variant: variant,
-    tags: tags,
+    tags: tags ?? goldenTag,
   );
 }
 
@@ -69,23 +70,23 @@ extension Adaptive on WidgetTester {
     Key?
         byKey, // Sometimes we want to find the widget by its unique key in the case they are multiple of the same type.
     bool waitForImages = true,
+    Future<void> Function(WidgetTester tester, WindowConfigData windowConfig)? onDeviceSetup,
   }) async {
     final enforcedTestPlatform = AdaptiveTestConfiguration.instance.enforcedTestPlatform;
     if (enforcedTestPlatform != null && !enforcedTestPlatform.isRuntimePlatform) {
       throw ('Runtime platform ${Platform.operatingSystem} is not ${enforcedTestPlatform.name}');
     }
 
-    final localSuffix = suffix != null ? "_${ReCase(suffix).snakeCase}" : '';
-
-    final name = ReCase('$T');
     if (waitForImages) {
       await awaitImages();
     }
+
+    await onDeviceSetup?.call(this, windowConfig);
     await expectLater(
       // Find by its type except if the widget's unique key was given.
       byKey != null ? find.byKey(byKey) : find.byType(AdaptiveWrapper),
       matchesGoldenFile(
-        'preview/${windowConfig.name}:${name.snakeCase}$localSuffix.png',
+        AdaptiveTestConfiguration.instance.fileNameFactory(windowConfig, T, suffix),
       ),
     );
   }

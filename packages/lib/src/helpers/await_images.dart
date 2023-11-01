@@ -7,13 +7,11 @@ extension AwaitImages on WidgetTester {
   /// Pauses test until images are ready to be rendered.
   Future<void> awaitImages() async {
     await runAsync(() async {
-      for (final element in find.byType(Image).evaluate().toList()) {
-        final widget = element.widget as Image;
-        final image = widget.image;
-        await precacheImage(image, element);
-        await pumpAndSettle();
+      bool shouldReCall = false;
+      shouldReCall = await _awaitImages();
+      while (shouldReCall) {
+        shouldReCall = await _awaitImages();
       }
-
       for (final element in find.byType(DecoratedBox).evaluate().toList()) {
         final widget = element.widget as DecoratedBox;
         final decoration = widget.decoration;
@@ -25,6 +23,22 @@ extension AwaitImages on WidgetTester {
           }
         }
       }
+      if (shouldReCall) await awaitImages();
     });
+  }
+
+  Future<bool> _awaitImages() async {
+    bool allIsLoaded = false;
+    for (final element in find.byType(Image).evaluate().toList()) {
+      if (element.mounted == false) {
+        allIsLoaded = true;
+        continue; // ignore: avoid_slow_async_io
+      }
+      final widget = element.widget as Image;
+      final image = widget.image;
+      await precacheImage(image, element);
+      await pumpAndSettle(const Duration(seconds: 1));
+    }
+    return allIsLoaded;
   }
 }

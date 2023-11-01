@@ -1,6 +1,9 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import '../configuration.dart';
+
+typedef WindowConfigDataCallback<T> = T Function(WindowConfigData value);
 
 class WindowVariant extends ValueVariant<WindowConfigData> {
   WindowVariant(this.windowConfigs) : super(windowConfigs);
@@ -8,7 +11,7 @@ class WindowVariant extends ValueVariant<WindowConfigData> {
   final Set<WindowConfigData> windowConfigs;
 
   @override
-  String describeValue(WindowConfigData value) => value.name;
+  String describeValue(WindowConfigData value) => AdaptiveTestConfiguration.instance.customDescribeValue(value);
 }
 
 /// Describe the size of Android physical screen camera punch hole in `dp`,
@@ -51,16 +54,13 @@ class WindowConfig extends InheritedWidget {
   final WindowConfigData windowConfig;
 
   static WindowConfigData of(BuildContext context) {
-    final WindowConfigData? result = context
-        .dependOnInheritedWidgetOfExactType<WindowConfig>()
-        ?.windowConfig;
+    final WindowConfigData? result = context.dependOnInheritedWidgetOfExactType<WindowConfig>()?.windowConfig;
     assert(result != null, 'No WindowConfig found in context');
     return result!;
   }
 
   @override
-  bool updateShouldNotify(WindowConfig oldWidget) =>
-      oldWidget.windowConfig != windowConfig;
+  bool updateShouldNotify(WindowConfig oldWidget) => oldWidget.windowConfig != windowConfig;
 }
 
 /// A Data class that describe a device properties that will impact design.
@@ -76,6 +76,7 @@ class WindowConfigData extends Equatable {
     this.notchSize,
     this.punchHole,
     this.homeIndicator,
+    this.themeMode,
   })  : viewInsets = ViewPaddingImpl(
               bottom: keyboardSize?.height ?? 0,
             ) *
@@ -140,6 +141,8 @@ class WindowConfigData extends Equatable {
   /// This represent the size of the device, expressed in `px`.
   final Size physicalSize;
 
+  final ThemeMode? themeMode;
+
   @override
   List<Object?> get props => [
         name,
@@ -154,7 +157,30 @@ class WindowConfigData extends Equatable {
         viewInsets,
         padding,
         physicalSize,
+        themeMode,
       ];
+
+  WindowConfigData copyWith({
+    String? name,
+    ThemeMode? themeMode,
+  }) {
+    return WindowConfigData(
+      name ?? this.name,
+      themeMode: themeMode,
+      size: size,
+      keyboardSize: keyboardSize,
+      borderRadius: borderRadius,
+      homeIndicator: homeIndicator,
+      notchSize: notchSize,
+      targetPlatform: targetPlatform,
+      punchHole: punchHole,
+      pixelDensity: pixelDensity,
+      safeAreaPadding: EdgeInsets.fromViewPadding(
+        padding,
+        pixelDensity,
+      ),
+    );
+  }
 }
 
 /// Implementation of the abstract class [FakeViewPadding].
