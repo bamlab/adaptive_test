@@ -10,3 +10,10 @@ scripts:
     packageFilters:
       dependsOn:
         - adaptive_test
+
+  tests:
+    exec: flutter test
+    description: Run tests.
+    packageFilters:
+      dependsOn:
+        - flutter_test

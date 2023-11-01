@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'window_size.dart';
 import '../configuration.dart';
 import '../helpers/await_images.dart';
@@ -8,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:meta/meta.dart';
 import './window_configuration.dart';
-import '../helpers/target_platform_extension.dart';
 import 'widgets/adaptive_wrapper.dart';
 
 /// Type of [callback] that will be executed inside the Flutter test environment.
@@ -45,7 +42,7 @@ void testAdaptiveWidgets(
       debugDisableShadows = true;
       debugDefaultTargetPlatformOverride = null;
     },
-    skip: skip,
+    skip: skip ?? AdaptiveTestConfiguration.instance.skipGoldenAssertion(),
     timeout: timeout,
     semanticsEnabled: semanticsEnabled,
     variant: variant,
@@ -72,11 +69,6 @@ extension Adaptive on WidgetTester {
     bool waitForImages = true,
     Future<void> Function(WidgetTester tester, WindowConfigData windowConfig)? onDeviceSetup,
   }) async {
-    final enforcedTestPlatform = AdaptiveTestConfiguration.instance.enforcedTestPlatform;
-    if (enforcedTestPlatform != null && !enforcedTestPlatform.isRuntimePlatform) {
-      throw ('Runtime platform ${Platform.operatingSystem} is not ${enforcedTestPlatform.name}');
-    }
-
     if (waitForImages) {
       await awaitImages();
     }

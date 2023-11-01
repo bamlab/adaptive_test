@@ -1,3 +1,5 @@
+// ignore_for_file: unused_field, constant_identifier_names
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/painting.dart';
 import 'window_size.dart';
@@ -6,8 +8,8 @@ enum _Device {
   iPhone_8,
   iPhone_13,
   iPadPro,
-  desktop,
-  pixel_5,
+  Desktop,
+  Pixel_5,
 }
 
 /// [WindowConfigData] for an iPhone 8.
@@ -36,7 +38,7 @@ final WindowConfigData iPhone13 = WindowConfigData(
 
 /// [WindowConfigData] for a Google Pixel 5.
 final WindowConfigData pixel5 = WindowConfigData(
-  _Device.pixel_5.name,
+  _Device.Pixel_5.name,
   size: const Size(360, 764),
   pixelDensity: 3.0,
   safeAreaPadding: const EdgeInsets.only(top: 24),
@@ -61,7 +63,7 @@ final WindowConfigData iPadPro = WindowConfigData(
 
 /// [WindowConfigData] for a basic 1080p web or desktop window.
 final WindowConfigData desktop = WindowConfigData(
-  _Device.desktop.name,
+  _Device.Desktop.name,
   size: const Size(1920, 1080),
   pixelDensity: 1.0,
   safeAreaPadding: EdgeInsets.zero,

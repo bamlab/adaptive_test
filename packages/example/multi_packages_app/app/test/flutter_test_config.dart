@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:adaptive_test/adaptive_test.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 final defaultDeviceConfigs = {
@@ -14,9 +13,7 @@ final defaultDeviceConfigs = {
 
 Future<void> testExecutable(FutureOr<void> Function() testMain) async {
   TestWidgetsFlutterBinding.ensureInitialized();
-  AdaptiveTestConfiguration.instance
-    ..setEnforcedTestPlatform(TargetPlatform.macOS)
-    ..setDeviceVariants(defaultDeviceConfigs);
+  AdaptiveTestConfiguration.instance.setDeviceVariants(defaultDeviceConfigs);
   await loadFontsFromPackage(
     package: Package(
       name: 'multi_packages_example_theme',

@@ -88,7 +88,7 @@ Future<void> _load(Map<String, List<Future<ByteData>>> fontFamilyToData) async {
 }
 
 // Loads the cached material icon font.
-// Only necessary for golden tests. Relies on the tool updating cached packages.assets
+// Only necessary for golden tests. Relies on the tool updating cached assets
 // before running tests.
 Future<void> _loadMaterialIconFont() async {
   const f.FileSystem fs = l.LocalFileSystem();

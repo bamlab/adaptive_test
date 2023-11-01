@@ -17,7 +17,7 @@ class HomeLayout extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image.asset(
-                'packages.assets/dash.png',
+                'assets/dash.png',
                 height: 56,
                 width: 56,
               ),
