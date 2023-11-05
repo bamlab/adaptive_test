@@ -1,3 +1,7 @@
+## 0.4.1
+
+* fix: Update broken link on README.md
+
 ## 0.4.0
 
 * fix: add support for flutter >=3.10.0
