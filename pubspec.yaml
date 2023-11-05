@@ -9,24 +9,5 @@ environment:
   sdk: '>=3.0.5 <4.0.0'
   flutter: ">=1.17.0"
 
-dependencies:
-  cupertino_icons: ^1.0.5
-  equatable: ^2.0.5
-  file: ^7.0.0
-  flutter:
-    sdk: flutter
-  flutter_test:
-    sdk: flutter
-  meta: ^1.8.0
-  path: ^1.8.2
-  platform: ^3.1.0
-  recase: ^4.0.0
-
 dev_dependencies:
-  flutter_lints: ^2.0.1
-
-flutter:
-  uses-material-design: true
-  assets:
-    # Add assets from the images directory to the application.
-    - assets/keyboards/
+  melos: ^3.2.0

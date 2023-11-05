@@ -1,0 +1,20 @@
+name: workspace
+
+packages:
+  - packages/**
+  - packages/
+
+scripts:
+  gen:goldens:
+    exec: flutter test --update-goldens --tags=golden
+    description: Generate goldens.
+    packageFilters:
+      dependsOn:
+        - adaptive_test_extended
+
+  tests:
+    exec: flutter test
+    description: Run tests.
+    packageFilters:
+      dirExists:
+        - test

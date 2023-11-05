@@ -1,0 +1,43 @@
+name: multi_packages_example_theme
+description: A multi packages Flutter app to illustrate the package adaptive_test. This "multi_packages_theme" package holds the theme related code
+
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.5 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  adaptive_test_extended:
+    path: ../../../
+
+  flutter_lints: ^2.0.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/dash.png
+  fonts:
+  - family: Roboto
+    fonts:
+      - asset: fonts/Roboto-Black.ttf
+      - asset: fonts/Roboto-BlackItalic.ttf
+      - asset: fonts/Roboto-Bold.ttf
+      - asset: fonts/Roboto-BoldItalic.ttf
+      - asset: fonts/Roboto-Italic.ttf
+      - asset: fonts/Roboto-Light.ttf
+      - asset: fonts/Roboto-LightItalic.ttf
+      - asset: fonts/Roboto-Medium.ttf
+      - asset: fonts/Roboto-MediumItalic.ttf
+      - asset: fonts/Roboto-Regular.ttf
+      - asset: fonts/Roboto-Thin.ttf
+      - asset: fonts/Roboto-ThinItalic.ttf
