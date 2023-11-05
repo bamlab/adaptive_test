@@ -97,7 +97,7 @@ Future<void> testExecutable(FutureOr<void> Function() testMain) async {
 ```
 
 ### (Optional) Allow a differences threshold in golden files comparators
-Source : [The Rows blog](https://blog.rows.com/p/writing-a-localfilecomparator-with?s=r)
+Source : [The Rows blog](https://rows.com/blog/post/writing-a-localfilecomparator-with-threshold-for-flutter-golden-tests)
 Different processor architectures can lead to a small differences of pixel between a files generated on an ARM processor and an x86 one.
 Eg: a MacBook M1 and an intel one.
 
