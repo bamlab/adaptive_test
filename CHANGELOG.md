@@ -8,6 +8,33 @@
 
   To resolve this, you can either rename the golden files manually or regenerate them.
 
+  To ease the migration, we provide a script that will rename your goldens files to the new format:
+  ```bash
+  #!/bin/bash
+
+  # Function to rename files in directories named "preview"
+  rename_files_in_preview() {
+      # Find directories named "preview"
+      find . -type d -name "preview" | while read -r dir; do
+          echo "Processing directory: $dir"
+          # Find files within these directories
+          find "$dir" -type f | while read -r file; do
+              # New filename by replacing ':' with '-'
+              new_name=$(echo "$file" | sed 's/:/-/g')
+              if [ "$file" != "$new_name" ]; then
+                  mv "$file" "$new_name"
+                  echo "Renamed $file to $new_name"
+              fi
+          done
+      done
+  }
+
+  # Call the function
+  rename_files_in_preview()
+  ```
+
+  You can add the script in a `.sh` file and run it from your project root directory.
+
 ## 0.4.1
 
 * fix: Update broken link on README.md
