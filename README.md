@@ -184,6 +184,36 @@ void main() {
 }
 ```
 
+## Migration to 0.5.x
+The 0.5.0 version introduces a new default file name for goldens that doesn't use characters unsupported by Windows file system.
+
+To ease the migration, we provide a script that will rename your goldens files to the new format:
+```bash
+#!/bin/bash
+
+# Function to rename files in directories named "preview"
+rename_files_in_preview() {
+    # Find directories named "preview"
+    find . -type d -name "preview" | while read -r dir; do
+        echo "Processing directory: $dir"
+        # Find files within these directories
+        find "$dir" -type f | while read -r file; do
+            # New filename by replacing ':' with '-'
+            new_name=$(echo "$file" | sed 's/:/-/g')
+            if [ "$file" != "$new_name" ]; then
+                mv "$file" "$new_name"
+                echo "Renamed $file to $new_name"
+            fi
+        done
+    done
+}
+
+# Call the function
+rename_files_in_preview()
+```
+
+You can add the script in a `.sh` file and run it from your project root directory.
+
 ## Additional information
 
 This package is still in early stage of development.
