@@ -32,9 +32,8 @@ class AdaptiveTestConfiguration {
 
   WindowConfigDataCallback<String>? _customDescribeValue;
 
-  String Function(WindowConfigData windowConfig, Type widgetType, String? suffix)? _fileNameFactory;
   String Function(WindowConfigData windowConfig, Type widgetType, String? suffix) get fileNameFactory =>
-      _fileNameFactory ?? _defaultGoldenFilePathFactory;
+      _defaultGoldenFilePathFactory;
 
   /// a function indicating whether a golden assertion should be skipped
   SkipGoldenAssertion get skipGoldenAssertion => _skipGoldenAssertion;
@@ -91,6 +90,21 @@ See: https://api.flutter.dev/flutter/flutter_test/flutter_test-library.html
     _themedDeviceVariant = WindowVariant(themedVariants);
   }
 
+  void setLocalizedDeviceVariants(Set<WindowConfigData> deviceConfigs, List<Locale> locales) {
+    final localizedDeviceConfigs = <WindowConfigData>{};
+
+    final themedVariants = <WindowConfigData>{};
+    for (final deviceConfig in deviceConfigs) {
+      for (final locale in locales) {
+        localizedDeviceConfigs.add(deviceConfig.copyWith(locale: locale));
+        themedVariants.add(deviceConfig.light().copyWith(locale: locale));
+        themedVariants.add(deviceConfig.dark().copyWith(locale: locale));
+      }
+    }
+    _deviceVariant = WindowVariant(localizedDeviceConfigs);
+    _themedDeviceVariant = WindowVariant(themedVariants);
+  }
+
   /// Generates golden path for a given [WindowConfigData] and [Widget] type.
   String _defaultGoldenFilePathFactory(WindowConfigData windowConfig, Type widgetType, String? suffix) {
     final themeModeName = windowConfig.themeMode == null ? '' : ':${windowConfig.themeMode!.name}';
@@ -102,6 +116,7 @@ See: https://api.flutter.dev/flutter/flutter_test/flutter_test-library.html
       rootDirName,
       parentDirName,
       if (localSuffix.isNotEmpty) localSuffix,
+      if (windowConfig.locale != null) windowConfig.locale!.languageCode,
       fileName,
     ].join('/');
   }

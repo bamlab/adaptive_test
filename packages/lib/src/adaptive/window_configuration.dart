@@ -12,7 +12,10 @@ extension WidgetTesterWithConfigurableWindow on WidgetTester {
     view.devicePixelRatio = windowConfig.pixelDensity;
     view.padding = windowConfig.padding;
     view.viewPadding = windowConfig.padding;
-
+    if (windowConfig.locale != null) {
+      view.platformDispatcher.localeTestValue = windowConfig.locale!;
+    }
+    addTearDown(() => view.platformDispatcher.clearLocaleTestValue());
     addTearDown(view.resetPadding);
     addTearDown(view.resetViewPadding);
     addTearDown(view.resetDevicePixelRatio);

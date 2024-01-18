@@ -102,6 +102,7 @@ class WindowConfigData extends Equatable {
     this.punchHole,
     this.homeIndicator,
     this.themeMode,
+    this.locale,
   })  : viewInsets = ViewPaddingImpl(
               bottom: keyboardSize?.height ?? 0,
             ) *
@@ -199,6 +200,7 @@ class WindowConfigData extends Equatable {
   final Size physicalSize;
 
   final ThemeMode? themeMode;
+  final Locale? locale;
   @override
   List<Object?> get props => [
         name,
@@ -214,7 +216,25 @@ class WindowConfigData extends Equatable {
         padding,
         physicalSize,
         themeMode,
+        locale,
       ];
+
+  WindowConfigData copyWith({Locale? locale}) {
+    return WindowConfigData._(
+      name,
+      size: size,
+      pixelDensity: pixelDensity,
+      targetPlatform: targetPlatform,
+      borderRadius: borderRadius,
+      safeAreaPadding: EdgeInsets.fromViewPadding(padding, pixelDensity),
+      keyboardSize: keyboardSize,
+      notchSize: notchSize,
+      punchHole: punchHole,
+      homeIndicator: homeIndicator,
+      themeMode: themeMode,
+      locale: locale ?? this.locale,
+    );
+  }
 }
 
 /// Implementation of the abstract class [FakeViewPadding].

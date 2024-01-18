@@ -12,13 +12,14 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.2
-
+  intl: any
+  flutter_localizations:
+    sdk: flutter
 dev_dependencies:
   flutter_test:
     sdk: flutter
   adaptive_test_extended:
     path: ../../
-
   flutter_lints: ^2.0.0
 
 flutter:
@@ -41,3 +42,15 @@ flutter:
       - asset: fonts/Roboto-Regular.ttf
       - asset: fonts/Roboto-Thin.ttf
       - asset: fonts/Roboto-ThinItalic.ttf
+
+  - family: Dubai
+    fonts:
+      - asset: fonts/Dubai-Bold.ttf
+      - asset: fonts/Dubai-Light.ttf
+      - asset: fonts/Dubai-Medium.ttf
+      - asset: fonts/Dubai-Regular.ttf
+
+flutter_intl:
+  enabled: true
+  class_name: AppLocalizations
+  main_locale: en

@@ -18,3 +18,7 @@ scripts:
     packageFilters:
       dirExists:
         - test
+
+  l10n:gen:
+    run: melos exec --fail-fast --depends-on="intl_utils" -- dart run intl_utils:generate
+    description: Generates the localization code for the main application.
