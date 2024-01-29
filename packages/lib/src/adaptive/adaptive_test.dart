@@ -82,6 +82,11 @@ void _testAdaptiveWidgetsBase(
   testWidgets(
     description,
     (tester) async {
+      if (variant.currentValue?.themeMode == ThemeMode.dark) {
+        tester.platformDispatcher.platformBrightnessTestValue = Brightness.dark;
+      } else {
+        tester.platformDispatcher.platformBrightnessTestValue = Brightness.light;
+      }
       debugDefaultTargetPlatformOverride = variant.currentValue!.targetPlatform;
       debugDisableShadows = false;
       tester.configureWindow(variant.currentValue!);

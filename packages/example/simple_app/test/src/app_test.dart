@@ -11,7 +11,7 @@ void main() {
         AdaptiveWrapper(
           windowConfig: variant,
           tester: tester,
-          child: App(testLocale: variant.locale),
+          child: const App(),
         ),
       );
 
