@@ -132,6 +132,20 @@ Future<void> testExecutable(FutureOr<void> Function() testMain) async {
 
 As an alternative you can use [Alchemist](https://pub.dev/packages/alchemist).
 
+Also, you can configure `AdaptiveTestConfiguration` singleton to skip tests instead of throwing if they are run on an unintended platform.
+```dart
+Future<void> testExecutable(FutureOr<void> Function() testMain) async {
+  TestWidgetsFlutterBinding.ensureInitialized();
+  AdaptiveTestConfiguration.instance
+    ..setEnforcedTestPlatform(TargetPlatform.macOS)
+    ..setFailTestOnWrongPlatform(false) <-- Adding this will skip the `testAdaptiveWidgets` tests if you are not running the tests on a macOS platform.
+    ..setDeviceVariants(defaultDeviceConfigs);
+  await loadFonts();
+  setupFileComparatorWithThreshold();
+  await testMain();
+}
+```
+
 ### Write a test
 Use `testAdaptiveWidgets` function. It take a callback with two arguments, `WidgetTester` and `WindowConfigData`.
 
