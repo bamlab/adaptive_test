@@ -34,6 +34,20 @@ class AdaptiveTestConfiguration {
     _enforcedTestPlatform = enforcedTestPlatform;
   }
 
+  bool _failTestOnWrongPlatform = true;
+
+  bool get failTestOnWrongPlatform => _failTestOnWrongPlatform;
+
+  /// When using [enforcedTestPlatform], the default behavior is that the test
+  /// will fail if the runtime platform the test is running on does not match
+  /// the [enforcedTestPlatform].
+  ///
+  /// Setting [failTestOnWrongPlatform] to false will skip the test instead of
+  /// failing it.
+  void setFailTestOnWrongPlatform(bool failTestOnWrongPlatform) {
+    _failTestOnWrongPlatform = failTestOnWrongPlatform;
+  }
+
   WindowVariant? _deviceVariant;
 
   WindowVariant get deviceVariant {
