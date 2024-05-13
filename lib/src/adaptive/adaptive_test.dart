@@ -4,6 +4,7 @@ import 'package:adaptive_test/src/adaptive/window_configuration.dart';
 import 'package:adaptive_test/src/adaptive/window_size.dart';
 import 'package:adaptive_test/src/configuration.dart';
 import 'package:adaptive_test/src/helpers/await_images.dart';
+import 'package:adaptive_test/src/helpers/skip_test_extension.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -27,14 +28,22 @@ typedef WidgetTesterAdaptiveCallback = Future<void> Function(
 void testAdaptiveWidgets(
   String description,
   WidgetTesterAdaptiveCallback callback, {
+  /// If true, the test will be skipped. Defaults to false.
+  /// If [enforcedTestPlatform] is defined in the [AdaptiveTestConfiguration]
+  /// and [failTestOnWrongPlatform] is false, the test will be skipped if the
+  /// runtime platform does not match the [enforcedTestPlatform].
   bool? skip,
   Timeout? timeout,
   bool semanticsEnabled = true,
   ValueVariant<WindowConfigData>? variantOverride,
   dynamic tags,
 }) {
-  final defaultVariant = AdaptiveTestConfiguration.instance.deviceVariant;
+  final configuration = AdaptiveTestConfiguration.instance;
+  final defaultVariant = configuration.deviceVariant;
   final variant = variantOverride ?? defaultVariant;
+
+  skip = skip ?? configuration.shouldSkipTest;
+
   testWidgets(
     description,
     (tester) async {

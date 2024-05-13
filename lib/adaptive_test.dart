@@ -7,3 +7,4 @@ export 'src/configuration.dart';
 export 'src/helpers/await_images.dart';
 export 'src/helpers/fonts_loader.dart';
 export 'src/helpers/goldens_difference.dart';
+export 'src/helpers/skip_test_extension.dart';
