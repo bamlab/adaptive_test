@@ -6,6 +6,30 @@ on:
 
 jobs:
   publish:
+    runs-on: ubuntu-latest
+
+    # Required for publishing to pub.dev
     permissions:
-      id-token: write # Required for authentication using OIDC
-    uses: dart-lang/setup-dart/.github/workflows/publish.yml@v1
+      id-token: write
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - id: dotenv
+        uses: falti/dotenv-action@v0.2.8
+        with:
+          path: .github/workflows/.env
+
+      - uses: subosito/flutter-action@v2.5.0
+        with:
+          flutter-version: ${{ steps.dotenv.outputs.flutter_version }}
+          channel: "stable"
+          cache: true
+          cache-key: flutter-macos-${{ steps.dotenv.outputs.flutter_version }}
+          cache-path: ${{ runner.tool_cache }}/flutter-${{ steps.dotenv.outputs.flutter_version }}
+
+      - name: Install Dependencies
+        run: flutter pub get
+
+      - name: Publish to pub.dev
+        run: flutter pub publish --force
