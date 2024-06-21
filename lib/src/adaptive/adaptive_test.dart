@@ -70,26 +70,26 @@ extension Adaptive on WidgetTester {
     Key?
         byKey, // Sometimes we want to find the widget by its unique key in the case they are multiple of the same type.
     bool waitForImages = true,
+    String Function()? pathBuilder,
   }) async {
-    final enforcedTestPlatform =
-        AdaptiveTestConfiguration.instance.enforcedTestPlatform;
-    if (enforcedTestPlatform != null &&
-        !enforcedTestPlatform.isRuntimePlatform) {
+    final enforcedTestPlatform = AdaptiveTestConfiguration.instance.enforcedTestPlatform;
+    if (enforcedTestPlatform != null && !enforcedTestPlatform.isRuntimePlatform) {
       throw ('Runtime platform ${Platform.operatingSystem} is not ${enforcedTestPlatform.name}');
     }
 
-    final localSuffix = suffix != null ? "_${ReCase(suffix).snakeCase}" : '';
+    pathBuilder ??= () {
+      final name = ReCase('$T');
+      final localSuffix = suffix != null ? "_${ReCase(suffix).snakeCase}" : '';
+      return 'preview/${windowConfig.name}-${name.snakeCase}$localSuffix.png';
+    };
 
-    final name = ReCase('$T');
     if (waitForImages) {
       await awaitImages();
     }
     await expectLater(
       // Find by its type except if the widget's unique key was given.
       byKey != null ? find.byKey(byKey) : find.byType(AdaptiveWrapper),
-      matchesGoldenFile(
-        'preview/${windowConfig.name}-${name.snakeCase}$localSuffix.png',
-      ),
+      matchesGoldenFile(pathBuilder.call()),
     );
   }
 }
