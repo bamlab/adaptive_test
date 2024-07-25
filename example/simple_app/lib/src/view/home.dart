@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:material_symbols_icons/symbols.dart';
 
 class HomeLayout extends StatelessWidget {
   const HomeLayout({super.key, this.useFadeInImage = false});
@@ -10,7 +11,14 @@ class HomeLayout extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Adaptive Golden'),
+        title: const Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(Symbols.image),
+            SizedBox(width: 12),
+            Text('Adaptive Golden'),
+          ],
+        ),
       ),
       body: Center(
         child: Padding(
