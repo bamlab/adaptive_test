@@ -32,7 +32,8 @@ class Package {
 ///
 /// *Note* for this function to work, your package needs to include all fonts
 /// it uses in a font dir at the root of the project.
-Future<void> loadFonts([String? package]) {
+@Deprecated("Use [loadAppFonts] instead")
+Future<void> loadFonts([String? package]) async {
   return package != null
       ? loadFontsFromPackage(
           package: Package(name: package, relativePath: './$package'),
@@ -52,6 +53,7 @@ Future<void> loadFonts([String? package]) {
 /// If no [package] is provided, it will look for a fonts dir at the root of the project.
 /// If a [package] is provided with a [Package.relativePath] it will look for a fonts dir with the package located at that path
 /// If a [package] is provided with a [Package.name] it will prefix the fonts dir with `packages/[package.name]`
+@Deprecated("Use [loadAppFonts] instead")
 Future<void> loadFontsFromPackage({Package? package}) async {
   TestWidgetsFlutterBinding.ensureInitialized();
   await _load(loadFontsFromFontsDir(package));
@@ -90,6 +92,12 @@ Future<ByteData> _fileToByteData(File file) async {
   return ByteData.view(bytes.buffer);
 }
 
+/// Load fonts and icons to make sure they show up in golden tests.
+///
+/// To use it efficiently:
+/// * Create a flutter_test_config.dart file. See:
+/// https://api.flutter.dev/flutter/flutter_test/flutter_test-library.html
+/// * add `await loadAppFonts();` in the `testExecutable` function.
 Future<void> loadAppFonts() async {
   TestWidgetsFlutterBinding.ensureInitialized();
 
