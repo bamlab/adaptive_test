@@ -17,7 +17,7 @@ Future<void> testExecutable(FutureOr<void> Function() testMain) async {
   AdaptiveTestConfiguration.instance
     ..setEnforcedTestPlatform(TargetPlatform.macOS)
     ..setDeviceVariants(defaultDeviceConfigs);
-  await loadFonts();
+  await loadAppFonts();
   const m1IntelDifferenceThreshold = 0.2 / 100; // 0.2%
   setupFileComparatorWithThreshold(m1IntelDifferenceThreshold);
   await testMain();

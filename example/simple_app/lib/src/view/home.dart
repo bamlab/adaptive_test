@@ -10,7 +10,7 @@ class HomeLayout extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Adaptative Golden'),
+        title: const Text('Adaptive Golden'),
       ),
       body: Center(
         child: Padding(
