@@ -8,7 +8,14 @@ class HomeLayout extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const AppText('Adaptive Golden'),
+        title: const Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            AppIcon.image,
+            SizedBox(width: 12),
+            AppText('Adaptive Golden'),
+          ],
+        ),
       ),
       body: Center(
         child: Padding(
