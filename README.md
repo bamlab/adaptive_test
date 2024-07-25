@@ -221,8 +221,8 @@ After using it in multiple projects, we wanted to open-source it.
 
 Feedbacks, issues, contributions and suggestions are more than welcomed! 😁
 
-## 👉 About Bam
+## 👉 About Theodo apps
 
-We are a 100 people company developing and designing multiplatform applications with [React Native](https://www.bam.tech/expertise/react-native) and [Flutter](https://www.bam.tech/expertise/flutter) using the Lean & Agile methodology. To get more information on the solutions that would suit your needs, feel free to get in touch by [email](mailto://contact@bam.tech) or through or [contact form](https://www.bam.tech/contact)!
+We are a 100 people company developing and designing multiplatform applications with [React Native](https://www.bam.tech/expertise/react-native) and [Flutter](https://www.bam.tech/expertise/flutter) using the Lean & Agile methodology. To get more information on the solutions that would suit your needs, feel free to get in touch by [email](mailto://contact-apps@theodo.com) or through or [contact form](https://apps.theodo.com/contact)!
 
 We will always answer you with pleasure 😁
