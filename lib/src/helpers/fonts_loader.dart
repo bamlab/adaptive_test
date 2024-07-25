@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:file/file.dart' as f;
@@ -87,6 +88,25 @@ Future<ByteData> _fileToByteData(File file) async {
   final bytes = await file.readAsBytes();
 
   return ByteData.view(bytes.buffer);
+}
+
+Future<void> loadAppFonts() async {
+  TestWidgetsFlutterBinding.ensureInitialized();
+
+  final fontManifest = await rootBundle.loadStructuredData<Iterable<dynamic>>(
+    'FontManifest.json',
+    (string) async => json.decode(string),
+  );
+  final waitList = <Future<void>>[];
+  for (final Map<String, dynamic> font in fontManifest) {
+    final fontLoader = FontLoader(font['family']);
+
+    for (final Map<String, dynamic> fontType in font['fonts']) {
+      fontLoader.addFont(rootBundle.load(fontType['asset']));
+    }
+    waitList.add(fontLoader.load());
+  }
+  await Future.wait(waitList);
 }
 
 Future<void> _load(Map<String, List<Future<ByteData>>> fontFamilyToData) async {
