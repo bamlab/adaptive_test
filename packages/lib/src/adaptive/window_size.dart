@@ -11,7 +11,8 @@ class WindowVariant extends ValueVariant<WindowConfigData> {
   final Set<WindowConfigData> windowConfigs;
 
   @override
-  String describeValue(WindowConfigData value) => AdaptiveTestConfiguration.instance.customDescribeValue(value);
+  String describeValue(WindowConfigData value) =>
+      AdaptiveTestConfiguration.instance.customDescribeValue(value);
 }
 
 /// Describe the size of Android physical screen camera punch hole in `dp`,
@@ -54,13 +55,16 @@ class WindowConfig extends InheritedWidget {
   final WindowConfigData windowConfig;
 
   static WindowConfigData of(BuildContext context) {
-    final WindowConfigData? result = context.dependOnInheritedWidgetOfExactType<WindowConfig>()?.windowConfig;
+    final WindowConfigData? result = context
+        .dependOnInheritedWidgetOfExactType<WindowConfig>()
+        ?.windowConfig;
     assert(result != null, 'No WindowConfig found in context');
     return result!;
   }
 
   @override
-  bool updateShouldNotify(WindowConfig oldWidget) => oldWidget.windowConfig != windowConfig;
+  bool updateShouldNotify(WindowConfig oldWidget) =>
+      oldWidget.windowConfig != windowConfig;
 }
 
 /// A Data class that describe a device properties that will impact design.

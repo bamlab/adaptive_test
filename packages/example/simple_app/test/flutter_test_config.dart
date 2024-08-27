@@ -14,8 +14,8 @@ final defaultDeviceConfigs = {
 
 Future<void> testExecutable(FutureOr<void> Function() testMain) async {
   TestWidgetsFlutterBinding.ensureInitialized();
-  AdaptiveTestConfiguration.instance
-      .setLocalizedDeviceVariants(defaultDeviceConfigs, AppLocalizations.delegate.supportedLocales);
+  AdaptiveTestConfiguration.instance.setLocalizedDeviceVariants(
+      defaultDeviceConfigs, AppLocalizations.delegate.supportedLocales);
   await loadFonts();
   const m1IntelDifferenceThreshold = 0.2 / 100; // 0.2%
   setupFileComparatorWithThreshold(m1IntelDifferenceThreshold);

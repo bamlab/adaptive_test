@@ -28,7 +28,8 @@ class App extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(
           seedColor: Colors.blue,
         ),
-        fontFamily: defaultLocale.languageCode.contains('ar') ? 'Dubai' : 'Roboto',
+        fontFamily:
+            defaultLocale.languageCode.contains('ar') ? 'Dubai' : 'Roboto',
       ),
       locale: defaultLocale,
       home: const HomeLayout(),

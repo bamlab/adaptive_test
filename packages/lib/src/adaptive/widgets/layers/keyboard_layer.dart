@@ -59,7 +59,8 @@ class _KeyboardDisplayerState extends State<KeyboardDisplayer> {
           return widget.tester.configureClosedKeyboardWindow(windowConfig);
         }
 
-        final focusedWidget = FocusManager.instance.primaryFocus?.context?.widget;
+        final focusedWidget =
+            FocusManager.instance.primaryFocus?.context?.widget;
         if (focusedWidget == null) {
           displayKeyboard = false;
           return widget.tester.configureClosedKeyboardWindow(windowConfig);

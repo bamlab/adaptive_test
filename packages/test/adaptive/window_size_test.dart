@@ -23,7 +23,8 @@ void main() {
       expect(testDevice.themeMode, null);
       expect(testDevice.keyboardSize, const Size(390, 302));
       expect(testDevice.borderRadius, BorderRadius.circular(48));
-      expect(testDevice.homeIndicator, const HomeIndicatorData(8, Size(135, 5)));
+      expect(
+          testDevice.homeIndicator, const HomeIndicatorData(8, Size(135, 5)));
       expect(testDevice.notchSize, const Size(154, 32));
       expect(testDevice.targetPlatform, TargetPlatform.iOS);
       expect(testDevice.physicalSize, const Size(390, 844) * 3);
@@ -49,7 +50,8 @@ void main() {
       expect(expectedLightTestDevice.themeMode, ThemeMode.light);
       expect(expectedLightTestDevice.keyboardSize, const Size(390, 302));
       expect(expectedLightTestDevice.borderRadius, BorderRadius.circular(48));
-      expect(expectedLightTestDevice.homeIndicator, const HomeIndicatorData(8, Size(135, 5)));
+      expect(expectedLightTestDevice.homeIndicator,
+          const HomeIndicatorData(8, Size(135, 5)));
       expect(expectedLightTestDevice.notchSize, const Size(154, 32));
       expect(expectedLightTestDevice.targetPlatform, TargetPlatform.iOS);
       expect(expectedLightTestDevice.physicalSize, const Size(390, 844) * 3);
@@ -62,9 +64,11 @@ void main() {
 
       final expectedViewInsets = const ViewPaddingImpl(bottom: 302) * 3;
       expect(expectedLightTestDevice.viewInsets.top, expectedViewInsets.top);
-      expect(expectedLightTestDevice.viewInsets.bottom, expectedViewInsets.bottom);
+      expect(
+          expectedLightTestDevice.viewInsets.bottom, expectedViewInsets.bottom);
       expect(expectedLightTestDevice.viewInsets.left, expectedViewInsets.left);
-      expect(expectedLightTestDevice.viewInsets.right, expectedViewInsets.right);
+      expect(
+          expectedLightTestDevice.viewInsets.right, expectedViewInsets.right);
     });
 
     test('dark', () {
@@ -75,7 +79,8 @@ void main() {
       expect(expectedLightTestDevice.themeMode, ThemeMode.dark);
       expect(expectedLightTestDevice.keyboardSize, const Size(390, 302));
       expect(expectedLightTestDevice.borderRadius, BorderRadius.circular(48));
-      expect(expectedLightTestDevice.homeIndicator, const HomeIndicatorData(8, Size(135, 5)));
+      expect(expectedLightTestDevice.homeIndicator,
+          const HomeIndicatorData(8, Size(135, 5)));
       expect(expectedLightTestDevice.notchSize, const Size(154, 32));
       expect(expectedLightTestDevice.targetPlatform, TargetPlatform.iOS);
       expect(expectedLightTestDevice.physicalSize, const Size(390, 844) * 3);
@@ -88,9 +93,11 @@ void main() {
 
       final expectedViewInsets = const ViewPaddingImpl(bottom: 302) * 3;
       expect(expectedLightTestDevice.viewInsets.top, expectedViewInsets.top);
-      expect(expectedLightTestDevice.viewInsets.bottom, expectedViewInsets.bottom);
+      expect(
+          expectedLightTestDevice.viewInsets.bottom, expectedViewInsets.bottom);
       expect(expectedLightTestDevice.viewInsets.left, expectedViewInsets.left);
-      expect(expectedLightTestDevice.viewInsets.right, expectedViewInsets.right);
+      expect(
+          expectedLightTestDevice.viewInsets.right, expectedViewInsets.right);
     });
   });
 }

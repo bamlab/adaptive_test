@@ -30,7 +30,8 @@ void testAdaptiveThemedWidgets(
   ValueVariant<WindowConfigData>? variantOverride,
   dynamic tags,
 }) {
-  final variant = variantOverride ?? AdaptiveTestConfiguration.instance.themedDeviceVariant;
+  final variant =
+      variantOverride ?? AdaptiveTestConfiguration.instance.themedDeviceVariant;
 
   _testAdaptiveWidgetsBase(
     description,
@@ -85,7 +86,8 @@ void _testAdaptiveWidgetsBase(
       if (variant.currentValue?.themeMode == ThemeMode.dark) {
         tester.platformDispatcher.platformBrightnessTestValue = Brightness.dark;
       } else {
-        tester.platformDispatcher.platformBrightnessTestValue = Brightness.light;
+        tester.platformDispatcher.platformBrightnessTestValue =
+            Brightness.light;
       }
       debugDefaultTargetPlatformOverride = variant.currentValue!.targetPlatform;
       debugDisableShadows = false;
@@ -119,7 +121,8 @@ extension Adaptive on WidgetTester {
     Key?
         byKey, // Sometimes we want to find the widget by its unique key in the case they are multiple of the same type.
     bool waitForImages = true,
-    Future<void> Function(WidgetTester tester, WindowConfigData windowConfig)? onDeviceSetup,
+    Future<void> Function(WidgetTester tester, WindowConfigData windowConfig)?
+        onDeviceSetup,
   }) async {
     if (waitForImages) {
       await awaitImages();
@@ -130,7 +133,8 @@ extension Adaptive on WidgetTester {
       // Find by its type except if the widget's unique key was given.
       byKey != null ? find.byKey(byKey) : find.byType(AdaptiveWrapper),
       matchesGoldenFile(
-        AdaptiveTestConfiguration.instance.fileNameFactory(windowConfig, T, suffix),
+        AdaptiveTestConfiguration.instance
+            .fileNameFactory(windowConfig, T, suffix),
       ),
     );
   }

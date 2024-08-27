@@ -21,24 +21,28 @@ typedef SkipGoldenAssertion = bool Function();
 class AdaptiveTestConfiguration {
   AdaptiveTestConfiguration._privateConstructor();
 
-  static final AdaptiveTestConfiguration _instance = AdaptiveTestConfiguration._privateConstructor();
+  static final AdaptiveTestConfiguration _instance =
+      AdaptiveTestConfiguration._privateConstructor();
 
   static AdaptiveTestConfiguration get instance => _instance;
 
   WindowConfigDataCallback<String> get customDescribeValue =>
       _customDescribeValue ??
-      (windowConfig) =>
-          windowConfig.themeMode == null ? windowConfig.name : '${windowConfig.name}:${windowConfig.themeMode!.name}';
+      (windowConfig) => windowConfig.themeMode == null
+          ? windowConfig.name
+          : '${windowConfig.name}:${windowConfig.themeMode!.name}';
 
   WindowConfigDataCallback<String>? _customDescribeValue;
 
-  String Function(WindowConfigData windowConfig, Type widgetType, String? suffix) get fileNameFactory =>
-      _defaultGoldenFilePathFactory;
+  String Function(
+          WindowConfigData windowConfig, Type widgetType, String? suffix)
+      get fileNameFactory => _defaultGoldenFilePathFactory;
 
   /// a function indicating whether a golden assertion should be skipped
   SkipGoldenAssertion get skipGoldenAssertion => _skipGoldenAssertion;
   //default is DoNotSkipGoldenAssertion
-  SkipGoldenAssertion _skipGoldenAssertion = () => !Platform.isMacOS && !Platform.version.contains('ARM64');
+  SkipGoldenAssertion _skipGoldenAssertion =
+      () => !Platform.isMacOS && !Platform.version.contains('ARM64');
 
   void setCustomDescribeValue(WindowConfigDataCallback<String> callback) {
     _customDescribeValue = callback;
@@ -90,7 +94,8 @@ See: https://api.flutter.dev/flutter/flutter_test/flutter_test-library.html
     _themedDeviceVariant = WindowVariant(themedVariants);
   }
 
-  void setLocalizedDeviceVariants(Set<WindowConfigData> deviceConfigs, List<Locale> locales) {
+  void setLocalizedDeviceVariants(
+      Set<WindowConfigData> deviceConfigs, List<Locale> locales) {
     final localizedDeviceConfigs = <WindowConfigData>{};
 
     final themedVariants = <WindowConfigData>{};
@@ -106,8 +111,11 @@ See: https://api.flutter.dev/flutter/flutter_test/flutter_test-library.html
   }
 
   /// Generates golden path for a given [WindowConfigData] and [Widget] type.
-  String _defaultGoldenFilePathFactory(WindowConfigData windowConfig, Type widgetType, String? suffix) {
-    final themeModeName = windowConfig.themeMode == null ? '' : ':${windowConfig.themeMode!.name}';
+  String _defaultGoldenFilePathFactory(
+      WindowConfigData windowConfig, Type widgetType, String? suffix) {
+    final themeModeName = windowConfig.themeMode == null
+        ? ''
+        : ':${windowConfig.themeMode!.name}';
     final localSuffix = suffix != null ? ReCase(suffix).snakeCase : '';
     const rootDirName = 'golden';
     String parentDirName = widgetType.toString().snakeCase;

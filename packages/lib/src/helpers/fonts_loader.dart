@@ -18,7 +18,8 @@ class Package {
 
   /// Creates a new [Package] instance.
   /// Either [name] or [relativePath] must be provided.
-  Package({this.name, this.relativePath}) : assert(name != null || relativePath != null);
+  Package({this.name, this.relativePath})
+      : assert(name != null || relativePath != null);
 }
 
 /// Load fonts to make sure they show up in golden tests.
@@ -63,13 +64,19 @@ Map<String, List<Future<ByteData>>> loadFontsFromFontsDir([Package? package]) {
   final currentDir = path.dirname(Platform.script.path);
   final fontsDirectory = path.join(
     currentDir,
-    package == null || package.relativePath == null ? 'fonts' : '${package.relativePath}/fonts',
+    package == null || package.relativePath == null
+        ? 'fonts'
+        : '${package.relativePath}/fonts',
   );
-  final prefix = package == null || package.name == null ? '' : 'packages/${package.name}/';
+  final prefix = package == null || package.name == null
+      ? ''
+      : 'packages/${package.name}/';
   for (final file in Directory(fontsDirectory).listSync()) {
     if (file is File) {
-      final fontFamily = prefix + path.basenameWithoutExtension(file.path).split('-').first;
-      (fontFamilyToData[fontFamily] ??= []).add(file.readAsBytes().then((bytes) => ByteData.view(bytes.buffer)));
+      final fontFamily =
+          prefix + path.basenameWithoutExtension(file.path).split('-').first;
+      (fontFamilyToData[fontFamily] ??= [])
+          .add(file.readAsBytes().then((bytes) => ByteData.view(bytes.buffer)));
     }
   }
   return fontFamilyToData;
@@ -105,7 +112,8 @@ Future<void> _loadMaterialIconFont() async {
     ),
   );
 
-  final bytes = Future<ByteData>.value(iconFont.readAsBytesSync().buffer.asByteData());
+  final bytes =
+      Future<ByteData>.value(iconFont.readAsBytesSync().buffer.asByteData());
 
   await (FontLoader('MaterialIcons')..addFont(bytes)).load();
 }
