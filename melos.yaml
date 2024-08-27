@@ -2,7 +2,6 @@ name: workspace
 
 packages:
   - packages/**
-  - packages/
 
 scripts:
   gen:goldens:
@@ -13,7 +12,7 @@ scripts:
         - adaptive_test_extended
 
   tests:
-    exec: flutter test
+    exec: flutter test --no-pub --test-randomize-ordering-seed random
     description: Run tests.
     packageFilters:
       dirExists:
@@ -22,3 +21,14 @@ scripts:
   l10n:gen:
     run: melos exec --fail-fast --depends-on="intl_utils" -- dart run intl_utils:generate
     description: Generates the localization code for the main application.
+
+  format:
+    exec: dart format --set-exit-if-changed lib test
+    description: Format code.
+
+  analyze:
+    exec: flutter analyze lib test
+    description: Analyze code.
+    packageFilters:
+      dirExists:
+        - test
