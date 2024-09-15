@@ -1,3 +1,7 @@
 include: package:theodo_analysis/analysis_options.yaml
 # Additional information about this file can be found at
 # https://pub.dev/packages/theodo_analysis
+linter:
+  rules:
+    public_member_api_docs: false
+  
