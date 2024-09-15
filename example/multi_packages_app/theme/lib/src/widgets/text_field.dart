@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 
 class AppTextField extends StatelessWidget {
-  final String? labelText;
-  final TextStyle style;
   const AppTextField({
     this.labelText,
     this.style = const TextStyle(
@@ -12,6 +10,8 @@ class AppTextField extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
+  final String? labelText;
+  final TextStyle style;
   @override
   Widget build(BuildContext context) {
     return TextField(

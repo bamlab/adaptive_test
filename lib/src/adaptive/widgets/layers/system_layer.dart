@@ -16,6 +16,7 @@ class SystemLayer extends StatelessWidget {
 
     final homeIndicator = windowConfig.homeIndicator;
     if (homeIndicator == null) return child;
+
     return Directionality(
       textDirection: TextDirection.ltr,
       child: Stack(
@@ -35,7 +36,7 @@ class SystemLayer extends StatelessWidget {
                 ),
               ),
             ),
-          )
+          ),
         ],
       ),
     );

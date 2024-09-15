@@ -22,7 +22,6 @@ class HardwareLayer extends StatelessWidget {
 
     return ClipRRect(
       borderRadius: windowConfig.borderRadius,
-      clipBehavior: Clip.antiAlias,
       child: Directionality(
         textDirection: TextDirection.ltr,
         child: Stack(
@@ -85,6 +84,7 @@ class _PunchHole extends StatelessWidget {
 
     final punchHole = windowConfig.punchHole;
     if (punchHole == null) return const SizedBox();
+
     return Positioned(
       top: punchHole.offset.dy,
       left: punchHole.offset.dx,
@@ -122,6 +122,7 @@ class _NotchCorner extends StatelessWidget {
 }
 
 class _NotchLeftClipper extends CustomClipper<Path> {
+  const _NotchLeftClipper();
   @override
   Path getClip(Size size) {
     return Path()
@@ -141,6 +142,7 @@ class _NotchLeftClipper extends CustomClipper<Path> {
 }
 
 class _NotchRightClipper extends CustomClipper<Path> {
+  const _NotchRightClipper();
   @override
   Path getClip(Size size) {
     return Path()

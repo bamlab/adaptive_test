@@ -36,7 +36,7 @@ class HomeLayout extends StatelessWidget {
                     labelText: 'Say hi !',
                   ),
                 ),
-              )
+              ),
             ],
           ),
         ),

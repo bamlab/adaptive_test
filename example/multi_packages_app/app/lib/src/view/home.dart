@@ -24,7 +24,7 @@ class HomeLayout extends StatelessWidget {
               const SizedBox(width: 20),
               const Expanded(
                 child: AppTextField(labelText: 'Say hi !'),
-              )
+              ),
             ],
           ),
         ),

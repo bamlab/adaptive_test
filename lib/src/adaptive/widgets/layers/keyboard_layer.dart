@@ -46,6 +46,7 @@ class _KeyboardDisplayerState extends State<KeyboardDisplayer> {
 
   @override
   void initState() {
+    super.initState();
     listener = () {
       final windowConfig = WindowConfig.of(context);
       if (!mounted) {
@@ -56,6 +57,7 @@ class _KeyboardDisplayerState extends State<KeyboardDisplayer> {
         final deviceHasKeyboard = windowConfig.keyboardSize != null;
         if (!deviceHasKeyboard) {
           displayKeyboard = false;
+
           return widget.tester.configureClosedKeyboardWindow(windowConfig);
         }
 
@@ -63,6 +65,7 @@ class _KeyboardDisplayerState extends State<KeyboardDisplayer> {
             FocusManager.instance.primaryFocus?.context?.widget;
         if (focusedWidget == null) {
           displayKeyboard = false;
+
           return widget.tester.configureClosedKeyboardWindow(windowConfig);
         }
 
@@ -71,15 +74,16 @@ class _KeyboardDisplayerState extends State<KeyboardDisplayer> {
 
         if (!focusNeedsInput) {
           displayKeyboard = false;
+
           return widget.tester.configureClosedKeyboardWindow(windowConfig);
         }
         displayKeyboard = true;
+
         return widget.tester.configureOpenedKeyboardWindow(windowConfig);
       });
     };
 
     FocusManager.instance.addListener(listener);
-    super.initState();
   }
 
   @override
@@ -93,6 +97,7 @@ class _KeyboardDisplayerState extends State<KeyboardDisplayer> {
     final windowConfig = WindowConfig.of(context);
 
     if (!displayKeyboard) return const SizedBox();
+
     return Positioned(
       bottom: 0,
       child: Image.asset(

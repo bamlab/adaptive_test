@@ -10,16 +10,16 @@ import 'package:platform/platform.dart' as p;
 
 /// A class representing a package within a multi-packages app
 class Package {
+  /// Creates a new [Package] instance.
+  /// Either [name] or [relativePath] must be provided.
+  Package({this.name, this.relativePath})
+      : assert(name != null || relativePath != null);
+
   /// This is the name of the package as defined in the pubspec.yaml file
   final String? name;
 
   /// This is the path to the package relative to where the test is run from.
   final String? relativePath;
-
-  /// Creates a new [Package] instance.
-  /// Either [name] or [relativePath] must be provided.
-  Package({this.name, this.relativePath})
-      : assert(name != null || relativePath != null);
 }
 
 /// Load fonts to make sure they show up in golden tests.
@@ -31,7 +31,7 @@ class Package {
 ///
 /// *Note* for this function to work, your package needs to include all fonts
 /// it uses in a font dir at the root of the project.
-Future<void> loadFonts([String? package]) async {
+Future<void> loadFonts([String? package]) {
   return package != null
       ? loadFontsFromPackage(
           package: Package(name: package, relativePath: './$package'),
@@ -79,6 +79,7 @@ Map<String, List<Future<ByteData>>> loadFontsFromFontsDir([Package? package]) {
           .add(file.readAsBytes().then((bytes) => ByteData.view(bytes.buffer)));
     }
   }
+
   return fontFamilyToData;
 }
 

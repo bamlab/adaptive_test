@@ -60,6 +60,7 @@ See: https://api.flutter.dev/flutter/flutter_test/flutter_test-library.html
 ''',
       );
     }
+
     return scopedDeviceVariant;
   }
 

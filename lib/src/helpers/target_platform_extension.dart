@@ -10,15 +10,12 @@ extension IsRuntimePlatform on TargetPlatform {
     final usualTargetPlatforms = [
       TargetPlatform.linux,
       TargetPlatform.macOS,
-      TargetPlatform.windows
+      TargetPlatform.windows,
     ];
 
-    if (usualTargetPlatforms.contains(this)) {
-      return;
-    } else {
-      log('''Tests are intended to be runned on linux, macOS or windows platform.
+    if (usualTargetPlatforms.contains(this)) {}
+    log('''Tests are intended to be runned on linux, macOS or windows platform.
       But you are running them on $name''');
-    }
   }
 
   bool get isRuntimePlatform {
@@ -27,14 +24,19 @@ extension IsRuntimePlatform on TargetPlatform {
     switch (this) {
       case TargetPlatform.linux:
         return Platform.isLinux;
+
       case TargetPlatform.macOS:
         return Platform.isMacOS;
+
       case TargetPlatform.windows:
         return Platform.isWindows;
+
       case TargetPlatform.android:
         return Platform.isAndroid;
+
       case TargetPlatform.fuchsia:
         return Platform.isFuchsia;
+
       case TargetPlatform.iOS:
         return Platform.isIOS;
     }

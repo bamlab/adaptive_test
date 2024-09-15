@@ -55,6 +55,7 @@ class WindowConfig extends InheritedWidget {
         .dependOnInheritedWidgetOfExactType<WindowConfig>()
         ?.windowConfig;
     assert(result != null, 'No WindowConfig found in context');
+
     return result!;
   }
 

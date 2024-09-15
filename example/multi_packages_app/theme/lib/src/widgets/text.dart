@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 class AppText extends StatelessWidget {
-  final String text;
-  final TextStyle? style;
   const AppText(this.text, {this.style, Key? key}) : super(key: key);
 
+  final String text;
+  final TextStyle? style;
   @override
   Widget build(BuildContext context) {
     return Text(

@@ -28,7 +28,9 @@ final WindowConfigData iPhone13 = WindowConfigData(
   pixelDensity: 3.0,
   safeAreaPadding: const EdgeInsets.only(top: 47, bottom: 34),
   keyboardSize: const Size(390, 302),
-  borderRadius: BorderRadius.circular(48),
+  borderRadius: const BorderRadius.all(
+    Radius.circular(48),
+  ),
   homeIndicator: const HomeIndicatorData(8, Size(135, 5)),
   notchSize: const Size(154, 32),
   targetPlatform: TargetPlatform.iOS,
@@ -41,7 +43,9 @@ final WindowConfigData pixel5 = WindowConfigData(
   pixelDensity: 3.0,
   safeAreaPadding: const EdgeInsets.only(top: 24),
   keyboardSize: const Size(360, 297),
-  borderRadius: BorderRadius.circular(32),
+  borderRadius: const BorderRadius.all(
+    Radius.circular(32),
+  ),
   homeIndicator: const HomeIndicatorData(8, Size(72, 2)),
   targetPlatform: TargetPlatform.android,
   punchHole: const PunchHoleData(Offset(12, 12), 25),
@@ -54,7 +58,9 @@ final WindowConfigData iPadPro = WindowConfigData(
   pixelDensity: 2.0,
   safeAreaPadding: const EdgeInsets.only(top: 24, bottom: 20),
   keyboardSize: const Size(1366, 420),
-  borderRadius: BorderRadius.circular(24),
+  borderRadius: const BorderRadius.all(
+    Radius.circular(24),
+  ),
   homeIndicator: const HomeIndicatorData(8, Size(315, 5)),
   targetPlatform: TargetPlatform.iOS,
 );
