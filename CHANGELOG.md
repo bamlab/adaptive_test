@@ -1,3 +1,5 @@
+* feat: awaitImages now support FadeInImage.
+* improvement: use pump instead of pumpAndSettle in awaitImages.
 * feat: add path and version argument to expectGolden method.
 
 ## 0.5.1
