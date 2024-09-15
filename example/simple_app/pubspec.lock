@@ -7,7 +7,7 @@ packages:
       path: "../.."
       relative: true
     source: path
-    version: "0.5.0"
+    version: "0.5.1"
   async:
     dependency: transitive
     description:
@@ -231,6 +231,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.7.2"
+  theodo_analysis:
+    dependency: "direct dev"
+    description:
+      name: theodo_analysis
+      sha256: bee1356c5bf8e2856a88b1f51b593951c924a15816b0a6a4d4a57361caaf4691
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.0"
   vector_math:
     dependency: transitive
     description:
