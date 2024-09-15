@@ -11,7 +11,7 @@ extension AwaitImages on WidgetTester {
         final widget = element.widget as Image;
         final image = widget.image;
         await precacheImage(image, element);
-        await pumpAndSettle();
+        await pump();
       }
 
       for (final element in find.byType(DecoratedBox).evaluate().toList()) {
@@ -21,7 +21,7 @@ extension AwaitImages on WidgetTester {
           final image = decoration.image?.image;
           if (image != null) {
             await precacheImage(image, element);
-            await pumpAndSettle();
+            await pump();
           }
         }
       }
