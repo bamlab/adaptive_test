@@ -1,3 +1,5 @@
+* feat: add path and version argument to expectGolden method.
+
 ## 0.5.1
 
 * feat: add support for skipping tests instead of failing them based on the enforced target platform defined in the `AdaptiveTestConfiguration` class.
