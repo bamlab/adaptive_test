@@ -76,6 +76,12 @@ extension Adaptive on WidgetTester {
   Future<void> expectGolden<T>(
     WindowConfigData windowConfig, {
     String? suffix,
+
+    /// By default, the path of the generated golden file is constructed as follows:
+    /// `preview/${windowConfig.name}-${name.snakeCase}$localSuffix.png`
+    ///
+    /// If a path is provided, it will override this default behavior.
+    String? path,
     Key?
         byKey, // Sometimes we want to find the widget by its unique key in the case they are multiple of the same type.
     bool waitForImages = true,
@@ -93,12 +99,13 @@ extension Adaptive on WidgetTester {
     if (waitForImages) {
       await awaitImages();
     }
+
+    final key = path ??
+        'preview/${windowConfig.name}-${name.snakeCase}$localSuffix.png';
     await expectLater(
       // Find by its type except if the widget's unique key was given.
       byKey != null ? find.byKey(byKey) : find.byType(AdaptiveWrapper),
-      matchesGoldenFile(
-        'preview/${windowConfig.name}-${name.snakeCase}$localSuffix.png',
-      ),
+      matchesGoldenFile(key),
     );
   }
 }
