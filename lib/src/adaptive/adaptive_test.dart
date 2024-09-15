@@ -72,18 +72,28 @@ void testAdaptiveWidgets(
 /// [enforcedTestPlatform] defined in the [AdaptiveTestConfiguration].
 extension Adaptive on WidgetTester {
   /// Visual regression test for a given [WindowConfigData].
+  ///
+  /// The [suffix] is appended to the golden file name. It defaults to
+  /// the empty string if not provided.
+  ///
+  /// By default, the path of the generated golden file is constructed as follows:
+  /// `preview/${windowConfig.name}-${name.snakeCase}$localSuffix.png`.
+  /// If a [path] is provided, it will override this default behavior.
+  ///
+  /// The [byKey] argument allows the test to find the widget by its unique key,
+  /// which is useful when multiple widgets of the same type are present.
+  ///
+  /// The [version] argument is an optional integer that can be used to
+  /// differentiate historical golden files.
+  ///
+  /// Set [waitForImages] to `false` if you want to skip waiting for all images
+  /// to load before taking the snapshot. By default, it waits for all images to load.
   @isTest
   Future<void> expectGolden<T>(
     WindowConfigData windowConfig, {
     String? suffix,
-
-    /// By default, the path of the generated golden file is constructed as follows:
-    /// `preview/${windowConfig.name}-${name.snakeCase}$localSuffix.png`
-    ///
-    /// If a path is provided, it will override this default behavior.
     String? path,
-    Key?
-        byKey, // Sometimes we want to find the widget by its unique key in the case they are multiple of the same type.
+    Key? byKey,
     int? version,
     bool waitForImages = true,
   }) async {
