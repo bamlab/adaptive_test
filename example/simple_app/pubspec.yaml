@@ -19,7 +19,6 @@ dev_dependencies:
   adaptive_test:
     path: ../../
 
-  flutter_lints: ^2.0.0
   theodo_analysis: ^1.2.0
 
 flutter:

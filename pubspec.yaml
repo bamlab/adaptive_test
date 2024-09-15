@@ -23,7 +23,6 @@ dependencies:
   recase: ^4.0.0
 
 dev_dependencies:
-  flutter_lints: ^2.0.1
   theodo_analysis: ^1.2.0
 
 flutter:
