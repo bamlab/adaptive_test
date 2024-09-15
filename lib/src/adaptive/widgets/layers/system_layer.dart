@@ -1,12 +1,10 @@
+import 'package:adaptive_test/src/adaptive/window_size.dart';
 import 'package:flutter/material.dart';
-
-import '../../window_size.dart';
 
 class SystemLayer extends StatelessWidget {
   const SystemLayer({
-    Key? key,
-    required this.child,
-  }) : super(key: key);
+    required this.child, super.key,
+  });
 
   final Widget child;
 

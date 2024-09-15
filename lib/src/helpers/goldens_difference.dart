@@ -35,9 +35,8 @@ void setupFileComparatorWithThreshold([
 /// Works just like [LocalFileComparator] but includes a [threshold] that, when
 /// exceeded, marks the test as a failure.
 class LocalFileComparatorWithThreshold extends LocalFileComparator {
-  LocalFileComparatorWithThreshold(Uri testFile, this.threshold)
-      : assert(threshold >= 0 && threshold <= 1),
-        super(testFile);
+  LocalFileComparatorWithThreshold(super.testFile, this.threshold)
+      : assert(threshold >= 0 && threshold <= 1);
 
   /// Threshold above which tests will be marked as failing.
   /// Ranges from 0 to 1, both inclusive.

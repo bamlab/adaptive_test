@@ -1,18 +1,17 @@
 import 'dart:io';
 
+import 'package:adaptive_test/src/adaptive/widgets/adaptive_wrapper.dart';
 import 'package:adaptive_test/src/adaptive/window_configuration.dart';
 import 'package:adaptive_test/src/adaptive/window_size.dart';
 import 'package:adaptive_test/src/configuration.dart';
 import 'package:adaptive_test/src/helpers/await_images.dart';
 import 'package:adaptive_test/src/helpers/skip_test_extension.dart';
+import 'package:adaptive_test/src/helpers/target_platform_extension.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:meta/meta.dart';
 import 'package:recase/recase.dart';
-
-import '../helpers/target_platform_extension.dart';
-import 'widgets/adaptive_wrapper.dart';
 
 /// Type of [callback] that will be executed inside the Flutter test environment.
 ///
@@ -101,10 +100,10 @@ extension Adaptive on WidgetTester {
         AdaptiveTestConfiguration.instance.enforcedTestPlatform;
     if (enforcedTestPlatform != null &&
         !enforcedTestPlatform.isRuntimePlatform) {
-      throw ('Runtime platform ${Platform.operatingSystem} is not ${enforcedTestPlatform.name}');
+      throw 'Runtime platform ${Platform.operatingSystem} is not ${enforcedTestPlatform.name}';
     }
 
-    final localSuffix = suffix != null ? "_${ReCase(suffix).snakeCase}" : '';
+    final localSuffix = suffix != null ? '_${ReCase(suffix).snakeCase}' : '';
 
     final name = ReCase('$T');
     if (waitForImages) {

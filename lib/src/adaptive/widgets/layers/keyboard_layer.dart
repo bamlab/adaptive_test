@@ -1,15 +1,12 @@
-import 'package:flutter/widgets.dart';
 import 'package:adaptive_test/src/adaptive/window_configuration.dart';
+import 'package:adaptive_test/src/adaptive/window_size.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
-
-import '../../window_size.dart';
 
 class KeyboardLayer extends StatelessWidget {
   const KeyboardLayer({
-    Key? key,
-    required this.tester,
-    required this.child,
-  }) : super(key: key);
+    required this.tester, required this.child, super.key,
+  });
 
   final Widget child;
   final WidgetTester tester;
@@ -31,9 +28,8 @@ class KeyboardLayer extends StatelessWidget {
 /// Will display a keyboard if an `EditableText` is focused.
 class KeyboardDisplayer extends StatefulWidget {
   const KeyboardDisplayer({
-    Key? key,
-    required this.tester,
-  }) : super(key: key);
+    required this.tester, super.key,
+  });
   final WidgetTester tester;
 
   @override

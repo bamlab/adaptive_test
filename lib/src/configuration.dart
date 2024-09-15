@@ -1,6 +1,5 @@
+import 'package:adaptive_test/src/adaptive/window_size.dart';
 import 'package:flutter/material.dart';
-
-import 'adaptive/window_size.dart';
 
 /// Singleton class that configures global variables for the test.
 ///
@@ -54,7 +53,8 @@ class AdaptiveTestConfiguration {
     final scopedDeviceVariant = _deviceVariant;
     if (scopedDeviceVariant == null) {
       throw Exception(
-        '''Device variant is not set.
+        '''
+Device variant is not set.
 please set it first in the [testExecutable] method.
 See: https://api.flutter.dev/flutter/flutter_test/flutter_test-library.html
 ''',

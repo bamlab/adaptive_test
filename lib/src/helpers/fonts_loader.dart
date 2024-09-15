@@ -1,11 +1,11 @@
 import 'dart:io';
 
-import 'package:meta/meta.dart';
-import 'package:path/path.dart' as path;
 import 'package:file/file.dart' as f;
 import 'package:file/local.dart' as l;
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:meta/meta.dart';
+import 'package:path/path.dart' as path;
 import 'package:platform/platform.dart' as p;
 
 /// A class representing a package within a multi-packages app

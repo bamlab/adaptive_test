@@ -7,8 +7,8 @@ class AppTextField extends StatelessWidget {
       package: 'multi_packages_example_theme',
       fontFamily: 'Roboto',
     ),
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   final String? labelText;
   final TextStyle style;

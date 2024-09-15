@@ -1,11 +1,9 @@
-import 'package:flutter_test/flutter_test.dart';
-
-import 'package:flutter/material.dart';
+import 'package:adaptive_test/src/adaptive/widgets/layers/hardware_layer.dart';
+import 'package:adaptive_test/src/adaptive/widgets/layers/keyboard_layer.dart';
+import 'package:adaptive_test/src/adaptive/widgets/layers/system_layer.dart';
 import 'package:adaptive_test/src/adaptive/window_size.dart';
-
-import 'layers/hardware_layer.dart';
-import 'layers/keyboard_layer.dart';
-import 'layers/system_layer.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_test/flutter_test.dart';
 
 /// Widget wrapper that paint divers window elements over a child.
 ///
@@ -15,11 +13,8 @@ import 'layers/system_layer.dart';
 /// * [KeyboardLayer]
 class AdaptiveWrapper extends StatelessWidget {
   const AdaptiveWrapper({
-    Key? key,
-    required this.child,
-    required this.windowConfig,
-    required this.tester,
-  }) : super(key: key);
+    required this.child, required this.windowConfig, required this.tester, super.key,
+  });
 
   final Widget child;
   final WindowConfigData windowConfig;
