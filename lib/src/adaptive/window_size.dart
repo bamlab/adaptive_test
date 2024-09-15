@@ -75,6 +75,7 @@ class WindowConfigData extends Equatable {
     required this.borderRadius,
     required EdgeInsets safeAreaPadding,
     required this.keyboardName,
+    this.keyboardPackage,
     this.keyboardSize,
     this.notchSize,
     this.punchHole,
@@ -146,6 +147,10 @@ class WindowConfigData extends Equatable {
   /// Name of the image asset that represent the keyboard.
   final String keyboardName;
 
+  /// Package where the keyboard asset file is located. Keep to null if the
+  /// asset is located in your app.
+  final String? keyboardPackage;
+
   @override
   List<Object?> get props => [
         name,
@@ -161,6 +166,7 @@ class WindowConfigData extends Equatable {
         padding,
         physicalSize,
         keyboardName,
+        keyboardPackage,
       ];
 }
 

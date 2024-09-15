@@ -12,6 +12,8 @@ enum _Device {
   String get keyboardName => 'assets/keyboards/${this.name}.png';
 }
 
+const _keyboardPackage = 'adaptive_test';
+
 /// [WindowConfigData] for an iPhone 8.
 final WindowConfigData iPhone8 = WindowConfigData(
   _Device.iPhone_8.name,
@@ -22,6 +24,7 @@ final WindowConfigData iPhone8 = WindowConfigData(
   borderRadius: BorderRadius.zero,
   targetPlatform: TargetPlatform.iOS,
   keyboardName: _Device.iPhone_8.keyboardName,
+  keyboardPackage: _keyboardPackage,
 );
 
 /// [WindowConfigData] for an iPhone 13.
@@ -38,6 +41,7 @@ final WindowConfigData iPhone13 = WindowConfigData(
   notchSize: const Size(154, 32),
   targetPlatform: TargetPlatform.iOS,
   keyboardName: _Device.iPhone_13.keyboardName,
+  keyboardPackage: _keyboardPackage,
 );
 
 /// [WindowConfigData] for a Google Pixel 5.
@@ -54,6 +58,7 @@ final WindowConfigData pixel5 = WindowConfigData(
   targetPlatform: TargetPlatform.android,
   punchHole: const PunchHoleData(Offset(12, 12), 25),
   keyboardName: _Device.pixel_5.keyboardName,
+  keyboardPackage: _keyboardPackage,
 );
 
 /// [WindowConfigData] for a 12.9" iPad Pro.
@@ -69,6 +74,7 @@ final WindowConfigData iPadPro = WindowConfigData(
   homeIndicator: const HomeIndicatorData(8, Size(315, 5)),
   targetPlatform: TargetPlatform.iOS,
   keyboardName: _Device.iPadPro.keyboardName,
+  keyboardPackage: _keyboardPackage,
 );
 
 /// [WindowConfigData] for a basic 1080p web or desktop window.
@@ -80,4 +86,5 @@ final WindowConfigData desktop = WindowConfigData(
   borderRadius: BorderRadius.zero,
   targetPlatform: TargetPlatform.linux,
   keyboardName: _Device.desktop.keyboardName,
+  keyboardPackage: _keyboardPackage,
 );

@@ -104,7 +104,7 @@ class _KeyboardDisplayerState extends State<KeyboardDisplayer> {
         windowConfig.keyboardName,
         height: windowConfig.keyboardSize?.height,
         width: windowConfig.keyboardSize?.width,
-        package: 'adaptive_test',
+        package: windowConfig.keyboardPackage,
         fit: BoxFit.cover,
       ),
     );
