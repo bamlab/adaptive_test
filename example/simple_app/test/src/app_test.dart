@@ -30,6 +30,20 @@ void main() {
       },
     );
     testAdaptiveWidgets(
+      '$App render with FadeInImage',
+      (tester, variant) async {
+        await tester.pumpWidget(
+          AdaptiveWrapper(
+            windowConfig: variant,
+            tester: tester,
+            child: const App(),
+          ),
+        );
+
+        await tester.expectGolden<App>(variant, suffix: 'fade_in_image');
+      },
+    );
+    testAdaptiveWidgets(
       '$App render with custom path',
       (tester, variant) async {
         await tester.pumpWidget(

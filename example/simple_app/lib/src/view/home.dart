@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
 class HomeLayout extends StatelessWidget {
-  const HomeLayout({Key? key}) : super(key: key);
+  const HomeLayout({Key? key, this.useFadeInImage = false}) : super(key: key);
 
+  final bool useFadeInImage;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -15,11 +16,18 @@ class HomeLayout extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset(
-                'assets/dash.png',
-                height: 56,
-                width: 56,
-              ),
+              useFadeInImage
+                  ? const FadeInImage(
+                      placeholder: AssetImage('assets/dash.png'),
+                      image: AssetImage('assets/dash.png'),
+                      height: 56,
+                      width: 56,
+                    )
+                  : Image.asset(
+                      'assets/dash.png',
+                      height: 56,
+                      width: 56,
+                    ),
               const SizedBox(width: 20),
               const Expanded(
                 child: TextField(

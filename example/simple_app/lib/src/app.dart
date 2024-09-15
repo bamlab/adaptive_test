@@ -2,7 +2,12 @@ import 'view/home.dart';
 import 'package:flutter/material.dart';
 
 class App extends StatelessWidget {
-  const App({Key? key}) : super(key: key);
+  const App({
+    Key? key,
+    this.useFadeInImage = false,
+  }) : super(key: key);
+
+  final bool useFadeInImage;
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +18,9 @@ class App extends StatelessWidget {
         primarySwatch: Colors.blue,
         fontFamily: 'roboto',
       ),
-      home: const HomeLayout(),
+      home: HomeLayout(
+        useFadeInImage: useFadeInImage,
+      ),
     );
   }
 }
