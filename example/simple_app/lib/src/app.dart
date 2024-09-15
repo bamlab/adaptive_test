@@ -1,11 +1,11 @@
-import 'view/home.dart';
 import 'package:flutter/material.dart';
+import 'package:simple_app_example/src/view/home.dart';
 
 class App extends StatelessWidget {
   const App({
-    Key? key,
+    super.key,
     this.useFadeInImage = false,
-  }) : super(key: key);
+  });
 
   final bool useFadeInImage;
 

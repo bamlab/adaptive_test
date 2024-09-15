@@ -43,18 +43,20 @@ class HomeIndicatorData extends Equatable {
 /// See also: [WindowConfigData].
 class WindowConfig extends InheritedWidget {
   const WindowConfig({
-    Key? key,
     required this.windowConfig,
-    required Widget child,
-  }) : super(key: key, child: child);
+    required super.child,
+    super.key,
+  });
 
   final WindowConfigData windowConfig;
 
   static WindowConfigData of(BuildContext context) {
-    final WindowConfigData? result = context
+    final result = context
         .dependOnInheritedWidgetOfExactType<WindowConfig>()
         ?.windowConfig;
     assert(result != null, 'No WindowConfig found in context');
+
+    // ignore: avoid-non-null-assertion, protected by assertion
     return result!;
   }
 

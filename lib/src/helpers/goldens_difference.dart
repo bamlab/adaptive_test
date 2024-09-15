@@ -6,10 +6,6 @@ import 'package:flutter_test/flutter_test.dart';
 
 const _kGoldenTestsThreshold = 0.03 / 100; // 0.03%
 
-/// Source : https://blog.rows.com/p/writing-a-localfilecomparator-with?s=r
-/// Since GitHub Actions does not support ARM machines and the difference
-/// in our failing golden tests was never greater than [_kGoldenTestsThreshold]%,
-/// we decided to compromise and add a threshold of 0.03% in golden tests.
 void setupFileComparatorWithThreshold([
   double goldenTestsThreshold = _kGoldenTestsThreshold,
 ]) {
@@ -39,13 +35,12 @@ void setupFileComparatorWithThreshold([
 /// Works just like [LocalFileComparator] but includes a [threshold] that, when
 /// exceeded, marks the test as a failure.
 class LocalFileComparatorWithThreshold extends LocalFileComparator {
+  LocalFileComparatorWithThreshold(super.testFile, this.threshold)
+      : assert(threshold >= 0 && threshold <= 1);
+
   /// Threshold above which tests will be marked as failing.
   /// Ranges from 0 to 1, both inclusive.
   final double threshold;
-
-  LocalFileComparatorWithThreshold(Uri testFile, this.threshold)
-      : assert(threshold >= 0 && threshold <= 1),
-        super(testFile);
 
   /// Copy of [LocalFileComparator]'s [compare] method, except for the fact that
   /// it checks if the [ComparisonResult.diffPercent] is not greater than
@@ -71,6 +66,7 @@ class LocalFileComparatorWithThreshold extends LocalFileComparator {
       final error = await generateFailureOutput(result, golden, basedir);
       throw FlutterError(error);
     }
+
     return result.passed;
   }
 }

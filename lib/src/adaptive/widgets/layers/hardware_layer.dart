@@ -1,6 +1,5 @@
+import 'package:adaptive_test/src/adaptive/window_size.dart';
 import 'package:flutter/material.dart';
-
-import '../../window_size.dart';
 
 /// Widget wrapper that paint hardware elements over a child.
 ///
@@ -10,9 +9,8 @@ import '../../window_size.dart';
 /// * Device punch holde.
 class HardwareLayer extends StatelessWidget {
   const HardwareLayer({
-    Key? key,
-    required this.child,
-  }) : super(key: key);
+    required this.child, super.key,
+  });
 
   final Widget child;
 
@@ -22,7 +20,6 @@ class HardwareLayer extends StatelessWidget {
 
     return ClipRRect(
       borderRadius: windowConfig.borderRadius,
-      clipBehavior: Clip.antiAlias,
       child: Directionality(
         textDirection: TextDirection.ltr,
         child: Stack(
@@ -38,9 +35,7 @@ class HardwareLayer extends StatelessWidget {
 }
 
 class _Notch extends StatelessWidget {
-  const _Notch({
-    Key? key,
-  }) : super(key: key);
+  const _Notch();
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +49,7 @@ class _Notch extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _NotchCorner(
+        const _NotchCorner(
           clipper: _NotchLeftClipper(),
         ),
         Container(
@@ -68,7 +63,7 @@ class _Notch extends StatelessWidget {
             ),
           ),
         ),
-        _NotchCorner(
+        const _NotchCorner(
           clipper: _NotchRightClipper(),
         ),
       ],
@@ -77,7 +72,7 @@ class _Notch extends StatelessWidget {
 }
 
 class _PunchHole extends StatelessWidget {
-  const _PunchHole({Key? key}) : super(key: key);
+  const _PunchHole();
 
   @override
   Widget build(BuildContext context) {
@@ -85,6 +80,7 @@ class _PunchHole extends StatelessWidget {
 
     final punchHole = windowConfig.punchHole;
     if (punchHole == null) return const SizedBox();
+
     return Positioned(
       top: punchHole.offset.dy,
       left: punchHole.offset.dx,
@@ -102,9 +98,8 @@ class _PunchHole extends StatelessWidget {
 
 class _NotchCorner extends StatelessWidget {
   const _NotchCorner({
-    Key? key,
     required this.clipper,
-  }) : super(key: key);
+  });
 
   final CustomClipper<Path> clipper;
 
@@ -122,6 +117,7 @@ class _NotchCorner extends StatelessWidget {
 }
 
 class _NotchLeftClipper extends CustomClipper<Path> {
+  const _NotchLeftClipper();
   @override
   Path getClip(Size size) {
     return Path()
@@ -141,6 +137,7 @@ class _NotchLeftClipper extends CustomClipper<Path> {
 }
 
 class _NotchRightClipper extends CustomClipper<Path> {
+  const _NotchRightClipper();
   @override
   Path getClip(Size size) {
     return Path()

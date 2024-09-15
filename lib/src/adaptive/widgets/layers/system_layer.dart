@@ -1,12 +1,10 @@
+import 'package:adaptive_test/src/adaptive/window_size.dart';
 import 'package:flutter/material.dart';
-
-import '../../window_size.dart';
 
 class SystemLayer extends StatelessWidget {
   const SystemLayer({
-    Key? key,
-    required this.child,
-  }) : super(key: key);
+    required this.child, super.key,
+  });
 
   final Widget child;
 
@@ -16,6 +14,7 @@ class SystemLayer extends StatelessWidget {
 
     final homeIndicator = windowConfig.homeIndicator;
     if (homeIndicator == null) return child;
+
     return Directionality(
       textDirection: TextDirection.ltr,
       child: Stack(
@@ -35,7 +34,7 @@ class SystemLayer extends StatelessWidget {
                 ),
               ),
             ),
-          )
+          ),
         ],
       ),
     );

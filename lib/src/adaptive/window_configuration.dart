@@ -1,6 +1,5 @@
+import 'package:adaptive_test/src/adaptive/window_size.dart';
 import 'package:flutter_test/flutter_test.dart';
-
-import 'window_size.dart';
 
 /// Dart extension to add configuration functions to a [WidgetTester] object,
 /// e.g. [configureWindow], [configureOpenedKeyboardWindow],
