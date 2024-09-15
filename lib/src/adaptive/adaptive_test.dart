@@ -13,7 +13,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:meta/meta.dart';
 import 'package:recase/recase.dart';
 
-/// Type of [callback] that will be executed inside the Flutter test environment.
+/// Type of [callback] that will be executed inside the Flutter test
+/// environment.
 ///
 /// Take a [WidgetTester] and a [WindowConfigData] for arguments.
 typedef WidgetTesterAdaptiveCallback = Future<void> Function(
@@ -35,25 +36,29 @@ void testAdaptiveWidgets(
   Timeout? timeout,
   bool semanticsEnabled = true,
   ValueVariant<WindowConfigData>? variantOverride,
+  // ignore: avoid-dynamic, argument type of testWidgets
   dynamic tags,
 }) {
   final configuration = AdaptiveTestConfiguration.instance;
   final defaultVariant = configuration.deviceVariant;
   final variant = variantOverride ?? defaultVariant;
 
-  skip = skip ?? configuration.shouldSkipTest;
+  final _skip = skip ?? configuration.shouldSkipTest;
 
   testWidgets(
     description,
     (tester) async {
+      // ignore: avoid-non-null-assertion, will throw in test
       debugDefaultTargetPlatformOverride = variant.currentValue!.targetPlatform;
       debugDisableShadows = false;
+      // ignore: avoid-non-null-assertion, will throw in test
       tester.configureWindow(variant.currentValue!);
+      // ignore: avoid-non-null-assertion, will throw in test
       await callback(tester, variant.currentValue!);
       debugDisableShadows = true;
       debugDefaultTargetPlatformOverride = null;
     },
-    skip: skip,
+    skip: _skip,
     timeout: timeout,
     semanticsEnabled: semanticsEnabled,
     variant: variant,
@@ -75,7 +80,8 @@ extension Adaptive on WidgetTester {
   /// The [suffix] is appended to the golden file name. It defaults to
   /// the empty string if not provided.
   ///
-  /// By default, the path of the generated golden file is constructed as follows:
+  /// By default, the path of the generated golden file is constructed as
+  /// follows:
   /// `preview/${windowConfig.name}-${name.snakeCase}$localSuffix.png`.
   /// If a [path] is provided, it will override this default behavior.
   ///
@@ -86,7 +92,8 @@ extension Adaptive on WidgetTester {
   /// differentiate historical golden files.
   ///
   /// Set [waitForImages] to `false` if you want to skip waiting for all images
-  /// to load before taking the snapshot. By default, it waits for all images to load.
+  /// to load before taking the snapshot. By default, it waits for all images to
+  /// load.
   @isTest
   Future<void> expectGolden<T>(
     WindowConfigData windowConfig, {
@@ -100,7 +107,10 @@ extension Adaptive on WidgetTester {
         AdaptiveTestConfiguration.instance.enforcedTestPlatform;
     if (enforcedTestPlatform != null &&
         !enforcedTestPlatform.isRuntimePlatform) {
-      throw 'Runtime platform ${Platform.operatingSystem} is not ${enforcedTestPlatform.name}';
+      throw Exception(
+        'Runtime platform ${Platform.operatingSystem}'
+        ' is not ${enforcedTestPlatform.name}',
+      );
     }
 
     final localSuffix = suffix != null ? '_${ReCase(suffix).snakeCase}' : '';

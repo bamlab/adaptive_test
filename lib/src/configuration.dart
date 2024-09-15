@@ -14,10 +14,8 @@ import 'package:flutter/material.dart';
 class AdaptiveTestConfiguration {
   AdaptiveTestConfiguration._privateConstructor();
 
-  static final AdaptiveTestConfiguration _instance =
+  static final AdaptiveTestConfiguration instance =
       AdaptiveTestConfiguration._privateConstructor();
-
-  static AdaptiveTestConfiguration get instance => _instance;
 
   TargetPlatform? _enforcedTestPlatform;
 

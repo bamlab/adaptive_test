@@ -7,15 +7,16 @@ import 'package:meta/meta.dart';
 @internal
 extension IsRuntimePlatform on TargetPlatform {
   void _logUnusualTargetPlatformWarning() {
-    final usualTargetPlatforms = [
-      TargetPlatform.linux,
-      TargetPlatform.macOS,
-      TargetPlatform.windows,
-    ];
+    switch (this) {
+      case TargetPlatform.linux ||
+            TargetPlatform.macOS ||
+            TargetPlatform.windows:
+        return;
 
-    if (usualTargetPlatforms.contains(this)) {}
-    log('''Tests are intended to be runned on linux, macOS or windows platform.
-      But you are running them on $name''');
+      default:
+        log('Tests are intended to be runned on linux, macOS or windows'
+            ' platform. But you are running them on $name');
+    }
   }
 
   bool get isRuntimePlatform {

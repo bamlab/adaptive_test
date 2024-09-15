@@ -73,14 +73,20 @@ Map<String, List<Future<ByteData>>> loadFontsFromFontsDir([Package? package]) {
       : 'packages/${package.name}/';
   for (final file in Directory(fontsDirectory).listSync()) {
     if (file is File) {
-      final fontFamily =
-          prefix + path.basenameWithoutExtension(file.path).split('-').first;
-      (fontFamilyToData[fontFamily] ??= [])
-          .add(file.readAsBytes().then((bytes) => ByteData.view(bytes.buffer)));
+      final fontFamily = prefix +
+          (path.basenameWithoutExtension(file.path).split('-').firstOrNull ??
+              '');
+      (fontFamilyToData[fontFamily] ??= []).add(_fileToByteData(file));
     }
   }
 
   return fontFamilyToData;
+}
+
+Future<ByteData> _fileToByteData(File file) async {
+  final bytes = await file.readAsBytes();
+
+  return ByteData.view(bytes.buffer);
 }
 
 Future<void> _load(Map<String, List<Future<ByteData>>> fontFamilyToData) async {

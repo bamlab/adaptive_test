@@ -5,7 +5,9 @@ import 'package:flutter_test/flutter_test.dart';
 
 class KeyboardLayer extends StatelessWidget {
   const KeyboardLayer({
-    required this.tester, required this.child, super.key,
+    required this.tester,
+    required this.child,
+    super.key,
   });
 
   final Widget child;
@@ -28,7 +30,8 @@ class KeyboardLayer extends StatelessWidget {
 /// Will display a keyboard if an `EditableText` is focused.
 class KeyboardDisplayer extends StatefulWidget {
   const KeyboardDisplayer({
-    required this.tester, super.key,
+    required this.tester,
+    super.key,
   });
   final WidgetTester tester;
 
@@ -37,13 +40,14 @@ class KeyboardDisplayer extends StatefulWidget {
 }
 
 class _KeyboardDisplayerState extends State<KeyboardDisplayer> {
-  bool displayKeyboard = false;
-  late void Function() listener;
+  bool _displayKeyboard = false;
+  late void Function() _listener;
 
   @override
   void initState() {
     super.initState();
-    listener = () {
+    _listener = () {
+      // ignore: avoid-inherited-widget-in-initstate, it's in a listner
       final windowConfig = WindowConfig.of(context);
       if (!mounted) {
         return widget.tester.configureClosedKeyboardWindow(windowConfig);
@@ -52,7 +56,7 @@ class _KeyboardDisplayerState extends State<KeyboardDisplayer> {
       setState(() {
         final deviceHasKeyboard = windowConfig.keyboardSize != null;
         if (!deviceHasKeyboard) {
-          displayKeyboard = false;
+          _displayKeyboard = false;
 
           return widget.tester.configureClosedKeyboardWindow(windowConfig);
         }
@@ -60,7 +64,7 @@ class _KeyboardDisplayerState extends State<KeyboardDisplayer> {
         final focusedWidget =
             FocusManager.instance.primaryFocus?.context?.widget;
         if (focusedWidget == null) {
-          displayKeyboard = false;
+          _displayKeyboard = false;
 
           return widget.tester.configureClosedKeyboardWindow(windowConfig);
         }
@@ -69,22 +73,22 @@ class _KeyboardDisplayerState extends State<KeyboardDisplayer> {
         final focusNeedsInput = focus.debugLabel == '$EditableText';
 
         if (!focusNeedsInput) {
-          displayKeyboard = false;
+          _displayKeyboard = false;
 
           return widget.tester.configureClosedKeyboardWindow(windowConfig);
         }
-        displayKeyboard = true;
+        _displayKeyboard = true;
 
         return widget.tester.configureOpenedKeyboardWindow(windowConfig);
       });
     };
 
-    FocusManager.instance.addListener(listener);
+    FocusManager.instance.addListener(_listener);
   }
 
   @override
   void dispose() {
-    FocusManager.instance.removeListener(listener);
+    FocusManager.instance.removeListener(_listener);
     super.dispose();
   }
 
@@ -92,7 +96,7 @@ class _KeyboardDisplayerState extends State<KeyboardDisplayer> {
   Widget build(BuildContext context) {
     final windowConfig = WindowConfig.of(context);
 
-    if (!displayKeyboard) return const SizedBox();
+    if (!_displayKeyboard) return const SizedBox();
 
     return Positioned(
       bottom: 0,
