@@ -84,6 +84,7 @@ extension Adaptive on WidgetTester {
     String? path,
     Key?
         byKey, // Sometimes we want to find the widget by its unique key in the case they are multiple of the same type.
+    int? version,
     bool waitForImages = true,
   }) async {
     final enforcedTestPlatform =
@@ -105,7 +106,7 @@ extension Adaptive on WidgetTester {
     await expectLater(
       // Find by its type except if the widget's unique key was given.
       byKey != null ? find.byKey(byKey) : find.byType(AdaptiveWrapper),
-      matchesGoldenFile(key),
+      matchesGoldenFile(key, version: version),
     );
   }
 }
