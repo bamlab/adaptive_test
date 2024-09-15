@@ -242,10 +242,10 @@ packages:
     dependency: "direct dev"
     description:
       name: theodo_analysis
-      sha256: bee1356c5bf8e2856a88b1f51b593951c924a15816b0a6a4d4a57361caaf4691
+      sha256: d79261bc640ffbd84c6142172d68eb8bfba61f32fdabece22ab53f4549d74d53
       url: "https://pub.dev"
     source: hosted
-    version: "1.1.0"
+    version: "1.2.0"
   vector_math:
     dependency: transitive
     description:
