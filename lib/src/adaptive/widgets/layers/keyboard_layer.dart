@@ -101,7 +101,7 @@ class _KeyboardDisplayerState extends State<KeyboardDisplayer> {
     return Positioned(
       bottom: 0,
       child: Image.asset(
-        'assets/keyboards/${windowConfig.name}.png',
+        windowConfig.keyboardName,
         height: windowConfig.keyboardSize?.height,
         width: windowConfig.keyboardSize?.width,
         package: 'adaptive_test',

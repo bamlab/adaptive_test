@@ -1,3 +1,5 @@
+* **BREAKING**: feat: Add keyboardName to WindowConfigData
+  - fix: It's now possible to use custom devices as WindowConfigData variant
 * feat: awaitImages now support FadeInImage.
 * improvement: use pump instead of pumpAndSettle in awaitImages.
 * feat: add path and version argument to expectGolden method.
