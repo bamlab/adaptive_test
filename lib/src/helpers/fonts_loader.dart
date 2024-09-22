@@ -1,3 +1,5 @@
+// ignore_for_file: avoid-dynamic, avoid-accessing-collections-by-constant-index
+
 import 'dart:convert';
 import 'dart:io';
 
@@ -33,7 +35,7 @@ class Package {
 /// *Note* for this function to work, your package needs to include all fonts
 /// it uses in a font dir at the root of the project.
 @Deprecated("Use [loadAppFonts] instead")
-Future<void> loadFonts([String? package]) async {
+Future<void> loadFonts([String? package]) {
   return package != null
       ? loadFontsFromPackage(
           package: Package(name: package, relativePath: './$package'),
