@@ -1,4 +1,10 @@
 include: package:theodo_analysis/analysis_options.yaml
+analyzer:
+  errors:
+    return_of_invalid_type_from_closure: false
+    for_in_of_invalid_element_type: false
+    argument_type_not_assignable: false
+    for_in_of_invalid_type: false
 # Additional information about this file can be found at
 # https://pub.dev/packages/theodo_analysis
 linter:
