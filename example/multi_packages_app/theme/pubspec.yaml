@@ -12,6 +12,7 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.2
+  material_symbols_icons: ^4.2771.0
 
 dev_dependencies:
   flutter_test:
@@ -19,7 +20,7 @@ dev_dependencies:
   adaptive_test:
     path: ../../../
 
-  theodo_analysis: ^1.2.0
+  theodo_analysis: ^1.3.0
 
 flutter:
   uses-material-design: true
