@@ -1,3 +1,5 @@
+* **BREAKING**: feat: Remove argument packages fron loadFonts
+  - feat: loadFonts now support custom icons font like material_symbols_icons
 * **BREAKING**: feat: Add keyboardName to WindowConfigData
   - fix: It's now possible to use custom devices as WindowConfigData variant
 * feat: awaitImages now support FadeInImage.
