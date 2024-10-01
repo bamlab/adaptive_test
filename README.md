@@ -1,40 +1,44 @@
-<!-- 
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
-
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/guides/libraries/writing-package-pages). 
-
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-library-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/developing-packages). 
--->
-
-A Flutter package to generate adaptive golden files during widget tests.
-
-> This package is in beta. Use it with caution and [file any potential issues here](https://github.com/bamlab/adaptive_test/issues).
+# Adaptive Test
 
 <p>
-  <img  alt="Example" src="https://raw.githubusercontent.com/bamlab/adaptive_test/main/doc/example.png"/>
+  <a href="https://apps.theodo.com">
+  <img  alt="logo" src="https://raw.githubusercontent.com/bamlab/theodo_analysis/main/doc/theodo_apps_white.png" width="200"/>
+  </a>
+  </br>
+  <p>Devtools to write stunning widget test in Flutter.</br> Made by <a href="https://apps.theodo.com">Theodo Apps</a> ❤️💙💛.</p>
 </p>
 
+![Example](https://raw.githubusercontent.com/bamlab/adaptive_test/main/doc/example.png)
+
+## Table of Contents
+1. [Features](#features)
+2. [Getting Started](#getting-started)
+3. [Usage](#usage)
+   - [Rendering Custom Fonts](#rendering-custom-fonts)
+   - [Setting Up Test Devices](#setting-up-test-devices)
+   - [Configuring Difference Threshold](#configuring-difference-threshold)
+   - [Enforcing Test Platform](#enforcing-test-platform)
+   - [Writing a Test](#writing-a-test)
+4. [Migration Guide](#migration-guide)
+5. [Additional Information](#additional-information)
+
 ## Features
-Use this package in your test to:
-- Generated golden files during test for different devices.
-- Load fonts.
-- Set window sizes and pixel density.
-- Await for images rendering.
-- Render Physical and system UI layers.
-- Render a keyboard during tests.
-- Set a preferred OS to run the tests.
-- Configure a difference tolerance threshold for files comparison.
 
-## Getting started
+Use this package in your tests to:
+- Generate golden files for different devices during tests
+- Load fonts
+- Set window sizes and pixel density
+- Await image rendering
+- Render physical and system UI layers
+- Render a keyboard during tests
+- Set a preferred OS for running tests
+- Configure a difference tolerance threshold for file comparison
 
-Add `adaptive_test` to your dev dependencies
+## Getting Started
 
-At the root of your `test` folder create a `flutter_test_config.dart` file with a `testExecutable` function.
+1. Add `adaptive_test` to your dev dependencies.
+
+2. Create a `flutter_test_config.dart` file at the root of your `test` folder with a `testExecutable` function:
 
 ```dart
 Future<void> testExecutable(FutureOr<void> Function() testMain) async {
@@ -42,40 +46,48 @@ Future<void> testExecutable(FutureOr<void> Function() testMain) async {
 }
 ```
 
-See the [official doc](https://api.flutter.dev/flutter/flutter_test/flutter_test-library.html).
+For more information, see the [official Flutter documentation](https://api.flutter.dev/flutter/flutter_test/flutter_test-library.html).
 
 ## Usage
 
-### To render custom fonts:
-- Add your fonts to your app assets folders.
-- Add your fonts to your flutter assets.
+### Rendering Custom Fonts
+
+1. Add your fonts to your app assets folders.
+2. Add your fonts to your Flutter assets in `pubspec.yaml`:
+
 ```yaml
 flutter:
   fonts:
   - family: Roboto
     fonts:
       - asset: fonts/Roboto-Black.ttf
-...
 ```
-- In your flutter_test_config, call `loadAppFonts()`.
+
+3. In your `flutter_test_config.dart`, call `loadFonts()`:
+
 ```dart
 Future<void> testExecutable(FutureOr<void> Function() testMain) async {
   TestWidgetsFlutterBinding.ensureInitialized();
-  await loadAppFonts();
+  await loadFonts();
   await testMain();
 }
 ```
-> ℹ️  `loadAppFonts` loads the fonts from the `pubspec.yaml`, and from every separate package dependencies as well.
 
-### Setup devices to run test on
-Define a set of device variant corresponding to your definition of done.
+> ℹ️ `loadFonts()` loads fonts from `pubspec.yaml` and from every separate package dependency as well.
+
+### Setting Up Test Devices
+
+1. Define a set of device variants:
+
 ```dart
 final defaultDeviceConfigs = {
   iPhone13,
   pixel5,
 };
 ```
-Use the `AdaptiveTestConfiguration` singleton to set variants.
+
+2. Use the `AdaptiveTestConfiguration` singleton to set variants:
+
 ```dart
 Future<void> testExecutable(FutureOr<void> Function() testMain) async {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -86,12 +98,10 @@ Future<void> testExecutable(FutureOr<void> Function() testMain) async {
 }
 ```
 
-### (Optional) Allow a differences threshold in golden files comparators
-Source : [The Rows blog](https://rows.com/blog/post/writing-a-localfilecomparator-with-threshold-for-flutter-golden-tests)
-Different processor architectures can lead to a small differences of pixel between a files generated on an ARM processor and an x86 one.
-Eg: a MacBook M1 and an intel one.
+### Configuring Difference Threshold
 
-We can allow the tests to passe if the difference is small. To do this, add `setupFileComparatorWithThreshold()` to your flutter_test_config.
+To allow for small pixel differences between processors, add `setupFileComparatorWithThreshold()` to your `flutter_test_config.dart`:
+
 ```dart
 Future<void> testExecutable(FutureOr<void> Function() testMain) async {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -103,11 +113,10 @@ Future<void> testExecutable(FutureOr<void> Function() testMain) async {
 }
 ```
 
-### (Optional) Enforce a Platform for the test to run on
-Different OS render golden files with small differences of pixel.
-See the [flutter issue](https://github.com/flutter/flutter/issues/36667).
+### Enforcing Test Platform
 
-You can configure `AdaptiveTestConfiguration` singleton to make tests throw if they are run on an unintended platform.
+Configure `AdaptiveTestConfiguration` to enforce a specific test platform:
+
 ```dart
 Future<void> testExecutable(FutureOr<void> Function() testMain) async {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -120,59 +129,23 @@ Future<void> testExecutable(FutureOr<void> Function() testMain) async {
 }
 ```
 
-As an alternative you can use [Alchemist](https://pub.dev/packages/alchemist).
+To skip tests instead of throwing an error on unintended platforms:
 
-Also, you can configure `AdaptiveTestConfiguration` singleton to skip tests instead of throwing if they are run on an unintended platform.
 ```dart
-Future<void> testExecutable(FutureOr<void> Function() testMain) async {
-  TestWidgetsFlutterBinding.ensureInitialized();
-  AdaptiveTestConfiguration.instance
-    ..setEnforcedTestPlatform(TargetPlatform.macOS)
-    ..setFailTestOnWrongPlatform(false) <-- Adding this will skip the `testAdaptiveWidgets` tests if you are not running the tests on a macOS platform.
-    ..setDeviceVariants(defaultDeviceConfigs);
-  await loadFonts();
-  setupFileComparatorWithThreshold();
-  await testMain();
-}
+AdaptiveTestConfiguration.instance
+  ..setEnforcedTestPlatform(TargetPlatform.macOS)
+  ..setFailTestOnWrongPlatform(false)
+  ..setDeviceVariants(defaultDeviceConfigs);
 ```
 
-### Write a test
-Use `testAdaptiveWidgets` function. It take a callback with two arguments, `WidgetTester` and `WindowConfigData`.
+### Writing a Test
 
-`WindowConfigData` is a data class that describes a devices. It's used as a test variant.
+Use the `testAdaptiveWidgets` function:
 
 ```dart
 void main() {
   testAdaptiveWidgets(
     'Test description',
-    (tester, variant) async {},
-  );
-}
-```
-
-Wrap the widget you want to test with `AdaptiveWrapper`.
-
-```dart
-await tester.pumpWidget(
-  AdaptiveWrapper(
-    windowConfig: variant,
-    tester: tester,
-    child: const App(),
-  ),
-);
-```
-
-Use the `WidgetTester` extension `expectGolden` to generate golden files.
-
-```dart
-await tester.expectGolden<App>(variant);
-```
-
-A basic test should looks like this:
-```dart
-void main() {
-  testAdaptiveWidgets(
-    '$App render without regressions',
     (tester, variant) async {
       await tester.pumpWidget(
         AdaptiveWrapper(
@@ -188,21 +161,46 @@ void main() {
 }
 ```
 
-## Migration to 0.5.x
-The 0.5.0 version introduces a new default file name for goldens that doesn't use characters unsupported by Windows file system.
+## Migration Guide
 
-To ease the migration, we provide a script that will rename your goldens files to the new format:
+</details>
+<details>
+<summary>Migrating to version 0.7.x</summary>
+Version 0.7.0 introduces several breaking changes and new features:
+
+1. **Breaking Change**: `loadFonts()` no longer accepts a `packages` argument. `loadFontsFromPackage()` was removed.
+   - Update your `flutter_test_config.dart`:
+     ```dart
+     // Old
+     await loadFonts('my_package');
+     // or
+     await loadFontsFromPackage(
+       package: Package(
+         name: 'my_package',
+         relativePath: '../package',
+       ),
+     );
+
+     // New
+     await loadFonts();
+     ```
+   - `loadFonts()` now supports custom icon fonts like material_symbols_icons.
+
+2. **Breaking Change**: `WindowConfigData` now includes a `keyboardName` property.
+   - Update your custom device configurations to include this new property.
+</details>
+<details>
+<summary>Migrating to version 0.5.x</summary>
+
+Version 0.5.0 introduces a new default file name for goldens that's compatible with Windows file systems. To rename your existing golden files, use the following script:
+
 ```bash
 #!/bin/bash
 
-# Function to rename files in directories named "preview"
 rename_files_in_preview() {
-    # Find directories named "preview"
     find . -type d -name "preview" | while read -r dir; do
         echo "Processing directory: $dir"
-        # Find files within these directories
         find "$dir" -type f | while read -r file; do
-            # New filename by replacing ':' with '-'
             new_name=$(echo "$file" | sed 's/:/-/g')
             if [ "$file" != "$new_name" ]; then
                 mv "$file" "$new_name"
@@ -212,21 +210,21 @@ rename_files_in_preview() {
     done
 }
 
-# Call the function
-rename_files_in_preview()
+rename_files_in_preview
 ```
 
-You can add the script in a `.sh` file and run it from your project root directory.
+Save this script as a `.sh` file and run it from your project root directory.
 
-## Additional information
+</details>
 
-This package is still in early stage of development.
-After using it in multiple projects, we wanted to open-source it.
+## Additional Information
 
-Feedbacks, issues, contributions and suggestions are more than welcomed! 😁
+We welcome feedback, issues, contributions, and suggestions! Feel free to contribute to the development of this package.
 
-## 👉 About Bam
+👉 About Theodo Apps
 
-We are a 100 people company developing and designing multiplatform applications with [React Native](https://www.bam.tech/expertise/react-native) and [Flutter](https://www.bam.tech/expertise/flutter) using the Lean & Agile methodology. To get more information on the solutions that would suit your needs, feel free to get in touch by [email](mailto://contact@bam.tech) or through or [contact form](https://www.bam.tech/contact)!
+We are a 130 people company developing and designing universal applications with React Native and Flutter using the Lean & Agile methodology. To get more information on the solutions that would suit your needs, feel free to get in touch by email or through or contact form!
 
 We will always answer you with pleasure 😁
+
+
