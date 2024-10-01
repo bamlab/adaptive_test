@@ -1,3 +1,7 @@
+## 0.7.1
+
+* refactor: Format files with dart format.
+
 ## 0.7.0
 
 * **BREAKING**: feat: Remove argument packages fron loadFonts
