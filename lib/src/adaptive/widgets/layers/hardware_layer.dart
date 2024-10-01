@@ -9,7 +9,8 @@ import 'package:flutter/material.dart';
 /// * Device punch holde.
 class HardwareLayer extends StatelessWidget {
   const HardwareLayer({
-    required this.child, super.key,
+    required this.child,
+    super.key,
   });
 
   final Widget child;

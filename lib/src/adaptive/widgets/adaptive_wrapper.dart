@@ -13,7 +13,10 @@ import 'package:flutter_test/flutter_test.dart';
 /// * [KeyboardLayer]
 class AdaptiveWrapper extends StatelessWidget {
   const AdaptiveWrapper({
-    required this.child, required this.windowConfig, required this.tester, super.key,
+    required this.child,
+    required this.windowConfig,
+    required this.tester,
+    super.key,
   });
 
   final Widget child;
