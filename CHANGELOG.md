@@ -1,3 +1,5 @@
+## 0.7.0
+
 * **BREAKING**: feat: Remove argument packages fron loadFonts
   - feat: loadFonts now support custom icons font like material_symbols_icons
 * **BREAKING**: feat: loadFontsFromPackage
