@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 
 class SystemLayer extends StatelessWidget {
   const SystemLayer({
-    required this.child, super.key,
+    required this.child,
+    super.key,
   });
 
   final Widget child;
