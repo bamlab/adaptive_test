@@ -8,7 +8,8 @@ enum _Device {
   iPhone_16,
   iPadPro,
   desktop,
-  pixel_5;
+  pixel_5,
+  pixel_9;
 
   String get keyboardName => 'assets/keyboards/${this.name}.png';
 }
@@ -76,6 +77,23 @@ final WindowConfigData pixel5 = WindowConfigData(
   targetPlatform: TargetPlatform.android,
   punchHole: const PunchHoleData(Offset(12, 12), 25),
   keyboardName: _Device.pixel_5.keyboardName,
+  keyboardPackage: _keyboardPackage,
+);
+
+/// [WindowConfigData] for a Google Pixel 9.
+final WindowConfigData pixel9 = WindowConfigData(
+  _Device.pixel_9.name,
+  size: const Size(412, 923),
+  pixelDensity: 2.625,
+  safeAreaPadding: const EdgeInsets.only(top: 51, bottom: 24),
+  keyboardSize: const Size(412, 360),
+  borderRadius: const BorderRadius.all(
+    Radius.circular(55),
+  ),
+  homeIndicator: const HomeIndicatorData(10, Size(108, 4)),
+  targetPlatform: TargetPlatform.android,
+  punchHole: const PunchHoleData(Offset(190, 17), 31),
+  keyboardName: _Device.pixel_9.keyboardName,
   keyboardPackage: _keyboardPackage,
 );
 
