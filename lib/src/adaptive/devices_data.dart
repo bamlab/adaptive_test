@@ -66,10 +66,10 @@ final WindowConfigData iPhone16 = WindowConfigData(
 /// [WindowConfigData] for a Google Pixel 5.
 final WindowConfigData pixel5 = WindowConfigData(
   _Device.pixel_5.name,
-  size: const Size(360, 764),
-  pixelDensity: 3,
-  safeAreaPadding: const EdgeInsets.only(top: 24),
-  keyboardSize: const Size(360, 297),
+  size: const Size(392, 850),
+  pixelDensity: 2.75,
+  safeAreaPadding: const EdgeInsets.only(top: 49, bottom: 24),
+  keyboardSize: const Size(392, 302),
   borderRadius: const BorderRadius.all(
     Radius.circular(32),
   ),
