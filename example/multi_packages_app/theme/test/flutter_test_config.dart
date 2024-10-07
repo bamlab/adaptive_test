@@ -9,7 +9,7 @@ final defaultDeviceConfigs = {
   iPhone16,
   iPadPro,
   desktop,
-  pixel5,
+  pixel9,
 };
 
 Future<void> testExecutable(FutureOr<void> Function() testMain) async {
