@@ -81,8 +81,8 @@ Future<void> testExecutable(FutureOr<void> Function() testMain) async {
 
 ```dart
 final defaultDeviceConfigs = {
-  iPhone13,
-  pixel5,
+  iPhone16,
+  pixel9,
 };
 ```
 
