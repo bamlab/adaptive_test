@@ -27,6 +27,7 @@ class HardwareLayer extends StatelessWidget {
           children: [
             child,
             const _Notch(),
+            const _DynamicIsland(),
             const _PunchHole(),
           ],
         ),
@@ -68,6 +69,34 @@ class _Notch extends StatelessWidget {
           clipper: _NotchRightClipper(),
         ),
       ],
+    );
+  }
+}
+
+class _DynamicIsland extends StatelessWidget {
+  const _DynamicIsland();
+
+  @override
+  Widget build(BuildContext context) {
+    final windowConfig = WindowConfig.of(context);
+
+    final dynamicIslandData = windowConfig.dynamicIsland;
+
+    if (dynamicIslandData == null) return const SizedBox();
+
+    return Positioned(
+      top: dynamicIslandData.top,
+      width: windowConfig.size.width,
+      child: Center(
+        child: Container(
+          height: dynamicIslandData.size.height,
+          width: dynamicIslandData.size.width,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(dynamicIslandData.size.height),
+            color: Colors.black,
+          ),
+        ),
+      ),
     );
   }
 }
