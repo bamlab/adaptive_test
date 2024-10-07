@@ -5,6 +5,7 @@ import 'package:flutter/painting.dart';
 enum _Device {
   iPhone_8,
   iPhone_13,
+  iPhone_16,
   iPadPro,
   desktop,
   pixel_5;
@@ -41,6 +42,23 @@ final WindowConfigData iPhone13 = WindowConfigData(
   notchSize: const Size(154, 32),
   targetPlatform: TargetPlatform.iOS,
   keyboardName: _Device.iPhone_13.keyboardName,
+  keyboardPackage: _keyboardPackage,
+);
+
+/// [WindowConfigData] for an iPhone 16.
+final WindowConfigData iPhone16 = WindowConfigData(
+  _Device.iPhone_16.name,
+  size: const Size(393, 852),
+  pixelDensity: 3,
+  safeAreaPadding: const EdgeInsets.only(top: 59, bottom: 34),
+  keyboardSize: const Size(393, 336),
+  borderRadius: const BorderRadius.all(
+    Radius.circular(55),
+  ),
+  homeIndicator: const HomeIndicatorData(8, Size(140, 5)),
+  dynamicIsland: DynamicIslandData(11, Size(125, 37)),
+  targetPlatform: TargetPlatform.iOS,
+  keyboardName: _Device.iPhone_16.keyboardName,
   keyboardPackage: _keyboardPackage,
 );
 
