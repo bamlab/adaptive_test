@@ -5,9 +5,11 @@ import 'package:flutter/painting.dart';
 enum _Device {
   iPhone_8,
   iPhone_13,
+  iPhone_16,
   iPadPro,
   desktop,
-  pixel_5;
+  pixel_5,
+  pixel_9;
 
   String get keyboardName => 'assets/keyboards/${this.name}.png';
 }
@@ -33,24 +35,41 @@ final WindowConfigData iPhone13 = WindowConfigData(
   size: const Size(390, 844),
   pixelDensity: 3,
   safeAreaPadding: const EdgeInsets.only(top: 47, bottom: 34),
-  keyboardSize: const Size(390, 302),
+  keyboardSize: const Size(390, 336),
   borderRadius: const BorderRadius.all(
-    Radius.circular(48),
+    Radius.circular(47),
   ),
-  homeIndicator: const HomeIndicatorData(8, Size(135, 5)),
+  homeIndicator: const HomeIndicatorData(8, Size(139, 5)),
   notchSize: const Size(154, 32),
   targetPlatform: TargetPlatform.iOS,
   keyboardName: _Device.iPhone_13.keyboardName,
   keyboardPackage: _keyboardPackage,
 );
 
+/// [WindowConfigData] for an iPhone 16.
+final WindowConfigData iPhone16 = WindowConfigData(
+  _Device.iPhone_16.name,
+  size: const Size(393, 852),
+  pixelDensity: 3,
+  safeAreaPadding: const EdgeInsets.only(top: 59, bottom: 34),
+  keyboardSize: const Size(393, 336),
+  borderRadius: const BorderRadius.all(
+    Radius.circular(55),
+  ),
+  homeIndicator: const HomeIndicatorData(8, Size(140, 5)),
+  dynamicIsland: DynamicIslandData(11, Size(125, 37)),
+  targetPlatform: TargetPlatform.iOS,
+  keyboardName: _Device.iPhone_16.keyboardName,
+  keyboardPackage: _keyboardPackage,
+);
+
 /// [WindowConfigData] for a Google Pixel 5.
 final WindowConfigData pixel5 = WindowConfigData(
   _Device.pixel_5.name,
-  size: const Size(360, 764),
-  pixelDensity: 3,
-  safeAreaPadding: const EdgeInsets.only(top: 24),
-  keyboardSize: const Size(360, 297),
+  size: const Size(392, 850),
+  pixelDensity: 2.75,
+  safeAreaPadding: const EdgeInsets.only(top: 49, bottom: 24),
+  keyboardSize: const Size(392, 302),
   borderRadius: const BorderRadius.all(
     Radius.circular(32),
   ),
@@ -58,6 +77,23 @@ final WindowConfigData pixel5 = WindowConfigData(
   targetPlatform: TargetPlatform.android,
   punchHole: const PunchHoleData(Offset(12, 12), 25),
   keyboardName: _Device.pixel_5.keyboardName,
+  keyboardPackage: _keyboardPackage,
+);
+
+/// [WindowConfigData] for a Google Pixel 9.
+final WindowConfigData pixel9 = WindowConfigData(
+  _Device.pixel_9.name,
+  size: const Size(412, 923),
+  pixelDensity: 2.625,
+  safeAreaPadding: const EdgeInsets.only(top: 51, bottom: 24),
+  keyboardSize: const Size(412, 360),
+  borderRadius: const BorderRadius.all(
+    Radius.circular(55),
+  ),
+  homeIndicator: const HomeIndicatorData(10, Size(108, 4)),
+  targetPlatform: TargetPlatform.android,
+  punchHole: const PunchHoleData(Offset(190, 17), 31),
+  keyboardName: _Device.pixel_9.keyboardName,
   keyboardPackage: _keyboardPackage,
 );
 

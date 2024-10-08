@@ -64,7 +64,7 @@ See: https://api.flutter.dev/flutter/flutter_test/flutter_test-library.html
 
   /// Set the devices variant on which you want your test to run.
   ///
-  /// Eg [iPhone8], [iPhone13], [iPadPro], [desktop], [pixel5].
+  /// Eg [iPhone8], [iPhone13], [iPhone16], [iPadPro], [desktop], [pixel5], [pixel9].
   void setDeviceVariants(Set<WindowConfigData> deviceConfigs) {
     _deviceVariant = WindowVariant(deviceConfigs);
   }
