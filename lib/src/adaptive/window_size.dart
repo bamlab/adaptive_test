@@ -37,6 +37,22 @@ class HomeIndicatorData extends Equatable {
   List<Object?> get props => [bottom, size];
 }
 
+/// Describe the dynamic island on top of apps, expressed in `dp`.
+///
+/// This is null when the device has no dynamic island.
+class DynamicIslandData extends Equatable {
+  const DynamicIslandData(this.top, this.size);
+
+  /// top offset of the indicator, expressed in `dp`.
+  final double top;
+
+  /// Size of the indicator, expressed in `dp`.
+  final Size size;
+
+  @override
+  List<Object?> get props => [top, size];
+}
+
 /// Establish a subtree in which adaptive window resolves to the given data.
 /// Use `WindowConfig.of(context)` to retrieve the data in any child widget.
 ///
@@ -78,6 +94,7 @@ class WindowConfigData extends Equatable {
     this.keyboardPackage,
     this.keyboardSize,
     this.notchSize,
+    this.dynamicIsland,
     this.punchHole,
     this.homeIndicator,
   })  : viewInsets = ViewPaddingImpl(
@@ -110,6 +127,11 @@ class WindowConfigData extends Equatable {
   ///
   /// This is null when the device has no notch.
   final Size? notchSize;
+
+  /// Describe the size of the device physical screen top dynamic island in `dp`.
+  ///
+  /// This is null when the device has no dynamic island.
+  final DynamicIslandData? dynamicIsland;
 
   /// Describe the size of the device physical screen camera punch hole in `dp`.
   ///
