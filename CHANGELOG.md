@@ -1,3 +1,8 @@
+## 0.8.0
+
+* feat: Add new devices iPhone 16 pro and Pixel 9.
+* **BREAKING**: feat: Update device sizes and assets.
+
 ## 0.7.2
 
 * refactor: Format files with dart format.
