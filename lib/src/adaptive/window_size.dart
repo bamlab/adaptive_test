@@ -189,6 +189,7 @@ class WindowConfigData extends Equatable {
         physicalSize,
         keyboardName,
         keyboardPackage,
+        dynamicIsland,
       ];
 }
 
