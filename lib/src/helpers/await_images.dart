@@ -30,12 +30,14 @@ extension AwaitImages on WidgetTester {
       for (final element in find.byType(DecoratedBox).evaluate().toList()) {
         final widget = element.widget as DecoratedBox;
         final decoration = widget.decoration;
-        if (decoration is BoxDecoration) {
-          final image = decoration.image?.image;
-          if (image != null) {
-            await precacheImage(image, element);
-            await pump();
-          }
+        final image = switch (decoration) {
+          BoxDecoration() => decoration.image?.image,
+          ShapeDecoration() => decoration.image?.image,
+          _ => null,
+        };
+        if (image != null) {
+          await precacheImage(image, element);
+          await pump();
         }
       }
     });
