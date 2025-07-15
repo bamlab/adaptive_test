@@ -23,11 +23,13 @@ extension WidgetTesterWithConfigurableWindow on WidgetTester {
   void configureOpenedKeyboardWindow(WindowConfigData windowConfig) {
     view.viewInsets = windowConfig.viewInsets;
     view.padding = windowConfig.padding.copyWith(bottom: 0);
+    view.viewPadding = windowConfig.viewInsets;
   }
 
   /// Configure the tester window to represent a closed keyboard on the given device variant.
   void configureClosedKeyboardWindow(WindowConfigData windowConfig) {
     view.resetViewInsets();
     view.padding = windowConfig.padding;
+    view.viewPadding = windowConfig.padding;
   }
 }

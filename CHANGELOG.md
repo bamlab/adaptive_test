@@ -1,3 +1,7 @@
+## 0.9.0
+
+* fix: Handle viewPadding when keyboard opens.
+
 ## 0.8.0
 
 * feat: Add new devices iPhone 16 pro and Pixel 9.
