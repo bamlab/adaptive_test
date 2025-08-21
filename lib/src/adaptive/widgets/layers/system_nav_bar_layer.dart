@@ -2,8 +2,8 @@ import 'package:adaptive_test/src/adaptive/window_config.dart';
 import 'package:adaptive_test/src/adaptive/window_config_data/system_nav_bar_data.dart';
 import 'package:flutter/material.dart';
 
-class SystemLayer extends StatelessWidget {
-  const SystemLayer({
+class SystemNavBarLayer extends StatelessWidget {
+  const SystemNavBarLayer({
     required this.child,
     super.key,
   });
@@ -14,10 +14,10 @@ class SystemLayer extends StatelessWidget {
   Widget build(BuildContext context) {
     final windowConfig = WindowConfig.of(context);
 
-    final homeIndicator = windowConfig.systemNavBar;
-    if (homeIndicator == null) return child;
+    final systemNavBarData = windowConfig.systemNavBar;
+    if (systemNavBarData == null) return child;
 
-    switch (homeIndicator) {
+    switch (systemNavBarData) {
       case GestureIndicatorSystemNavBarData():
         return Directionality(
           textDirection: TextDirection.ltr,
@@ -25,15 +25,15 @@ class SystemLayer extends StatelessWidget {
             children: [
               child,
               Positioned(
-                bottom: homeIndicator.bottom,
+                bottom: systemNavBarData.bottom,
                 width: windowConfig.size.width,
                 child: Center(
                   child: Container(
-                    height: homeIndicator.size.height,
-                    width: homeIndicator.size.width,
+                    height: systemNavBarData.size.height,
+                    width: systemNavBarData.size.width,
                     decoration: BoxDecoration(
                       borderRadius:
-                          BorderRadius.circular(homeIndicator.size.height),
+                          BorderRadius.circular(systemNavBarData.size.height),
                       color: Colors.black,
                     ),
                   ),
