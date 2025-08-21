@@ -9,6 +9,14 @@ sealed class SystemNavBarData extends Equatable {
     double bottom,
     Size size,
   ) = GestureIndicatorSystemNavBarData;
+
+  const factory SystemNavBarData.threeButton({
+    double height,
+    Color backgroundColor,
+    Color iconColor,
+    double iconSize,
+    double bottomPadding,
+  }) = ThreeButtonSystemNavBarData;
 }
 
 /// Describe the OS gesture indicator on bottom of apps, expressed in `dp`.
@@ -25,4 +33,42 @@ class GestureIndicatorSystemNavBarData extends SystemNavBarData {
 
   @override
   List<Object?> get props => [bottom, size];
+}
+
+/// Describe the OS three-button navigation bar.
+///
+/// This is null when the device does not use a three-button navigation bar.
+/// Do not use with HomeIndicatorData.
+class ThreeButtonSystemNavBarData extends SystemNavBarData {
+  const ThreeButtonSystemNavBarData({
+    this.height = 48.0,
+    this.backgroundColor = const Color.fromRGBO(0, 0, 0, .1),
+    this.iconColor = const Color.fromRGBO(40, 40, 40, .6),
+    this.iconSize = 24.0,
+    this.bottomPadding = 0.0,
+  });
+
+  /// Height of the navigation bar, expressed in `dp`.
+  final double height;
+
+  /// Background color of the navigation bar.
+  final Color backgroundColor;
+
+  /// Color of the icons in the navigation bar.
+  final Color iconColor;
+
+  /// Size of the icons in the navigation bar.
+  final double iconSize;
+
+  /// Distance from the screen bottom to the navigation bar.
+  final double bottomPadding;
+
+  @override
+  List<Object?> get props => [
+        height,
+        backgroundColor,
+        iconColor,
+        iconSize,
+        bottomPadding,
+      ];
 }
