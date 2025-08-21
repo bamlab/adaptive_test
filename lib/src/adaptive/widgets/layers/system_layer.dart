@@ -1,4 +1,4 @@
-import 'package:adaptive_test/src/adaptive/window_size.dart';
+import 'package:adaptive_test/src/adaptive/window_config.dart';
 import 'package:flutter/material.dart';
 
 class SystemLayer extends StatelessWidget {

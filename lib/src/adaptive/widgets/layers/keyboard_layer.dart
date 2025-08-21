@@ -1,5 +1,5 @@
 import 'package:adaptive_test/src/adaptive/window_configuration_tester.dart';
-import 'package:adaptive_test/src/adaptive/window_size.dart';
+import 'package:adaptive_test/src/adaptive/window_config.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 
