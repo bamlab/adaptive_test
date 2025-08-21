@@ -5,11 +5,22 @@ import 'package:equatable/equatable.dart';
 sealed class SystemNavBarData extends Equatable {
   const SystemNavBarData();
 
+  /// Display the gesture indicator for the system navigation
+  ///
+  /// [bottom] The bottom offset of the indicator, expressed in `dp`.
+  /// [size] The size of the indicator, expressed in `dp`.
   const factory SystemNavBarData.gestureIndicator(
     double bottom,
     Size size,
   ) = GestureIndicatorSystemNavBarData;
 
+  /// Display the three-button navigation bar
+  ///
+  /// [height] The height of the navigation bar, expressed in `dp`.
+  /// [backgroundColor] The background color of the navigation bar.
+  /// [iconColor] The color of the icons in the navigation bar.
+  /// [iconSize] The size of the icons in the navigation bar.
+  /// [bottomPadding] The distance from the screen bottom to the navigation bar.
   const factory SystemNavBarData.threeButton({
     double height,
     Color backgroundColor,

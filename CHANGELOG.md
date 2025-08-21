@@ -1,3 +1,19 @@
+## 0.10.0
+
+* feat: Add support for system navigation bar with 3 buttons for Android devices.
+  ```dart
+  WindowConfigData(
+    systemNavBar = SystemNavBarData.threeButton(),
+  )
+  ```
+* **BREAKING**: refactor: replaced `homeIndicator` by `systemNavBar` in `WindowConfigData` for the home gesture indicator:
+  ```diff
+    WindowConfigData(
+  -  homeIndicator = HomeIndicatorData(bottomPadding, size)
+  +  systemNavBar = SystemNavBarData.gestureIndicator(bottomPadding, size)
+    )
+  ```
+
 ## 0.9.1
 
 * feat: await image now works with ShapeDecopration
