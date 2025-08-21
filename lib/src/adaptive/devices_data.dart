@@ -12,6 +12,7 @@ enum _Device {
   iPadPro,
   desktop,
   pixel_5,
+  pixel_5_alt,
   pixel_9;
 
   String get keyboardName => 'assets/keyboards/${this.name}.png';
@@ -77,6 +78,23 @@ final WindowConfigData pixel5 = WindowConfigData(
     Radius.circular(32),
   ),
   systemNavBar: const SystemNavBarData.gestureIndicator(8, Size(72, 2)),
+  targetPlatform: TargetPlatform.android,
+  punchHole: const PunchHoleData(Offset(12, 12), 25),
+  keyboardName: _Device.pixel_5.keyboardName,
+  keyboardPackage: _keyboardPackage,
+);
+
+/// [WindowConfigData] for a Google Pixel 5 alternative with 3-button navbar.
+final WindowConfigData pixel5Alt = WindowConfigData(
+  _Device.pixel_5_alt.name,
+  size: const Size(392, 850),
+  pixelDensity: 2.75,
+  safeAreaPadding: const EdgeInsets.only(top: 49, bottom: 48),
+  keyboardSize: const Size(392, 302),
+  borderRadius: const BorderRadius.all(
+    Radius.circular(32),
+  ),
+  systemNavBar: const SystemNavBarData.threeButton(),
   targetPlatform: TargetPlatform.android,
   punchHole: const PunchHoleData(Offset(12, 12), 25),
   keyboardName: _Device.pixel_5.keyboardName,
