@@ -16,31 +16,28 @@ class GestureIndicatorSystemNavBarLayer extends StatelessWidget {
   Widget build(BuildContext context) {
     final windowConfig = WindowConfig.of(context);
 
-    switch (gestureIndicator) {
-      case GestureIndicatorSystemNavBarData():
-        return Directionality(
-          textDirection: TextDirection.ltr,
-          child: Stack(
-            children: [
-              child,
-              Positioned(
-                bottom: gestureIndicator.bottom,
-                width: windowConfig.size.width,
-                child: Center(
-                  child: Container(
-                    height: gestureIndicator.size.height,
-                    width: gestureIndicator.size.width,
-                    decoration: BoxDecoration(
-                      borderRadius:
-                          BorderRadius.circular(gestureIndicator.size.height),
-                      color: Colors.black,
-                    ),
-                  ),
+    return Directionality(
+      textDirection: TextDirection.ltr,
+      child: Stack(
+        children: [
+          child,
+          Positioned(
+            bottom: gestureIndicator.bottom,
+            width: windowConfig.size.width,
+            child: Center(
+              child: Container(
+                height: gestureIndicator.size.height,
+                width: gestureIndicator.size.width,
+                decoration: BoxDecoration(
+                  borderRadius:
+                      BorderRadius.circular(gestureIndicator.size.height),
+                  color: Colors.black,
                 ),
               ),
-            ],
+            ),
           ),
-        );
-    }
+        ],
+      ),
+    );
   }
 }
