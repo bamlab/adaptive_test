@@ -1,4 +1,7 @@
-import 'package:adaptive_test/src/adaptive/window_size.dart';
+import 'package:adaptive_test/src/adaptive/window_config_data/dynamic_island_data.dart';
+import 'package:adaptive_test/src/adaptive/window_config_data/home_indicator_data.dart';
+import 'package:adaptive_test/src/adaptive/window_config_data/punch_hole_data.dart';
+import 'package:adaptive_test/src/adaptive/window_config_data/window_config_data.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/painting.dart';
 

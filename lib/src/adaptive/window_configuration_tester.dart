@@ -1,4 +1,4 @@
-import 'package:adaptive_test/src/adaptive/window_size.dart';
+import 'package:adaptive_test/src/adaptive/window_config_data/window_config_data.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 /// Dart extension to add configuration functions to a [WidgetTester] object,

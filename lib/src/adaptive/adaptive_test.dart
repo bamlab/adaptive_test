@@ -1,8 +1,8 @@
 import 'dart:io';
 
 import 'package:adaptive_test/src/adaptive/widgets/adaptive_wrapper.dart';
+import 'package:adaptive_test/src/adaptive/window_config_data/window_config_data.dart';
 import 'package:adaptive_test/src/adaptive/window_configuration_tester.dart';
-import 'package:adaptive_test/src/adaptive/window_size.dart';
 import 'package:adaptive_test/src/configuration.dart';
 import 'package:adaptive_test/src/helpers/await_images.dart';
 import 'package:adaptive_test/src/helpers/skip_test_extension.dart';

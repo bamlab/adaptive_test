@@ -1,3 +1,4 @@
+import 'package:adaptive_test/src/adaptive/window_config_data/window_config_data.dart';
 import 'package:adaptive_test/src/adaptive/window_size.dart';
 import 'package:flutter/material.dart';
 
