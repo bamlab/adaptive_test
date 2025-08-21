@@ -1,5 +1,5 @@
 import 'package:adaptive_test/src/adaptive/window_config_data/dynamic_island_data.dart';
-import 'package:adaptive_test/src/adaptive/window_config_data/home_indicator_data.dart';
+import 'package:adaptive_test/src/adaptive/window_config_data/system_nav_bar_data.dart';
 import 'package:adaptive_test/src/adaptive/window_config_data/punch_hole_data.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/widgets.dart';
@@ -20,7 +20,7 @@ class WindowConfigData extends Equatable {
     this.notchSize,
     this.dynamicIsland,
     this.punchHole,
-    this.homeIndicator,
+    this.systemNavBar,
   })  : viewInsets = ViewPaddingImpl(
               bottom: keyboardSize?.height ?? 0,
             ) *
@@ -63,10 +63,10 @@ class WindowConfigData extends Equatable {
   /// See: [PunchHoleData]
   final PunchHoleData? punchHole;
 
-  /// Describe the OS gesture indicator on bottom of apps, expressed in `dp`.
+  /// Describe the OS system navigation bar on bottom of apps
   ///
-  /// This is null when the device has no gesture indicator.
-  final HomeIndicatorData? homeIndicator;
+  /// This is null when the device has no navigation bar.
+  final SystemNavBarData? systemNavBar;
 
   /// Device Platform.
   ///
@@ -105,7 +105,7 @@ class WindowConfigData extends Equatable {
         keyboardSize,
         notchSize,
         punchHole,
-        homeIndicator,
+        systemNavBar,
         targetPlatform,
         borderRadius,
         viewInsets,
