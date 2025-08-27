@@ -12,7 +12,7 @@ enum _Device {
   iPadPro,
   desktop,
   pixel_5,
-  pixel_5_alt,
+  pixel_5_three_button,
   pixel_9;
 
   String get keyboardName => 'assets/keyboards/${this.name}.png';
@@ -85,8 +85,8 @@ final WindowConfigData pixel5 = WindowConfigData(
 );
 
 /// [WindowConfigData] for a Google Pixel 5 alternative with 3-button navbar.
-final WindowConfigData pixel5Alt = WindowConfigData(
-  _Device.pixel_5_alt.name,
+final WindowConfigData pixel5ThreeButton = WindowConfigData(
+  _Device.pixel_5_three_button.name,
   size: const Size(392, 850),
   pixelDensity: 2.75,
   safeAreaPadding: const EdgeInsets.only(top: 49, bottom: 48),

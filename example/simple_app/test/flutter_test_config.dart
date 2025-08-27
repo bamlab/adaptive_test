@@ -10,7 +10,7 @@ final defaultDeviceConfigs = {
   iPadPro,
   desktop,
   pixel9,
-  pixel5Alt,
+  pixel5ThreeButton,
 };
 
 Future<void> testExecutable(FutureOr<void> Function() testMain) async {
