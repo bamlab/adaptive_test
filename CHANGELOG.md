@@ -1,3 +1,7 @@
+## 0.9.1
+
+* feat: await image now works with ShapeDecopration
+
 ## 0.9.0
 
 * fix: Handle viewPadding when keyboard opens.
