@@ -4,6 +4,11 @@ import 'package:adaptive_test/adaptive_test.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+final pixel5TwoButton = pixel5ThreeButton.copyWith(
+  name: 'pixel_5_two_button',
+  systemNavBar: const SystemNavBarData.twoButton(),
+);
+
 final defaultDeviceConfigs = {
   iPhone8,
   iPhone16,
@@ -11,6 +16,7 @@ final defaultDeviceConfigs = {
   desktop,
   pixel9,
   pixel5ThreeButton,
+  pixel5TwoButton
 };
 
 Future<void> testExecutable(FutureOr<void> Function() testMain) async {

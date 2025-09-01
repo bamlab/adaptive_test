@@ -28,6 +28,23 @@ sealed class SystemNavBarData extends Equatable {
     double iconSize,
     double bottomPadding,
   }) = ThreeButtonSystemNavBarData;
+
+  /// Describe the OS two-button navigation bar.
+  ///
+  /// [height] The height of the navigation bar, expressed in `dp`.
+  /// [backgroundColor] The background color of the navigation bar.
+  /// [iconColor] The color of the icons in the navigation bar.
+  /// [homeWidth] The width of the home button, expressed in `dp`.
+  /// [homeHeight] The height of the home button, expressed in `dp`.
+  /// [bottomPadding] The distance from the screen bottom to the navigation bar.
+  const factory SystemNavBarData.twoButton({
+    double height,
+    Color backgroundColor,
+    Color iconColor,
+    double homeWidth,
+    double homeHeight,
+    double bottomPadding,
+  }) = TwoButtonSystemNavBarData;
 }
 
 /// Describe the OS gesture indicator on bottom of apps, expressed in `dp`.
@@ -80,6 +97,34 @@ class ThreeButtonSystemNavBarData extends SystemNavBarData {
         backgroundColor,
         iconColor,
         iconSize,
+        bottomPadding,
+      ];
+}
+
+class TwoButtonSystemNavBarData extends SystemNavBarData {
+  const TwoButtonSystemNavBarData({
+    this.height = 48.0,
+    this.backgroundColor = const Color.fromRGBO(0, 0, 0, .1),
+    this.iconColor = const Color.fromRGBO(40, 40, 40, .6),
+    this.homeWidth = 60.0,
+    this.homeHeight = 6.0,
+    this.bottomPadding = 0.0,
+  });
+
+  final double height; // total bar height
+  final Color backgroundColor; // bar background
+  final Color iconColor; // color of back arrow
+  final double homeWidth; // pill width
+  final double homeHeight; // pill height
+  final double bottomPadding; // distance from bottom
+
+  @override
+  List<Object?> get props => [
+        height,
+        backgroundColor,
+        iconColor,
+        homeWidth,
+        homeHeight,
         bottomPadding,
       ];
 }
