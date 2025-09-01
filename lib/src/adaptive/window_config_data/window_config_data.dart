@@ -115,6 +115,44 @@ class WindowConfigData extends Equatable {
         keyboardPackage,
         dynamicIsland,
       ];
+
+  WindowConfigData copyWith({
+    String? name,
+    Size? size,
+    double? pixelDensity,
+    TargetPlatform? targetPlatform,
+    BorderRadius? borderRadius,
+    EdgeInsets? safeAreaPadding,
+    String? keyboardName,
+    String? keyboardPackage,
+    Size? keyboardSize,
+    Size? notchSize,
+    DynamicIslandData? dynamicIsland,
+    PunchHoleData? punchHole,
+    SystemNavBarData? systemNavBar,
+  }) {
+    final newDensity = pixelDensity ?? this.pixelDensity;
+
+    return WindowConfigData(
+      name ?? this.name,
+      size: size ?? this.size,
+      pixelDensity: newDensity,
+      targetPlatform: targetPlatform ?? this.targetPlatform,
+      borderRadius: borderRadius ?? this.borderRadius,
+      safeAreaPadding: safeAreaPadding ??
+          EdgeInsets.only(
+            bottom: this.padding.bottom / newDensity,
+            top: this.padding.top / newDensity,
+          ),
+      keyboardName: keyboardName ?? this.keyboardName,
+      keyboardPackage: keyboardPackage ?? this.keyboardPackage,
+      keyboardSize: keyboardSize ?? this.keyboardSize,
+      notchSize: notchSize ?? this.notchSize,
+      dynamicIsland: dynamicIsland ?? this.dynamicIsland,
+      punchHole: punchHole ?? this.punchHole,
+      systemNavBar: systemNavBar ?? this.systemNavBar,
+    );
+  }
 }
 
 /// Implementation of the abstract class [FakeViewPadding].

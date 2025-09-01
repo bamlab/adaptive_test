@@ -85,20 +85,10 @@ final WindowConfigData pixel5 = WindowConfigData(
 );
 
 /// [WindowConfigData] for a Google Pixel 5 alternative with 3-button navbar.
-final WindowConfigData pixel5ThreeButton = WindowConfigData(
-  _Device.pixel_5_three_button.name,
-  size: const Size(392, 850),
-  pixelDensity: 2.75,
+final WindowConfigData pixel5ThreeButton = pixel5.copyWith(
+  name: _Device.pixel_5_three_button.name,
   safeAreaPadding: const EdgeInsets.only(top: 49, bottom: 48),
-  keyboardSize: const Size(392, 302),
-  borderRadius: const BorderRadius.all(
-    Radius.circular(32),
-  ),
   systemNavBar: const SystemNavBarData.threeButton(),
-  targetPlatform: TargetPlatform.android,
-  punchHole: const PunchHoleData(Offset(12, 12), 25),
-  keyboardName: _Device.pixel_5.keyboardName,
-  keyboardPackage: _keyboardPackage,
 );
 
 /// [WindowConfigData] for a Google Pixel 9.
