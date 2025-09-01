@@ -1,9 +1,13 @@
 ## 0.10.0
 
-* feat: Add support for system navigation bar with 3 buttons for Android devices.
+* feat: Add support for 2-button and 3-button navigation for Android devices.
   ```dart
   WindowConfigData(
     systemNavBar = SystemNavBarData.threeButton(),
+  )
+  // or
+  WindowConfigData(
+    systemNavBar = SystemNavBarData.twoButton(),
   )
   ```
 * **BREAKING**: refactor: replaced `homeIndicator` by `systemNavBar` in `WindowConfigData` for the home gesture indicator:
