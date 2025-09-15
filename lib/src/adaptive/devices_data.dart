@@ -1,4 +1,7 @@
-import 'package:adaptive_test/src/adaptive/window_size.dart';
+import 'package:adaptive_test/src/adaptive/window_config_data/dynamic_island_data.dart';
+import 'package:adaptive_test/src/adaptive/window_config_data/system_nav_bar_data.dart';
+import 'package:adaptive_test/src/adaptive/window_config_data/punch_hole_data.dart';
+import 'package:adaptive_test/src/adaptive/window_config_data/window_config_data.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/painting.dart';
 
@@ -9,6 +12,7 @@ enum _Device {
   iPadPro,
   desktop,
   pixel_5,
+  pixel_5_three_button,
   pixel_9;
 
   String get keyboardName => 'assets/keyboards/${this.name}.png';
@@ -39,7 +43,7 @@ final WindowConfigData iPhone13 = WindowConfigData(
   borderRadius: const BorderRadius.all(
     Radius.circular(47),
   ),
-  homeIndicator: const HomeIndicatorData(8, Size(139, 5)),
+  systemNavBar: const SystemNavBarData.gestureIndicator(8, Size(139, 5)),
   notchSize: const Size(154, 32),
   targetPlatform: TargetPlatform.iOS,
   keyboardName: _Device.iPhone_13.keyboardName,
@@ -56,7 +60,7 @@ final WindowConfigData iPhone16 = WindowConfigData(
   borderRadius: const BorderRadius.all(
     Radius.circular(55),
   ),
-  homeIndicator: const HomeIndicatorData(8, Size(140, 5)),
+  systemNavBar: const SystemNavBarData.gestureIndicator(8, Size(140, 5)),
   dynamicIsland: DynamicIslandData(11, Size(125, 37)),
   targetPlatform: TargetPlatform.iOS,
   keyboardName: _Device.iPhone_16.keyboardName,
@@ -73,11 +77,18 @@ final WindowConfigData pixel5 = WindowConfigData(
   borderRadius: const BorderRadius.all(
     Radius.circular(32),
   ),
-  homeIndicator: const HomeIndicatorData(8, Size(72, 2)),
+  systemNavBar: const SystemNavBarData.gestureIndicator(8, Size(72, 2)),
   targetPlatform: TargetPlatform.android,
   punchHole: const PunchHoleData(Offset(12, 12), 25),
   keyboardName: _Device.pixel_5.keyboardName,
   keyboardPackage: _keyboardPackage,
+);
+
+/// [WindowConfigData] for a Google Pixel 5 alternative with 3-button navbar.
+final WindowConfigData pixel5ThreeButton = pixel5.copyWith(
+  name: _Device.pixel_5_three_button.name,
+  safeAreaPadding: const EdgeInsets.only(top: 49, bottom: 48),
+  systemNavBar: const SystemNavBarData.threeButton(),
 );
 
 /// [WindowConfigData] for a Google Pixel 9.
@@ -90,7 +101,7 @@ final WindowConfigData pixel9 = WindowConfigData(
   borderRadius: const BorderRadius.all(
     Radius.circular(55),
   ),
-  homeIndicator: const HomeIndicatorData(10, Size(108, 4)),
+  systemNavBar: const SystemNavBarData.gestureIndicator(10, Size(108, 4)),
   targetPlatform: TargetPlatform.android,
   punchHole: const PunchHoleData(Offset(190, 17), 31),
   keyboardName: _Device.pixel_9.keyboardName,
@@ -107,7 +118,7 @@ final WindowConfigData iPadPro = WindowConfigData(
   borderRadius: const BorderRadius.all(
     Radius.circular(24),
   ),
-  homeIndicator: const HomeIndicatorData(8, Size(315, 5)),
+  systemNavBar: const SystemNavBarData.gestureIndicator(8, Size(315, 5)),
   targetPlatform: TargetPlatform.iOS,
   keyboardName: _Device.iPadPro.keyboardName,
   keyboardPackage: _keyboardPackage,

@@ -10,7 +10,14 @@ jobs:
   test:
     runs-on: macos-latest
     strategy:
-      matrix: { dir: ['example/simple_app', 'example/multi_packages_app/app', 'example/multi_packages_app/theme'] }
+      matrix:
+        include:
+          - dir: example/simple_app
+            name: simple_app
+          - dir: example/multi_packages_app/app
+            name: multi_packages_app_app
+          - dir: example/multi_packages_app/theme
+            name: multi_packages_app_theme
     defaults:
       run:
         working-directory: ${{ matrix.dir }}
@@ -42,3 +49,11 @@ jobs:
 
       - name: Run tests
         run: flutter test --no-pub --test-randomize-ordering-seed random
+
+      - name: Upload golden test failures
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: golden-failures-${{ matrix.name }}
+          path: ${{ matrix.dir }}/test/**/failures/
+          if-no-files-found: ignore

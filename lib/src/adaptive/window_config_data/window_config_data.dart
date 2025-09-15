@@ -1,85 +1,9 @@
+import 'package:adaptive_test/src/adaptive/window_config_data/dynamic_island_data.dart';
+import 'package:adaptive_test/src/adaptive/window_config_data/system_nav_bar_data.dart';
+import 'package:adaptive_test/src/adaptive/window_config_data/punch_hole_data.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
-
-class WindowVariant extends ValueVariant<WindowConfigData> {
-  WindowVariant(this.windowConfigs) : super(windowConfigs);
-
-  final Set<WindowConfigData> windowConfigs;
-
-  @override
-  String describeValue(WindowConfigData value) => value.name;
-}
-
-/// Describe the size of Android physical screen camera punch hole in `dp`,
-class PunchHoleData extends Equatable {
-  const PunchHoleData(this.offset, this.radius);
-  final Offset offset;
-  final double radius;
-
-  @override
-  List<Object?> get props => [offset, radius];
-}
-
-/// Describe the OS gesture indicator on bottom of apps, expressed in `dp`.
-///
-/// This is null when the device has no gesture indicator.
-class HomeIndicatorData extends Equatable {
-  const HomeIndicatorData(this.bottom, this.size);
-
-  /// Bottom offset of the indicator, expressed in `dp`.
-  final double bottom;
-
-  /// Size of the indicator, expressed in `dp`.
-  final Size size;
-
-  @override
-  List<Object?> get props => [bottom, size];
-}
-
-/// Describe the dynamic island on top of apps, expressed in `dp`.
-///
-/// This is null when the device has no dynamic island.
-class DynamicIslandData extends Equatable {
-  const DynamicIslandData(this.top, this.size);
-
-  /// top offset of the indicator, expressed in `dp`.
-  final double top;
-
-  /// Size of the indicator, expressed in `dp`.
-  final Size size;
-
-  @override
-  List<Object?> get props => [top, size];
-}
-
-/// Establish a subtree in which adaptive window resolves to the given data.
-/// Use `WindowConfig.of(context)` to retrieve the data in any child widget.
-///
-/// See also: [WindowConfigData].
-class WindowConfig extends InheritedWidget {
-  const WindowConfig({
-    required this.windowConfig,
-    required super.child,
-    super.key,
-  });
-
-  final WindowConfigData windowConfig;
-
-  static WindowConfigData of(BuildContext context) {
-    final result = context
-        .dependOnInheritedWidgetOfExactType<WindowConfig>()
-        ?.windowConfig;
-    assert(result != null, 'No WindowConfig found in context');
-
-    // ignore: avoid-non-null-assertion, protected by assertion
-    return result!;
-  }
-
-  @override
-  bool updateShouldNotify(WindowConfig oldWidget) =>
-      oldWidget.windowConfig != windowConfig;
-}
 
 /// A Data class that describe a device properties that will impact design.
 class WindowConfigData extends Equatable {
@@ -96,7 +20,7 @@ class WindowConfigData extends Equatable {
     this.notchSize,
     this.dynamicIsland,
     this.punchHole,
-    this.homeIndicator,
+    this.systemNavBar,
   })  : viewInsets = ViewPaddingImpl(
               bottom: keyboardSize?.height ?? 0,
             ) *
@@ -139,10 +63,10 @@ class WindowConfigData extends Equatable {
   /// See: [PunchHoleData]
   final PunchHoleData? punchHole;
 
-  /// Describe the OS gesture indicator on bottom of apps, expressed in `dp`.
+  /// Describe the OS system navigation bar on bottom of apps
   ///
-  /// This is null when the device has no gesture indicator.
-  final HomeIndicatorData? homeIndicator;
+  /// This is null when the device has no navigation bar.
+  final SystemNavBarData? systemNavBar;
 
   /// Device Platform.
   ///
@@ -181,7 +105,7 @@ class WindowConfigData extends Equatable {
         keyboardSize,
         notchSize,
         punchHole,
-        homeIndicator,
+        systemNavBar,
         targetPlatform,
         borderRadius,
         viewInsets,
@@ -191,6 +115,44 @@ class WindowConfigData extends Equatable {
         keyboardPackage,
         dynamicIsland,
       ];
+
+  WindowConfigData copyWith({
+    String? name,
+    Size? size,
+    double? pixelDensity,
+    TargetPlatform? targetPlatform,
+    BorderRadius? borderRadius,
+    EdgeInsets? safeAreaPadding,
+    String? keyboardName,
+    String? keyboardPackage,
+    Size? keyboardSize,
+    Size? notchSize,
+    DynamicIslandData? dynamicIsland,
+    PunchHoleData? punchHole,
+    SystemNavBarData? systemNavBar,
+  }) {
+    final newDensity = pixelDensity ?? this.pixelDensity;
+
+    return WindowConfigData(
+      name ?? this.name,
+      size: size ?? this.size,
+      pixelDensity: newDensity,
+      targetPlatform: targetPlatform ?? this.targetPlatform,
+      borderRadius: borderRadius ?? this.borderRadius,
+      safeAreaPadding: safeAreaPadding ??
+          EdgeInsets.only(
+            bottom: this.padding.bottom / newDensity,
+            top: this.padding.top / newDensity,
+          ),
+      keyboardName: keyboardName ?? this.keyboardName,
+      keyboardPackage: keyboardPackage ?? this.keyboardPackage,
+      keyboardSize: keyboardSize ?? this.keyboardSize,
+      notchSize: notchSize ?? this.notchSize,
+      dynamicIsland: dynamicIsland ?? this.dynamicIsland,
+      punchHole: punchHole ?? this.punchHole,
+      systemNavBar: systemNavBar ?? this.systemNavBar,
+    );
+  }
 }
 
 /// Implementation of the abstract class [FakeViewPadding].
