@@ -1,3 +1,7 @@
+## 0.10.1
+
+* fix: revert viewPadding update when keyboard opens/closes.
+
 ## 0.10.0
 
 * feat: Add support for 2-button and 3-button navigation for Android devices.
