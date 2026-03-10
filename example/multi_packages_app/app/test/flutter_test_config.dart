@@ -7,6 +7,7 @@ import 'package:flutter_test/flutter_test.dart';
 final defaultDeviceConfigs = {
   iPhone8,
   iPhone16,
+  iPhone16Dark,
   iPadPro,
   desktop,
   pixel9,

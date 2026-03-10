@@ -1,21 +1,21 @@
 import 'package:adaptive_test/src/adaptive/window_config_data/dynamic_island_data.dart';
-import 'package:adaptive_test/src/adaptive/window_config_data/system_nav_bar_data.dart';
 import 'package:adaptive_test/src/adaptive/window_config_data/punch_hole_data.dart';
+import 'package:adaptive_test/src/adaptive/window_config_data/system_nav_bar_data.dart';
 import 'package:adaptive_test/src/adaptive/window_config_data/window_config_data.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter/painting.dart';
+import 'package:flutter/material.dart';
 
 enum _Device {
   iPhone_8,
   iPhone_13,
   iPhone_16,
+  iPhone_16_dark,
   iPadPro,
   desktop,
   pixel_5,
   pixel_5_three_button,
   pixel_9;
 
-  String get keyboardName => 'assets/keyboards/${this.name}.png';
+  String get keyboardName => 'assets/keyboards/$name.png';
 }
 
 const _keyboardPackage = 'adaptive_test';
@@ -61,10 +61,16 @@ final WindowConfigData iPhone16 = WindowConfigData(
     Radius.circular(55),
   ),
   systemNavBar: const SystemNavBarData.gestureIndicator(8, Size(140, 5)),
-  dynamicIsland: DynamicIslandData(11, Size(125, 37)),
+  dynamicIsland: const DynamicIslandData(11, Size(125, 37)),
   targetPlatform: TargetPlatform.iOS,
   keyboardName: _Device.iPhone_16.keyboardName,
   keyboardPackage: _keyboardPackage,
+);
+
+/// [WindowConfigData] for an iPhone 16 in Dark mode.
+final WindowConfigData iPhone16Dark = iPhone16.copyWith(
+  name: _Device.iPhone_16_dark.name,
+  themeMode: ThemeMode.dark,
 );
 
 /// [WindowConfigData] for a Google Pixel 5.
