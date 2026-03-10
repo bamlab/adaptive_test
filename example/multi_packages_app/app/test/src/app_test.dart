@@ -1,7 +1,7 @@
 import 'package:adaptive_test/adaptive_test.dart';
-import 'package:multi_packages_example_app/src/app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:multi_packages_example_app/src/app.dart';
 
 void main() {
   testAdaptiveWidgets(
@@ -11,7 +11,7 @@ void main() {
         AdaptiveWrapper(
           windowConfig: variant,
           tester: tester,
-          child: const App(),
+          child: App(themeMode: variant.themeMode),
         ),
       );
 

@@ -1,8 +1,10 @@
-import 'view/home.dart';
 import 'package:flutter/material.dart';
 
+import 'view/home.dart';
+
 class App extends StatelessWidget {
-  const App({Key? key}) : super(key: key);
+  const App({Key? key, this.themeMode}) : super(key: key);
+  final ThemeMode? themeMode;
 
   @override
   Widget build(BuildContext context) {
@@ -13,6 +15,12 @@ class App extends StatelessWidget {
         primarySwatch: Colors.blue,
         fontFamily: 'roboto',
       ),
+      darkTheme: ThemeData(
+        brightness: Brightness.dark,
+        primarySwatch: Colors.blue,
+        fontFamily: 'roboto',
+      ),
+      themeMode: themeMode,
       home: const HomeLayout(),
     );
   }

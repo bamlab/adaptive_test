@@ -1,8 +1,8 @@
 import 'package:adaptive_test/src/adaptive/window_config_data/dynamic_island_data.dart';
-import 'package:adaptive_test/src/adaptive/window_config_data/system_nav_bar_data.dart';
 import 'package:adaptive_test/src/adaptive/window_config_data/punch_hole_data.dart';
+import 'package:adaptive_test/src/adaptive/window_config_data/system_nav_bar_data.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 /// A Data class that describe a device properties that will impact design.
@@ -21,6 +21,7 @@ class WindowConfigData extends Equatable {
     this.dynamicIsland,
     this.punchHole,
     this.systemNavBar,
+    this.themeMode = ThemeMode.light,
   })  : viewInsets = ViewPaddingImpl(
               bottom: keyboardSize?.height ?? 0,
             ) *
@@ -68,6 +69,11 @@ class WindowConfigData extends Equatable {
   /// This is null when the device has no navigation bar.
   final SystemNavBarData? systemNavBar;
 
+  /// Describe the theme mode selected by the device.
+  ///
+  /// This is null when the device has no theme mode.
+  final ThemeMode? themeMode;
+
   /// Device Platform.
   ///
   /// See: [TargetPlatform]
@@ -106,6 +112,7 @@ class WindowConfigData extends Equatable {
         notchSize,
         punchHole,
         systemNavBar,
+        themeMode,
         targetPlatform,
         borderRadius,
         viewInsets,
@@ -130,6 +137,7 @@ class WindowConfigData extends Equatable {
     DynamicIslandData? dynamicIsland,
     PunchHoleData? punchHole,
     SystemNavBarData? systemNavBar,
+    ThemeMode? themeMode,
   }) {
     final newDensity = pixelDensity ?? this.pixelDensity;
 
@@ -141,8 +149,8 @@ class WindowConfigData extends Equatable {
       borderRadius: borderRadius ?? this.borderRadius,
       safeAreaPadding: safeAreaPadding ??
           EdgeInsets.only(
-            bottom: this.padding.bottom / newDensity,
-            top: this.padding.top / newDensity,
+            bottom: padding.bottom / newDensity,
+            top: padding.top / newDensity,
           ),
       keyboardName: keyboardName ?? this.keyboardName,
       keyboardPackage: keyboardPackage ?? this.keyboardPackage,
@@ -151,6 +159,7 @@ class WindowConfigData extends Equatable {
       dynamicIsland: dynamicIsland ?? this.dynamicIsland,
       punchHole: punchHole ?? this.punchHole,
       systemNavBar: systemNavBar ?? this.systemNavBar,
+      themeMode: themeMode ?? this.themeMode,
     );
   }
 }
