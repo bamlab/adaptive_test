@@ -1,3 +1,7 @@
+## 0.10.3
+
+- fix: disable skipOffstage by default in awaitImages.
+
 ## 0.10.2
 
 - feat: added iPhone dark mode support.

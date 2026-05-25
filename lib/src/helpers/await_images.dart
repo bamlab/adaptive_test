@@ -9,14 +9,18 @@ extension AwaitImages on WidgetTester {
   /// Pauses test until images are ready to be rendered.
   Future<void> awaitImages() async {
     await runAsync(() async {
-      for (final element in find.byType(Image).evaluate().toList()) {
+      for (final element
+          in find.byType(Image, skipOffstage: false).evaluate().toList()) {
         final widget = element.widget as Image;
         final image = widget.image;
         await precacheImage(image, element);
         await pump();
       }
 
-      for (final element in find.byType(FadeInImage).evaluate().toList()) {
+      for (final element in find
+          .byType(FadeInImage, skipOffstage: false)
+          .evaluate()
+          .toList()) {
         final widget = element.widget as FadeInImage;
         final image = widget.image;
         final pumpDurationInMilliseconds = max(
@@ -27,7 +31,10 @@ extension AwaitImages on WidgetTester {
         await pump(Duration(milliseconds: pumpDurationInMilliseconds));
       }
 
-      for (final element in find.byType(DecoratedBox).evaluate().toList()) {
+      for (final element in find
+          .byType(DecoratedBox, skipOffstage: false)
+          .evaluate()
+          .toList()) {
         final widget = element.widget as DecoratedBox;
         final decoration = widget.decoration;
         final image = switch (decoration) {
