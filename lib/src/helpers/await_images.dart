@@ -1,3 +1,5 @@
+// ignore_for_file: avoid-long-functions
+
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -11,40 +13,52 @@ extension AwaitImages on WidgetTester {
     await runAsync(() async {
       for (final element
           in find.byType(Image, skipOffstage: false).evaluate().toList()) {
-        final widget = element.widget as Image;
-        final image = widget.image;
-        await precacheImage(image, element);
-        await pump();
+        try {
+          final widget = element.widget as Image;
+          final image = widget.image;
+          await precacheImage(image, element);
+          await pump();
+        } catch (e) {
+          debugPrint('An image could not be precached by awaitImages: $e');
+        }
       }
 
       for (final element in find
           .byType(FadeInImage, skipOffstage: false)
           .evaluate()
           .toList()) {
-        final widget = element.widget as FadeInImage;
-        final image = widget.image;
-        final pumpDurationInMilliseconds = max(
-          widget.fadeInDuration.inMilliseconds,
-          widget.fadeOutDuration.inMilliseconds,
-        );
-        await precacheImage(image, element);
-        await pump(Duration(milliseconds: pumpDurationInMilliseconds));
+        try {
+          final widget = element.widget as FadeInImage;
+          final image = widget.image;
+          final pumpDurationInMilliseconds = max(
+            widget.fadeInDuration.inMilliseconds,
+            widget.fadeOutDuration.inMilliseconds,
+          );
+          await precacheImage(image, element);
+          await pump(Duration(milliseconds: pumpDurationInMilliseconds));
+        } catch (e) {
+          debugPrint('An image could not be precached by awaitImages: $e');
+        }
       }
 
       for (final element in find
           .byType(DecoratedBox, skipOffstage: false)
           .evaluate()
           .toList()) {
-        final widget = element.widget as DecoratedBox;
-        final decoration = widget.decoration;
-        final image = switch (decoration) {
-          BoxDecoration() => decoration.image?.image,
-          ShapeDecoration() => decoration.image?.image,
-          _ => null,
-        };
-        if (image != null) {
-          await precacheImage(image, element);
-          await pump();
+        try {
+          final widget = element.widget as DecoratedBox;
+          final decoration = widget.decoration;
+          final image = switch (decoration) {
+            BoxDecoration() => decoration.image?.image,
+            ShapeDecoration() => decoration.image?.image,
+            _ => null,
+          };
+          if (image != null) {
+            await precacheImage(image, element);
+            await pump();
+          }
+        } catch (e) {
+          debugPrint('An image could not be precached by awaitImages: $e');
         }
       }
     });
