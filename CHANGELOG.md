@@ -1,3 +1,7 @@
+## 0.10.4
+
+- fix: catch flaky offstage widget finder errors in awaitImages
+
 ## 0.10.3
 
 - fix: disable skipOffstage by default in awaitImages.
