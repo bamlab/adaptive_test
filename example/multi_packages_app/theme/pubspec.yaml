@@ -42,3 +42,8 @@ flutter:
       - asset: fonts/Roboto-Regular.ttf
       - asset: fonts/Roboto-Thin.ttf
       - asset: fonts/Roboto-ThinItalic.ttf
+  # Declared from an existing asset, to cover a font family bundled by a
+  # dependency that does not collide with a platform default one.
+  - family: ThemeSans
+    fonts:
+      - asset: fonts/Roboto-Regular.ttf
