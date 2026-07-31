@@ -3,22 +3,26 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:adaptive_test/src/helpers/font_registration.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:package_config/package_config.dart';
 
-/// Loads fonts and icons to ensure they appear in golden tests.
+/// Loads the fonts and icons the goldens need, and returns the font families
+/// that were registered.
 ///
 /// Usage:
 /// 1. Create a flutter_test_config.dart file.
 /// 2. Add `await loadFonts();` in the `testExecutable` function.
 ///
 /// Note: Your package must include all used fonts as assets for this to work.
-Future<void> loadFonts() async {
+Future<Set<String>> loadFonts() async {
   TestWidgetsFlutterBinding.ensureInitialized();
-  final fontManifest = await _loadFontManifest();
-  final packageName = await _getCurrentPackageName();
-  await _loadFontsFromManifest(fontManifest, packageName);
+
+  return _loadFontsFromManifest(
+    await _loadFontManifest(),
+    packageName: await _getCurrentPackageName(),
+  );
 }
 
 Future<_FontManifest> _loadFontManifest() async {
@@ -30,32 +34,40 @@ Future<_FontManifest> _loadFontManifest() async {
   return fontManifest.map((font) => _FontData.fromJson(font)).toList();
 }
 
-Future<void> _loadFontsFromManifest(
-  _FontManifest fontManifest,
-  String? packageName,
-) async {
-  final fontLoaders = fontManifest.expand((font) {
-    final regularFontLoader = _createFontLoader(font.family, font.fonts);
+Future<Set<String>> _loadFontsFromManifest(
+  _FontManifest fontManifest, {
+  required String? packageName,
+}) async {
+  final loadings = fontManifest.expand((font) {
     final fontFamilyStartsWithPackages = font.family.startsWith('packages/');
+    // A font bundled by a dependency shows up as `packages/<pkg>/<family>` in
+    // the manifest, but a widget styled with
+    // `TextStyle(fontFamily: 'Roboto', package: 'my_theme')` — or a theme
+    // defaulting to that family — asks for the bare name.
+    final bareFamily =
+        fontFamilyStartsWithPackages ? _bareFamilyName(font.family) : null;
 
     return [
-      regularFontLoader,
+      _loadFontFamily(font.family, font.fonts),
       if (!fontFamilyStartsWithPackages && packageName != null)
-        _createFontLoader('packages/$packageName/${font.family}', font.fonts),
+        _loadFontFamily('packages/$packageName/${font.family}', font.fonts),
+      if (bareFamily != null) _loadFontFamily(bareFamily, font.fonts),
     ];
   }).toList();
 
-  await Future.wait(fontLoaders.map((loader) => loader.load()));
+  return (await Future.wait(loadings)).toSet();
 }
 
-FontLoader _createFontLoader(String fontFamily, List<_FontType> fontTypes) {
-  final fontLoader = FontLoader(fontFamily);
-  fontTypes.forEach(
-    (fontType) => fontLoader.addFont(rootBundle.load(fontType.asset)),
+Future<String> _loadFontFamily(String fontFamily, List<_FontType> fontTypes) {
+  return registerFontFamily(
+    fontFamily,
+    fontTypes.map((fontType) => rootBundle.load(fontType.asset)),
   );
-
-  return fontLoader;
 }
+
+/// `packages/my_theme/Roboto` -> `Roboto`.
+String _bareFamilyName(String manifestFamily) =>
+    manifestFamily.split('/').skip(2).join('/');
 
 Future<String?> _getCurrentPackageName() async {
   final current = Directory.current;
