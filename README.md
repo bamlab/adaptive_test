@@ -75,6 +75,41 @@ Future<void> testExecutable(FutureOr<void> Function() testMain) async {
 
 > ℹ️ `loadFonts()` loads fonts from `pubspec.yaml` and from every separate package dependency as well.
 
+A font bundled by a dependency is registered under both its manifest name
+(`packages/my_theme/Roboto`) and its bare family name (`Roboto`), since that is
+the name a `TextStyle` or a `ThemeData` asks for.
+
+`loadFonts()` also registers the families the framework itself falls back to on
+each platform — `Roboto` on Android, `CupertinoSystemText` on iOS, `Segoe UI` on
+Windows, ... They are declared in no `pubspec.yaml`: they either ship with the
+Flutter SDK or belong to the host OS. Without them, any widget that does not
+specify a font — a `DatePickerDialog`, a `CupertinoButton` — renders as
+placeholder blocks in your goldens.
+
+Opt out to register nothing but what the manifest declares:
+
+```dart
+AdaptiveTestConfiguration.instance.setLoadPlatformFallbackFonts(false);
+```
+
+#### Catching a missing font
+
+When a golden is taken, `expectGolden` checks the font families the widget tree
+asks for against the ones that were loaded, and warns about the text that will
+render as blocks:
+
+```
+adaptive_test: no font is registered for 'Poppins'.
+The text using that family renders as placeholder blocks in the golden.
+```
+
+Make it a failure — recommended on CI once your suite is clean — or silence it:
+
+```dart
+AdaptiveTestConfiguration.instance
+    .setMissingFontsBehavior(MissingFontsBehavior.fail);
+```
+
 ### Setting Up Test Devices
 
 1. Define a set of device variants:
