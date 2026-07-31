@@ -1,3 +1,19 @@
+## 0.11.0
+
+- fix: **BREAKING CHANGE** — `loadFonts()` now also loads the system fonts, on
+  top of the ones the font manifest declares: the families the framework falls
+  back to on each platform (`Roboto`, `CupertinoSystemText`, `Segoe UI`, ...),
+  and a dependency's font under its bare family name (`Roboto`) as well as its
+  manifest name (`packages/my_theme/Roboto`). Widgets that do not specify a font
+  — a `DatePickerDialog` for instance — used to render as placeholder blocks in
+  goldens. Opt out with
+  `AdaptiveTestConfiguration.instance.setLoadPlatformFallbackFonts(false)`.
+- feat: `expectGolden` warns when the snapshotted tree asks for a font family no
+  font is registered for. Configure it with
+  `AdaptiveTestConfiguration.instance.setMissingFontsBehavior(...)`.
+- **Goldens that contained placeholder blocks change with this version**, run
+  `flutter test --update-goldens` to regenerate them.
+
 ## 0.10.4
 
 - fix: catch flaky offstage widget finder errors in awaitImages
