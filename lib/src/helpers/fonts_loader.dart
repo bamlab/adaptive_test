@@ -3,7 +3,10 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:adaptive_test/src/configuration.dart';
+import 'package:adaptive_test/src/helpers/font_loading_policy.dart';
 import 'package:adaptive_test/src/helpers/font_registration.dart';
+import 'package:adaptive_test/src/helpers/platform_fonts.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:package_config/package_config.dart';
@@ -16,13 +19,27 @@ import 'package:package_config/package_config.dart';
 /// 2. Add `await loadFonts();` in the `testExecutable` function.
 ///
 /// Note: Your package must include all used fonts as assets for this to work.
+///
+/// The families the framework falls back to on each platform are loaded too.
+/// Opt out with
+/// `AdaptiveTestConfiguration.instance.setLoadPlatformFallbackFonts(false)`.
 Future<Set<String>> loadFonts() async {
   TestWidgetsFlutterBinding.ensureInitialized();
+  final policy = AdaptiveTestConfiguration.instance.loadPlatformFallbackFonts
+      ? FontLoadingPolicy.platformAware()
+      : const FontLoadingPolicy.manifestOnly();
 
-  return _loadFontsFromManifest(
+  final manifestFamilies = await _loadFontsFromManifest(
     await _loadFontManifest(),
     packageName: await _getCurrentPackageName(),
+    policy: policy,
   );
+  final providedFamilies = await loadPlatformFallbackFonts(
+    familiesToProvide: policy.familiesToProvide,
+    alreadyLoaded: manifestFamilies,
+  );
+
+  return {...manifestFamilies, ...providedFamilies};
 }
 
 Future<_FontManifest> _loadFontManifest() async {
@@ -37,6 +54,7 @@ Future<_FontManifest> _loadFontManifest() async {
 Future<Set<String>> _loadFontsFromManifest(
   _FontManifest fontManifest, {
   required String? packageName,
+  required FontLoadingPolicy policy,
 }) async {
   final loadings = fontManifest.expand((font) {
     final fontFamilyStartsWithPackages = font.family.startsWith('packages/');
@@ -51,7 +69,8 @@ Future<Set<String>> _loadFontsFromManifest(
       _loadFontFamily(font.family, font.fonts),
       if (!fontFamilyStartsWithPackages && packageName != null)
         _loadFontFamily('packages/$packageName/${font.family}', font.fonts),
-      if (bareFamily != null) _loadFontFamily(bareFamily, font.fonts),
+      if (bareFamily != null && policy.registersBareFamilyName(bareFamily))
+        _loadFontFamily(bareFamily, font.fonts),
     ];
   }).toList();
 

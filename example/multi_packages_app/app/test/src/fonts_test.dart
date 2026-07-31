@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -43,5 +44,25 @@ void main() {
       );
     });
 
+    test('renders the Material default typeface of the host platform', () {
+      final defaultFamily = Typography.material2021(
+        platform: TargetPlatform.iOS,
+      ).black.bodyMedium?.fontFamily;
+
+      expect(defaultFamily, isNotNull);
+      // ignore: avoid-non-null-assertion, asserted right above
+      expect(_rendersWithARealFont(defaultFamily!), isTrue);
+    });
+
+    test('renders text with a family no font could ever provide', () {
+      // Apple's system typeface: it ships with iOS and cannot be bundled, so it
+      // is stood in for by the typeface the SDK ships.
+      const cupertinoTextTheme = CupertinoTextThemeData();
+      final cupertinoFamily = cupertinoTextTheme.textStyle.fontFamily;
+
+      expect(cupertinoFamily, isNotNull);
+      // ignore: avoid-non-null-assertion, asserted right above
+      expect(_rendersWithARealFont(cupertinoFamily!), isTrue);
+    });
   });
 }

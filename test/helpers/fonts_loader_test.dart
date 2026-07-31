@@ -1,5 +1,9 @@
 import 'package:adaptive_test/adaptive_test.dart';
+import 'package:adaptive_test/src/helpers/platform_fonts.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter_test/flutter_test.dart';
+
+import 'font_test_helpers.dart';
 
 void main() {
   late Set<String> loadedFamilies;
@@ -25,6 +29,29 @@ void main() {
       // `TextStyle(fontFamily: 'CupertinoIcons', package: 'cupertino_icons')`
       // asks for the bare name, not the manifest one.
       expect(loadedFamilies, contains('CupertinoIcons'));
+    });
+
+    test('registers every font family the framework falls back to', () {
+      expect(
+        platformDefaultFontFamilies().difference(loadedFamilies),
+        isEmpty,
+      );
+    });
+
+    test('makes the platform default families render real glyphs', () {
+      final blockRendering = platformDefaultFontFamilies().whereNot(
+        rendersWithARealFont,
+      );
+
+      expect(
+        blockRendering,
+        isEmpty,
+        reason: 'those families render with the placeholder test font',
+      );
+    });
+
+    test('leaves unknown families to the placeholder font', () {
+      expect(rendersWithARealFont('NotARegisteredFontFamily'), isFalse);
     });
   });
 }
