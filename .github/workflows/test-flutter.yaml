@@ -18,6 +18,8 @@ jobs:
             name: multi_packages_app_app
           - dir: example/multi_packages_app/theme
             name: multi_packages_app_theme
+          - dir: .
+            name: adaptive_test
     defaults:
       run:
         working-directory: ${{ matrix.dir }}
