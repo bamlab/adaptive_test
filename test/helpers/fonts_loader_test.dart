@@ -50,6 +50,14 @@ void main() {
       );
     });
 
+    test('records the loaded families in the configuration', () {
+      // This is how expectGolden knows what will render real glyphs.
+      expect(
+        AdaptiveTestConfiguration.instance.loadedFontFamilies,
+        containsAll(loadedFamilies),
+      );
+    });
+
     test('leaves unknown families to the placeholder font', () {
       expect(rendersWithARealFont('NotARegisteredFontFamily'), isFalse);
     });

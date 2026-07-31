@@ -1,5 +1,6 @@
 import 'package:adaptive_test/src/adaptive/window_config.dart';
 import 'package:adaptive_test/src/adaptive/window_config_data/window_config_data.dart';
+import 'package:adaptive_test/src/helpers/missing_fonts.dart';
 import 'package:flutter/material.dart';
 
 /// Singleton class that configures global variables for the test.
@@ -59,6 +60,41 @@ class AdaptiveTestConfiguration {
   /// instance if you would rather register those families yourself.
   void setLoadPlatformFallbackFonts(bool loadPlatformFallbackFonts) {
     _loadPlatformFallbackFonts = loadPlatformFallbackFonts;
+  }
+
+  final Set<String> _loadedFontFamilies = {};
+
+  /// The font families [loadFonts] registered in this test isolate.
+  Set<String> get loadedFontFamilies => Set.unmodifiable(_loadedFontFamilies);
+
+  /// Records the families [loadFonts] registered, so that [expectGolden] can
+  /// tell whether the text it snapshots will render real glyphs.
+  void addLoadedFontFamilies(Iterable<String> families) {
+    _loadedFontFamilies.addAll(families);
+  }
+
+  final Set<String> _warnedFontFamilies = {};
+
+  /// The missing font families [expectGolden] already warned about, see
+  /// [MissingFontsBehavior.warn].
+  Set<String> get warnedFontFamilies => Set.unmodifiable(_warnedFontFamilies);
+
+  /// Records the families that were warned about, so that a gap shared by many
+  /// goldens is only reported once.
+  void addWarnedFontFamilies(Iterable<String> families) {
+    _warnedFontFamilies.addAll(families);
+  }
+
+  MissingFontsBehavior _missingFontsBehavior = MissingFontsBehavior.warn;
+
+  MissingFontsBehavior get missingFontsBehavior => _missingFontsBehavior;
+
+  /// What [expectGolden] does when the widget tree asks for a font family that
+  /// no font has been registered for, see [MissingFontsBehavior].
+  ///
+  /// Defaults to [MissingFontsBehavior.warn].
+  void setMissingFontsBehavior(MissingFontsBehavior missingFontsBehavior) {
+    _missingFontsBehavior = missingFontsBehavior;
   }
 
   WindowVariant? _deviceVariant;

@@ -23,6 +23,10 @@ import 'package:package_config/package_config.dart';
 /// The families the framework falls back to on each platform are loaded too.
 /// Opt out with
 /// `AdaptiveTestConfiguration.instance.setLoadPlatformFallbackFonts(false)`.
+///
+/// The registered families are also recorded in the
+/// [AdaptiveTestConfiguration], which is how [expectGolden] knows whether the
+/// text it snapshots will render real glyphs.
 Future<Set<String>> loadFonts() async {
   TestWidgetsFlutterBinding.ensureInitialized();
   final policy = AdaptiveTestConfiguration.instance.loadPlatformFallbackFonts
@@ -39,7 +43,10 @@ Future<Set<String>> loadFonts() async {
     alreadyLoaded: manifestFamilies,
   );
 
-  return {...manifestFamilies, ...providedFamilies};
+  final loadedFamilies = {...manifestFamilies, ...providedFamilies};
+  AdaptiveTestConfiguration.instance.addLoadedFontFamilies(loadedFamilies);
+
+  return loadedFamilies;
 }
 
 Future<_FontManifest> _loadFontManifest() async {
