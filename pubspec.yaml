@@ -10,6 +10,7 @@ environment:
   flutter: '>=1.17.0'
 
 dependencies:
+  collection: ^1.18.0
   cupertino_icons: ^1.0.5
   equatable: ^2.0.5
   file: ^7.0.0
