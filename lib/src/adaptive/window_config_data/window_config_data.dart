@@ -53,7 +53,8 @@ class WindowConfigData extends Equatable {
   /// This is null when the device has no notch.
   final Size? notchSize;
 
-  /// Describe the size of the device physical screen top dynamic island in `dp`.
+  /// Describe the size of the device physical screen top dynamic island in
+  /// `dp`.
   ///
   /// This is null when the device has no dynamic island.
   final DynamicIslandData? dynamicIsland;

@@ -2,7 +2,6 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
-import 'package:meta/meta.dart';
 
 @internal
 extension IsRuntimePlatform on TargetPlatform {
@@ -13,7 +12,9 @@ extension IsRuntimePlatform on TargetPlatform {
             TargetPlatform.windows:
         return;
 
-      default:
+      case TargetPlatform.android ||
+            TargetPlatform.iOS ||
+            TargetPlatform.fuchsia:
         log('Tests are intended to be runned on linux, macOS or windows'
             ' platform. But you are running them on $name');
     }
