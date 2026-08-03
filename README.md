@@ -75,6 +75,23 @@ Future<void> testExecutable(FutureOr<void> Function() testMain) async {
 
 > ℹ️ `loadFonts()` loads fonts from `pubspec.yaml` and from every separate package dependency as well.
 
+A font bundled by a dependency is registered under both its manifest name
+(`packages/my_theme/Roboto`) and its bare family name (`Roboto`), since that is
+the name a `TextStyle` or a `ThemeData` asks for.
+
+`loadFonts()` also registers the families the framework itself falls back to on
+each platform — `Roboto` on Android, `CupertinoSystemText` on iOS, `Segoe UI` on
+Windows, ... They are declared in no `pubspec.yaml`: they either ship with the
+Flutter SDK or belong to the host OS. Without them, any widget that does not
+specify a font — a `DatePickerDialog`, a `CupertinoButton` — renders as
+placeholder blocks in your goldens.
+
+Opt out to register nothing but what the manifest declares:
+
+```dart
+AdaptiveTestConfiguration.instance.setLoadPlatformFallbackFonts(false);
+```
+
 ### Setting Up Test Devices
 
 1. Define a set of device variants:

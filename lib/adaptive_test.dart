@@ -10,6 +10,7 @@ export 'src/adaptive/window_config_data/window_config_data.dart';
 export 'src/adaptive/window_configuration_tester.dart';
 export 'src/configuration.dart';
 export 'src/helpers/await_images.dart';
+export 'src/helpers/font_registration.dart';
 export 'src/helpers/fonts_loader.dart';
 export 'src/helpers/goldens_difference.dart';
 export 'src/helpers/skip_test_extension.dart';

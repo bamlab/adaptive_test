@@ -48,6 +48,21 @@ class AdaptiveTestConfiguration {
     _failTestOnWrongPlatform = failTestOnWrongPlatform;
   }
 
+  bool _loadPlatformFallbackFonts = true;
+
+  bool get loadPlatformFallbackFonts => _loadPlatformFallbackFonts;
+
+  /// Whether [loadFonts] also registers the font families the framework falls
+  /// back to on each platform, e.g. `Roboto` or `CupertinoSystemText`. They are
+  /// not declared in any `pubspec.yaml`, so without this the text using them
+  /// renders as placeholder blocks in goldens.
+  ///
+  /// Defaults to true. Set it to false to keep the previous behavior, for
+  /// instance if you would rather register those families yourself.
+  void setLoadPlatformFallbackFonts(bool loadPlatformFallbackFonts) {
+    _loadPlatformFallbackFonts = loadPlatformFallbackFonts;
+  }
+
   WindowVariant? _deviceVariant;
 
   WindowVariant get deviceVariant {
