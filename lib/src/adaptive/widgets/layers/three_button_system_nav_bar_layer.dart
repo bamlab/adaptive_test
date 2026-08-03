@@ -32,7 +32,7 @@ class ThreeButtonSystemNavBarLayer extends StatelessWidget {
                 children: const [
                   Icons.arrow_back_ios_rounded,
                   Icons.circle,
-                  Icons.square_rounded
+                  Icons.square_rounded,
                 ]
                     .map(
                       (iconData) => Icon(

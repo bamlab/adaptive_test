@@ -36,7 +36,10 @@ void setupFileComparatorWithThreshold([
 /// exceeded, marks the test as a failure.
 class LocalFileComparatorWithThreshold extends LocalFileComparator {
   LocalFileComparatorWithThreshold(super.testFile, this.threshold)
-      : assert(threshold >= 0 && threshold <= 1);
+      : assert(
+          threshold >= 0 && threshold <= 1,
+          'The threshold must be between 0 and 1 inclusive',
+        );
 
   /// Threshold above which tests will be marked as failing.
   /// Ranges from 0 to 1, both inclusive.
