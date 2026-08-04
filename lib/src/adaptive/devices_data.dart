@@ -1,3 +1,5 @@
+// ignore_for_file: constant_identifier_names
+
 import 'package:adaptive_test/src/adaptive/window_config_data/dynamic_island_data.dart';
 import 'package:adaptive_test/src/adaptive/window_config_data/punch_hole_data.dart';
 import 'package:adaptive_test/src/adaptive/window_config_data/system_nav_bar_data.dart';

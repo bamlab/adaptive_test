@@ -50,9 +50,9 @@ Future<void> _loadFontsFromManifest(
 
 FontLoader _createFontLoader(String fontFamily, List<_FontType> fontTypes) {
   final fontLoader = FontLoader(fontFamily);
-  fontTypes.forEach(
-    (fontType) => fontLoader.addFont(rootBundle.load(fontType.asset)),
-  );
+  for (final fontType in fontTypes) {
+    fontLoader.addFont(rootBundle.load(fontType.asset));
+  }
 
   return fontLoader;
 }
