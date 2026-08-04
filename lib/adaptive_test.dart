@@ -8,8 +8,9 @@ export 'src/adaptive/window_config_data/system_nav_bar_data.dart'
     show SystemNavBarData;
 export 'src/adaptive/window_config_data/window_config_data.dart';
 export 'src/adaptive/window_configuration_tester.dart';
-export 'src/configuration.dart';
+export 'src/configuration.dart' show AdaptiveTestConfiguration;
 export 'src/helpers/await_images.dart';
 export 'src/helpers/fonts_loader.dart';
 export 'src/helpers/goldens_difference.dart';
+export 'src/helpers/missing_fonts.dart' show MissingFontsBehavior;
 export 'src/helpers/skip_test_extension.dart';

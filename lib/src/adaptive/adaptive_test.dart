@@ -5,6 +5,7 @@ import 'package:adaptive_test/src/adaptive/window_config_data/window_config_data
 import 'package:adaptive_test/src/adaptive/window_configuration_tester.dart';
 import 'package:adaptive_test/src/configuration.dart';
 import 'package:adaptive_test/src/helpers/await_images.dart';
+import 'package:adaptive_test/src/helpers/missing_fonts.dart';
 import 'package:adaptive_test/src/helpers/skip_test_extension.dart';
 import 'package:adaptive_test/src/helpers/target_platform_extension.dart';
 import 'package:flutter/foundation.dart';
@@ -120,12 +121,36 @@ extension Adaptive on WidgetTester {
       await awaitImages();
     }
 
+    final finder =
+        byKey != null ? find.byKey(byKey) : find.byType(AdaptiveWrapper);
+
+    _reportMissingFonts(finder);
+
     final key = path ??
         'preview/${windowConfig.name}-${name.snakeCase}$localSuffix.png';
     await expectLater(
-      // Find by its type except if the widget's unique key was given.
-      byKey != null ? find.byKey(byKey) : find.byType(AdaptiveWrapper),
+      finder,
       matchesGoldenFile(key, version: version),
     );
+  }
+
+  void _reportMissingFonts(Finder finder) {
+    final configuration = AdaptiveTestConfiguration.instance;
+    if (configuration.missingFontsBehavior == MissingFontsBehavior.ignore) {
+      return;
+    }
+
+    final renderObject = finder.evaluate().firstOrNull?.renderObject;
+    if (renderObject == null) return;
+
+    final warnedFamilies = reportUnregisteredFontFamilies(
+      findUnregisteredFontFamilies(
+        renderObject,
+        loadedFamilies: FontLoadingRegistry.loadedFontFamilies,
+      ),
+      configuration.missingFontsBehavior,
+      alreadyWarned: FontLoadingRegistry.warnedFontFamilies,
+    );
+    FontLoadingRegistry.addWarnedFontFamilies(warnedFamilies);
   }
 }

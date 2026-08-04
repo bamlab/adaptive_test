@@ -3,22 +3,28 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:adaptive_test/src/configuration.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:package_config/package_config.dart';
 
-/// Loads fonts and icons to ensure they appear in golden tests.
+/// Loads fonts and icons to ensure they appear in golden tests and returns a
+/// [Set] containing all the loaded fonts
 ///
 /// Usage:
 /// 1. Create a flutter_test_config.dart file.
 /// 2. Add `await loadFonts();` in the `testExecutable` function.
 ///
 /// Note: Your package must include all used fonts as assets for this to work.
-Future<void> loadFonts() async {
+Future<Set<String>> loadFonts() async {
   TestWidgetsFlutterBinding.ensureInitialized();
-  final fontManifest = await _loadFontManifest();
-  final packageName = await _getCurrentPackageName();
-  await _loadFontsFromManifest(fontManifest, packageName);
+  final loadedFamilies = await _loadFontsFromManifest(
+    await _loadFontManifest(),
+    await _getCurrentPackageName(),
+  );
+  FontLoadingRegistry.addLoadedFontFamilies(loadedFamilies);
+
+  return loadedFamilies;
 }
 
 Future<_FontManifest> _loadFontManifest() async {
@@ -30,7 +36,7 @@ Future<_FontManifest> _loadFontManifest() async {
   return fontManifest.map((font) => _FontData.fromJson(font)).toList();
 }
 
-Future<void> _loadFontsFromManifest(
+Future<Set<String>> _loadFontsFromManifest(
   _FontManifest fontManifest,
   String? packageName,
 ) async {
@@ -39,13 +45,18 @@ Future<void> _loadFontsFromManifest(
     final fontFamilyStartsWithPackages = font.family.startsWith('packages/');
 
     return [
-      regularFontLoader,
+      MapEntry(font.family, regularFontLoader),
       if (!fontFamilyStartsWithPackages && packageName != null)
-        _createFontLoader('packages/$packageName/${font.family}', font.fonts),
+        MapEntry(
+          'packages/$packageName/${font.family}',
+          _createFontLoader('packages/$packageName/${font.family}', font.fonts),
+        ),
     ];
   }).toList();
 
-  await Future.wait(fontLoaders.map((loader) => loader.load()));
+  await Future.wait(fontLoaders.map((entry) => entry.value.load()));
+
+  return fontLoaders.map((entry) => entry.key).toSet();
 }
 
 FontLoader _createFontLoader(String fontFamily, List<_FontType> fontTypes) {
