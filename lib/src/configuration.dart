@@ -2,6 +2,7 @@
 
 import 'package:adaptive_test/src/adaptive/window_config.dart';
 import 'package:adaptive_test/src/adaptive/window_config_data/window_config_data.dart';
+import 'package:adaptive_test/src/helpers/missing_fonts.dart';
 import 'package:flutter/material.dart';
 
 /// Singleton class that configures global variables for the test.
@@ -48,6 +49,22 @@ class AdaptiveTestConfiguration {
     _failTestOnWrongPlatform = failTestOnWrongPlatform;
   }
 
+  final Set<String> _loadedFontFamilies = {};
+
+  final Set<String> _warnedFontFamilies = {};
+
+  MissingFontsBehavior _missingFontsBehavior = MissingFontsBehavior.warn;
+
+  MissingFontsBehavior get missingFontsBehavior => _missingFontsBehavior;
+
+  /// What [expectGolden] does when the widget tree asks for a font family that
+  /// no font has been registered for, see [MissingFontsBehavior].
+  ///
+  /// Defaults to [MissingFontsBehavior.warn].
+  void setMissingFontsBehavior(MissingFontsBehavior missingFontsBehavior) {
+    _missingFontsBehavior = missingFontsBehavior;
+  }
+
   WindowVariant? _deviceVariant;
 
   WindowVariant get deviceVariant {
@@ -71,5 +88,21 @@ See: https://api.flutter.dev/flutter/flutter_test/flutter_test-library.html
   /// [desktop], [pixel5], [pixel9].
   void setDeviceVariants(Set<WindowConfigData> deviceConfigs) {
     _deviceVariant = WindowVariant(deviceConfigs);
+  }
+}
+
+abstract final class FontLoadingRegistry {
+  static Set<String> get loadedFontFamilies =>
+      Set.unmodifiable(AdaptiveTestConfiguration.instance._loadedFontFamilies);
+
+  static void addLoadedFontFamilies(Iterable<String> families) {
+    AdaptiveTestConfiguration.instance._loadedFontFamilies.addAll(families);
+  }
+
+  static Set<String> get warnedFontFamilies =>
+      Set.unmodifiable(AdaptiveTestConfiguration.instance._warnedFontFamilies);
+
+  static void addWarnedFontFamilies(Iterable<String> families) {
+    AdaptiveTestConfiguration.instance._warnedFontFamilies.addAll(families);
   }
 }
