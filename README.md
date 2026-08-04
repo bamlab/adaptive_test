@@ -75,6 +75,24 @@ Future<void> testExecutable(FutureOr<void> Function() testMain) async {
 
 > ℹ️ `loadFonts()` loads fonts from `pubspec.yaml` and from every separate package dependency as well.
 
+#### Catching a missing font
+
+When a golden is taken, `expectGolden` checks the font families the widget tree
+asks for against the ones that were loaded, and warns about the text that will
+render as blocks:
+
+```
+adaptive_test: no font is registered for 'Poppins'.
+The text using that family renders as placeholder blocks in the golden.
+```
+
+Make it a failure — recommended on CI once your suite is clean — or silence it:
+
+```dart
+AdaptiveTestConfiguration.instance
+    .setMissingFontsBehavior(MissingFontsBehavior.fail);
+```
+
 ### Setting Up Test Devices
 
 1. Define a set of device variants:
